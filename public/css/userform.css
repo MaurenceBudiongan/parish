@@ -1,0 +1,168 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+body {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background-image: url("background.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.div1,
+.div2,
+.div3 {
+  position: absolute;
+  border-radius: 50%;
+}
+.div1 {
+  top: 28rem;
+  left: -4rem;
+  height: 540px;
+  width: 540px;
+  background-color: rgb(138, 160, 237);
+}
+.div2 {
+  top: -16rem;
+  left: 70rem;
+  height: 540px;
+  width: 540px;
+  background-color: rgb(138, 160, 237);
+}
+.div3 {
+  top: 35rem;
+  left: 55rem;
+  position: absolute;
+  height: 400px;
+  width: 700px;
+  background-color: rgb(215, 250, 205);
+}
+
+.intro {
+  margin-left: 10rem;
+  z-index: 1;
+  width: 500px;
+}
+.intro p {
+  line-height: 25px;
+}
+.intro h1,
+.intro p {
+  text-align: center;
+}
+
+.container {
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  gap: 100px;
+}
+
+/* Forms */
+.form {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.register h3,
+.login h3,
+p {
+  text-align: center;
+}
+.register p,
+.login p {
+  font-size: 13px;
+}
+.register a,
+.login a {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  cursor: pointer;
+}
+
+form {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+  width: 400px;
+  background-color: white;
+}
+ form .grid{
+  display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   
+   gap: 2.3rem;
+ }
+span {
+  font-size: 11px;
+}
+label {
+  font-weight: bold;
+  font-size: 13px;
+}
+input {
+  font-size: 11px;
+  text-indent: 10px;
+  background-color: rgb(243, 244, 247);
+  border: none;
+  height: 30px;
+  outline: none;
+  caret-color: blue;
+}
+button {
+  border: none;
+  background-color: rgb(97, 108, 124);
+  color: white;
+  font-weight: bold;
+  height: 45px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background-color: rgb(80, 90, 104);
+}
+input:focus {
+  background-color: transparent;
+}
+input:focus::placeholder {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow: auto;
+    padding: 20px;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    height: auto;
+  }
+  .intro {
+    margin-left: 0;
+    width: 90%;
+  }
+  .form {
+    width: 100%;
+    justify-content: center;
+  }
+  form {
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+  }
+  .div1,
+  .div2,
+  .div3 {
+    display: none;
+  }
+}
