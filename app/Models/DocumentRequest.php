@@ -10,6 +10,7 @@ class DocumentRequest extends Model
     use HasFactory;
 
     protected $fillable = [
+        'request_id',
         'firstname',
         'lastname',
         'dateofbirth',
@@ -21,8 +22,8 @@ class DocumentRequest extends Model
         'phonenumber',
         'documenttype',
         'reason',
-        'reference_code',
-        'status'
+        'status',
     ];
+    
 }
 

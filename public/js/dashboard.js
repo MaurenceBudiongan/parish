@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
-    dashboard.style.color = "white"; // Set the text color to white
+    dashboard.style.color = "white";
 
-    maincontent.innerHTML = ` 
+    fetch("/document-counts")
+        .then((response) => response.json())
+        .then((data) => {
+            maincontent.innerHTML = `
       <section id="service-section" class="service-section">
         <h2>Number Of Document Request</h2>
         <div class="service-section-header">
@@ -38,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </h3>
             </div>
             <div class="total">
-              <h1 style="text-align: center">+04</h1>
+              <h1 style="text-align: center">+${data.baptismal}</h1>
             </div>
             <a href="#">
               <span>See Request</span>
@@ -56,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </h3>
             </div>
             <div class="total">
-              <h1 style="text-align: center">+13</h1>
+              <h1 style="text-align: center">+${data.confirmation}</h1>
             </div>
             <a href="#">
               <span>See Request</span>
@@ -74,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </h3>
             </div>
             <div class="total">
-              <h1 style="text-align: center">+30</h1>
+              <h1 style="text-align: center">+${data.marriage}</h1>
             </div>
             <a href="#">
               <span>See Request</span>
@@ -166,6 +169,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </section>
     `;
+        })
+        .catch((error) =>
+            console.error("Error fetching document counts:", error)
+        );
 });
 
 function showUser() {
@@ -187,13 +194,14 @@ function showUser() {
 }
 
 function showDocumentRequest() {
+    document.getElementById("payment-section").style.display = "none";
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
         // Fetch the documentrequest view content
-        fetch("/admin/documentrequest") // Adjust the URL as necessary
+        fetch("/admin/document_requests") // Adjust the URL as necessary
             .then((response) => response.text()) // Get the response text
             .then((html) => {
                 maincontent.innerHTML = html; // Set the innerHTML to the fetched HTML

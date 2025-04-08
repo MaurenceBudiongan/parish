@@ -10,6 +10,6 @@ class SidebarController extends Controller
 
     public function showDocumentRequest()
     {
-        return view('admin.dashboard.sidebar.documentrequest'); // Adjust the path as necessary
+        return view('admin.document_requests'); // Adjust the path as necessary
     }
 }

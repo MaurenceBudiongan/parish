@@ -8,7 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
     />
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" />
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+   
   </head>
   <body>
     <!-- partial:index.partial.html -->
@@ -72,6 +72,10 @@
               <i class="ph-check-square"></i>
               <span>Member Record</span>
             </a>
+            <a href="#" onclick="showDocumentRequest()">
+              <i class="ph-clipboard-text"></i>
+              <span>Request Management</span>
+            </a>
             <a href="#">
               <i class="ph-swap"></i>
               <span>Sacramental Record</span>
@@ -91,10 +95,6 @@
             <a href="#transfer-section">
               <i class="ph-clipboard-text"></i>
               <span>Report Analytics</span>
-            </a>
-            <a href="#" onclick="showDocumentRequest()">
-              <i class="ph-clipboard-text"></i>
-              <span>Document Request Management</span>
             </a>
           </nav>
         </div>
@@ -198,5 +198,6 @@
  
     <!-- partial -->
     <script src="https://unpkg.com/phosphor-icons"></script>
+ <script src="{{ asset('js/dashboard.js') }}"></script>
   </body>
 </html>

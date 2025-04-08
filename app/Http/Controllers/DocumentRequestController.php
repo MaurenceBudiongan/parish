@@ -14,10 +14,25 @@ public function index()
     // Retrieve all document requests (or filter as needed)
     $documentRequests = DocumentRequest::all(); // Or use pagination, e.g., ->paginate(10)
 
-    // Pass the variable to the view
-    return view('admin.document_requests.index', compact('documentRequests'));
+    $counts = [
+        'baptismal' => DocumentRequest::where('documenttype', 'baptismal')->count(),
+        'confirmation' => DocumentRequest::where('documenttype', 'confirmation')->count(),
+        'marriage' => DocumentRequest::where('documenttype', 'marriagecertificate')->count(),
+    ];
+
+    return view('admin.document_requests.index', compact('documentRequests', 'counts'));
 }
 
+public function getDocumentRequestCounts()
+{
+    $counts = [
+        'baptismal' => DocumentRequest::where('documenttype', 'baptismal')->count(),
+        'confirmation' => DocumentRequest::where('documenttype', 'confirmation')->count(),
+        'marriage' => DocumentRequest::where('documenttype', 'marriagecertificate')->count(),
+    ];
+
+    return response()->json($counts);
+}
 
     public function userIndex()
     {
@@ -32,7 +47,7 @@ public function index()
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
             'dateofbirth' => 'required',
@@ -40,20 +55,21 @@ public function index()
             'city' => 'required',
             'state' => 'required',
             'zip' => 'required',
-            'email' => 'required|email',
+            'email' => 'required',
             'phonenumber' => 'required',
             'documenttype' => 'required',
             'reason' => 'required',
         ]);
+    
+        $validated['request_id'] = 'req-' . uniqid();
 
-        $requestData = $request->all();
-        $requestData['reference_code'] = 'REF-' . strtoupper(Str::random(10));
-
-        DocumentRequest::create($requestData);
-
-        return redirect()->route('user.document_requests.index')->with('success', 'Document request submitted.');
+    
+        DocumentRequest::create($validated);
+    
+        return redirect()->back()->with('success', 'Request Submitted Successfully');
     }
-
+    
+    
     public function edit(DocumentRequest $documentRequest)
     {
         return view('admin.document_requests.edit', compact('documentRequest'));
@@ -71,16 +87,21 @@ public function index()
         return back()->with('success', 'Document request deleted.');
     }
 
-    public function approve(DocumentRequest $documentRequest)
-    {
-        $documentRequest->update(['status' => 'APPROVED']);
-        return back()->with('success', 'Request Approved.');
-    }
+    public function approve($id)
+{
+    $request = DocumentRequest::findOrFail($id);
+    $request->update(['status' => 'APPROVED']);
+    
+    return redirect()->route('admin.document_requests.index')->with('success', 'Request Approved');
+}
 
-    public function reject(DocumentRequest $documentRequest)
-    {
-        $documentRequest->update(['status' => 'REJECTED']);
-        return back()->with('success', 'Request Rejected.');
-    }
+public function reject($id)
+{
+    $request = DocumentRequest::findOrFail($id);
+    $request->update(['status' => 'REJECTED']);
+    
+    return redirect()->route('admin.document_requests.index')->with('success', 'Request Rejected');
+}
+
 }
 
