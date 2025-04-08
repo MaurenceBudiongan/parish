@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </p>
         </div>
       </section>
+  
       <section id="transfer-section" class="transfer-section">
         <div class="transfer-section-header">
           <h2>Latest Request</h2>

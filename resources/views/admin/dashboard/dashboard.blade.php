@@ -42,10 +42,9 @@
           </button>
           <div class="app-header-actions-buttons">
           <button 
-          onclick="location.href={{ json_encode(route('authentication.adminform')) }}" 
-    class="icon-button large">
-    <i class="ph-sign-out"></i>
-</button>
+              class="icon-button large">
+              <i class="ph-sign-out"></i>
+          </button>
 
             <button class="icon-button large">
               <i class="ph-chat-circle-dots"></i>
@@ -198,11 +197,6 @@
     </div>
  
     <!-- partial -->
- 
-<script>
-
-</script>
-   
-
+    <script src="https://unpkg.com/phosphor-icons"></script>
   </body>
 </html>

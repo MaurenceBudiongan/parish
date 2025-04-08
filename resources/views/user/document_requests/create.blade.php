@@ -8,10 +8,11 @@
 </head>
 <body>
  <div class="container">
-  <div class="title">
+ <div class="title">
    <h1>Document Request Form</h1>
   </div>
   <div class="Content">
+
   <form action="{{ route('user.document_requests.store') }}" method="POST">
   @csrf
    <div class="form-list">
@@ -117,7 +118,6 @@
             </div>
        </div>
    </div>
-
    </form>
 
    </div>
