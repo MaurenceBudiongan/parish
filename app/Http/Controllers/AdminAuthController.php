@@ -32,7 +32,7 @@ class AdminAuthController extends Controller
 
         Auth::login($admin);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->back()->with('success', 'Request Submitted Successfully');
     }
 
     // Show login form
@@ -41,17 +41,19 @@ class AdminAuthController extends Controller
         return view('authentication.adminform');
     }
 
-    // Handle login
-    public function login(Request $request)
-    {
-        $credentials = $request->only('admin', 'password');
+// Handle login
+public function login(Request $request)
+{
+    // Attempt to authenticate with the 'admin' field
+    $credentials = $request->only('admin', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        return back()->withErrors(['admin' => 'These credentials do not match our records.']);
+    if (Auth::guard('admin')->attempt($credentials)) {
+        return redirect()->route('admin.dashboard.dashboard');
     }
+
+    return back()->withErrors(['admin' => 'These credentials do not match our records.']);
+}
+
 
     // Handle logout
     public function logout()

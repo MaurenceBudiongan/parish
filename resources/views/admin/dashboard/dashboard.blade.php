@@ -60,39 +60,49 @@
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="">
+            <a  class="a"href="">
               <i class="ph-browsers"></i>
               <span id="dashboard">Dashboard</span>
             </a>
-            <a href="#" onclick="showUser()">
+            <a class="a" href="#" onclick="showBaptistCreate()">
               <i class="ph-user"></i>
-              <span>User</span>
+              <span>Create Record</span>
             </a>
-            <a href="#">
-              <i class="ph-check-square"></i>
-              <span>Member Record</span>
-            </a>
-            <a href="#" onclick="showDocumentRequest()">
+  <div class="dropdown">
+  <a class="a" href="javascript:void(0);" onclick="toggleDropdown()">
+    <i class="ph-check-square"></i>
+    <span>Member Record</span>
+  </a>
+  
+  <div id="dropdownmenu" class="dropdown-menu">
+    <a href="#" onclick="showUser()" >Parishioner</a>
+    <a href="#"  onclick="showBaptistRecord()">Baptist Record</a>
+    <a href="#" onclick="showConfirmationRecord()">Confirmation Record</a>
+    <a href="#" onclick="showMarriageRecord()">Marriage Record</a>
+    <a href="#" onclick="showDeathRecord()">Death Record</a>
+  </div>
+</div>
+            <a class="a" href="#" onclick="showDocumentRequest()">
               <i class="ph-clipboard-text"></i>
               <span>Request Management</span>
             </a>
-            <a href="#">
+            <a class="a" href="#" onclick="showConfirmationCreate()">
               <i class="ph-swap"></i>
               <span>Sacramental Record</span>
             </a>
-            <a href="#">
+            <a class="a" href="#">
               <i class="ph-file-text"></i>
               <span>Financial Record</span>
             </a>
-            <a href="#">
+            <a  class="a"href="#">
               <i class="ph-globe"></i>
               <span>Events Record</span>
             </a>
-            <a href="#">
+            <a class="a" href="#">
               <i class="ph-file-plus"></i>
               <span>Staff Management</span>
             </a>
-            <a href="#transfer-section">
+            <a class="a" href="#transfer-section">
               <i class="ph-clipboard-text"></i>
               <span>Report Analytics</span>
             </a>
@@ -199,5 +209,6 @@
     <!-- partial -->
     <script src="https://unpkg.com/phosphor-icons"></script>
  <script src="{{ asset('js/dashboard.js') }}"></script>
+
   </body>
 </html>

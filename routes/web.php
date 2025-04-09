@@ -3,7 +3,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\Onclick;
-use App\Http\Controllers\AdminFormController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\BaptismalRecordController;
+use App\Http\Controllers\ConfirmationRecordController;
 
 
 Route::get('/', function () {
@@ -21,13 +23,54 @@ Route::get('/admin/dashboard/dashboard', function () {
 Route::get('/authentication/adminform', function () {
     return view('/authentication/adminform'); 
 });
+
+Route::get('/admin/create_record/baptistCreate', function () {
+    return view('/admin/create_record/baptistCreate'); 
+});
+Route::get('/admin/create_record/confirmationCreate', function () {
+    return view('/admin/create_record/confirmationCreate'); 
+});
+Route::get('/admin/record/memberRecord/baptistRecord', function () {
+    return view('/admin/record/memberRecord/baptistRecord'); 
+});
+Route::get('/admin/record/memberRecord/confirmationRecord', function () {
+    return view('/admin/record/memberRecord/confirmationRecord'); 
+});
+
+
+
+
+// Baptismal Record Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/baptismal-records', [BaptismalRecordController::class, 'index'])->name('baptismal.index');
+});
+// List all baptismal records
+Route::get('/admin/baptismal-records', [BaptismalRecordController::class, 'index'])->name('admin.baptismal.index');
+
+// Show the create form
+Route::get('/admin/baptismal-records/create', [BaptismalRecordController::class, 'create'])->name('admin.baptismal.create');
+
+// Store the new baptismal record
+Route::post('/admin/baptismal-records', [BaptismalRecordController::class, 'store'])->name('admin.baptismal.store');
+
+// Show the edit form
+Route::get('/admin/baptismal-records/{id}/edit', [BaptismalRecordController::class, 'edit'])->name('admin.baptismal.edit');
+
+// Update the baptismal record
+Route::put('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'update'])->name('admin.baptismal.update');
+
+// Delete the baptismal record
+Route::delete('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'destroy'])->name('admin.baptismal.destroy');
+
+//Confirmation Records Routes
+Route::resource('confirmation', ConfirmationRecordController::class);
+
+
+
+
 Route::get('/admin/user', [SidebarController::class, 'showUser']);
 Route::get('/admin/document_requests', [SidebarController::class, 'showDocumentRequest']);
 
-// adminform
-
-
-use App\Http\Controllers\AdminAuthController;
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
 Route::post('/admin/register', [AdminAuthController::class, 'register']);
@@ -35,9 +78,9 @@ Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth:admin')->name('admin.dashboard');
+Route::get('/admin/dashboard/dashboard', function () {
+    return view('admin.dashboard.dashboard');
+})->middleware('auth:admin')->name('admin.dashboard.dashboard');
 
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
 

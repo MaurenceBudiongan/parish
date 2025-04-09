@@ -178,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function showUser() {
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
-
     if (maincontent) {
         dashboard.style.color = "#969593"; // Set the text color to a different color
         // Fetch the user view content
@@ -195,6 +194,7 @@ function showUser() {
 
 function showDocumentRequest() {
     document.getElementById("payment-section").style.display = "none";
+    document.getElementById("dropdownmenu").style.display = "none";
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
 
@@ -205,6 +205,75 @@ function showDocumentRequest() {
             .then((response) => response.text()) // Get the response text
             .then((html) => {
                 maincontent.innerHTML = html; // Set the innerHTML to the fetched HTML
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
+}
+function toggleDropdown(element) {
+    document.getElementById("dropdownmenu").style.display = "block";
+}
+
+function showBaptistCreate() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+    document.getElementById("dropdownmenu").style.display = "none";
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+
+        fetch("/admin/create_record/baptistCreate")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
+}
+function showBaptistRecord() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch("/admin/baptismal-records")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
+}
+function showConfirmationCreate() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch("/admin/create_record/confirmationCreate")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
+}
+function showConfirmationRecord() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch("/confirmation")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
             })
             .catch((error) =>
                 console.error("Error fetching user view:", error)

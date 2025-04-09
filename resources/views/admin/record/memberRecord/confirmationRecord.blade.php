@@ -1,4 +1,3 @@
-
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
@@ -19,20 +18,20 @@
     --c-text-secondary: var(--c-gray-200);
     --c-text-tertiary: var(--c-gray-500);
 }
-    h2 {
-        text-align: center;
+    .confirmationRecord h2 {
         margin-top: 20px;
-        color: #333;
+        color: white;
     }
 
     table {
+        width: 100%;
         font-family: "Be Vietnam Pro", sans-serif;
         background-color: #ffffff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     th, td {
-        padding: 10px;
+        padding: 15px;
         text-align: left;
         border-bottom: 1px solid #f2f2f2;
     }
@@ -103,55 +102,38 @@
         text-align: center;
     }
 </style>
-<table>
-    <thead>
-        <tr>
-            <th>Request ID</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Document Type</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse($documentRequests as $request)
-        <tr>
-            <td>{{ $request->request_id }}</td>
-            <td>{{ $request->firstname }} {{ $request->lastname }}</td>
-            <td>{{ $request->streetaddress }}, {{ $request->city }}, {{ $request->state }} {{ $request->zip }}</td>
-            <td>{{ $request->email }}</td>
-            <td>{{ $request->phonenumber }}</td>
-            <td>{{ ucfirst($request->documenttype) }}</td>
-            <td>{{ $request->reason }}</td>
-            <td>{{ ucfirst($request->status) }}</td>
-            <td>
-                <div class="action">
-                    @if($request->status == 'PENDING')
-                    <form action="{{ route('admin.document_requests.approve', $request->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="approve">Approve</button>
-                    </form>
 
-                    <form action="{{ route('admin.document_requests.reject', $request->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="reject">Reject</button>
-                    </form>
-                    @else
-                    <span>No Action</span>
-                    @endif
-                </div>
-            </td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="9">No Document Request Found.</td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
+
+
+<div class="confirmationRecord">
+    <h2 class="">Confirmation Records</h2>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Sponsor</th>
+                <th>Confirmation Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($records as $record)
+                <tr>
+                    <td>{{ $record->event }}</td>
+                    <td>{{ $record->sponsor }}</td>
+                    <td>{{ $record->confirmation_date }}</td>
+                    <td>
+                        <a href="" onclick="return confirm('Edit this record?')">Edit</a>
+                        <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Delete this record?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    </div>
+    {{ $records->links() }}
+

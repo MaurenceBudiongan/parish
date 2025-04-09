@@ -10,23 +10,22 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('baptismal_records', function (Blueprint $table) {
-            $table->id();
-            $table->string('fullname');
-            $table->string('sponsor');
-            $table->date('baptism_date');
-            $table->timestamps();
-        });
-    }
-    
-    
+{
+    Schema::create('confirmation_records', function (Blueprint $table) {
+        $table->id();
+        $table->string('event');
+        $table->string('sponsor');
+        $table->date('confirmation_date');
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('confirmation_records');
     }
 };

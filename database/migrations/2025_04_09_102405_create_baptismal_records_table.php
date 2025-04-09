@@ -20,13 +20,12 @@ return new class extends Migration
         });
     }
     
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('baptismal_records');
     }
 };
