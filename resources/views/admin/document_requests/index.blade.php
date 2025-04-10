@@ -134,13 +134,13 @@
                     <form action="{{ route('admin.document_requests.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="approve">Approve</button>
+                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
                     </form>
 
                     <form action="{{ route('admin.document_requests.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="reject">Reject</button>
+                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
                     </form>
                     @else
                     <span>No Action</span>

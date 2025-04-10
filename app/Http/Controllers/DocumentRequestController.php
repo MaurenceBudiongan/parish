@@ -92,7 +92,7 @@ public function getDocumentRequestCounts()
     $request = DocumentRequest::findOrFail($id);
     $request->update(['status' => 'APPROVED']);
     
-    return redirect()->route('admin.document_requests.index')->with('success', 'Request Approved');
+    return back()->with('success', 'Request Approved');
 }
 
 public function reject($id)
@@ -100,7 +100,7 @@ public function reject($id)
     $request = DocumentRequest::findOrFail($id);
     $request->update(['status' => 'REJECTED']);
     
-    return redirect()->route('admin.document_requests.index')->with('success', 'Request Rejected');
+    return back()->with('success', 'Request Rejected');
 }
 
 }

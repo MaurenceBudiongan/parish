@@ -64,24 +64,31 @@
               <i class="ph-browsers"></i>
               <span id="dashboard">Dashboard</span>
             </a>
-            <a class="a" href="#" onclick="showBaptistCreate()">
-              <i class="ph-user"></i>
-              <span>Create Record</span>
-            </a>
+
+
   <div class="dropdown">
-  <a class="a" href="javascript:void(0);" onclick="toggleDropdown()">
-    <i class="ph-check-square"></i>
-    <span>Member Record</span>
-  </a>
-  
-  <div id="dropdownmenu" class="dropdown-menu">
-    <a href="#" onclick="showUser()" >Parishioner</a>
-    <a href="#"  onclick="showBaptistRecord()">Baptist Record</a>
-    <a href="#" onclick="showConfirmationRecord()">Confirmation Record</a>
-    <a href="#" onclick="showMarriageRecord()">Marriage Record</a>
-    <a href="#" onclick="showDeathRecord()">Death Record</a>
+      <a class="a" href="javascript:void(0);" onclick="createtoggleDropdown()">
+      <i class="ph-user"></i>
+        <span>Create Record</span>
+      </a>
+    <div id="createdropdownmenu" class="dropdown-menu">
+      <a href="#" onclick="showBaptistCreate()" >Baptist</a>
+      <a href="#"  onclick="showConfirmationCreate()">Confirmation</a>
+    </div>
   </div>
-</div>
+
+  <div class="dropdown">
+      <a class="a" href="javascript:void(0);" onclick="toggleDropdown()">
+        <i class="ph-check-square"></i>
+        <span>Member Record</span>
+      </a>
+    <div id="dropdownmenu" class="dropdown-menu">
+      <a href="#"  onclick="showBaptistRecord()">Baptist Record</a>
+      <a href="#" onclick="showConfirmationRecord()">Confirmation Record</a>
+      <a href="#" onclick="showMarriageRecord()">Marriage Record</a>
+      <a href="#" onclick="showDeathRecord()">Death Record</a>
+    </div>
+  </div>
             <a class="a" href="#" onclick="showDocumentRequest()">
               <i class="ph-clipboard-text"></i>
               <span>Request Management</span>

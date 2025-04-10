@@ -62,7 +62,7 @@ class BaptismalRecordController extends Controller
         $record = BaptismalRecord::findOrFail($id);
         $record->delete();
 
-        return redirect()->back()->with('success', 'Deleted');
+        return back()->with('success', 'Deleted');
 
     }
 }

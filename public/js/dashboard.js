@@ -213,12 +213,18 @@ function showDocumentRequest() {
 }
 function toggleDropdown(element) {
     document.getElementById("dropdownmenu").style.display = "block";
-}
+    document.getElementById("createdropdownmenu").style.display = "none";
+    
 
+}
+function createtoggleDropdown() {
+  document.getElementById("createdropdownmenu").style.display = "block";
+  document.getElementById("dropdownmenu").style.display = "none";
+}
 function showBaptistCreate() {
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
-    document.getElementById("dropdownmenu").style.display = "none";
+  
     if (maincontent) {
         dashboard.style.color = "#969593";
 

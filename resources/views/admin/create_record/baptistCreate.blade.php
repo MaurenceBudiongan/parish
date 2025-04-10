@@ -1,6 +1,5 @@
-
+<h2 class="h2"> Baptismal Record</h2>
 <div class="baptistCreate">
-<h2>Add Baptismal Record</h2>
 <form action="{{ route('admin.baptismal.store') }}" method="POST">
     @csrf
     <div>
@@ -17,12 +16,18 @@
         <input type="date" name="baptism_date" required>
     </div>
 
-    <button type="submit">Save Record</button>
+    <button type="submit" onclick="return confirm('Save this baptist record?')">Save Record</button>
 </form>
 
 <style>
-    h2{
-        text-align: center;
+   .baptistCreate{
+    padding: 15px;
+    background-color: var(--c-gray-600);
+    border-radius: 10px;
+    border-bottom: 10px;
+   }
+   .h2{
+        margin-bottom: 20px;
     }
     form{
         position: relative;
@@ -47,7 +52,8 @@
         display: block;
         margin-bottom: 5px;
         font-weight: 600;
-        color: #555;
+        color: var(--c-gray-200);
+        font-size: 12px;
     }
 
     input[type="text"],
@@ -57,6 +63,7 @@
         border: 1px solid #ccc;
         border-radius: 6px;
         transition: 0.3s;
+        font-size: 12px;
     }
 
     input[type="text"]:focus,
@@ -75,7 +82,7 @@
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 12px;
         transition: 0.3s;
     }
 

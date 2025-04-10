@@ -64,13 +64,14 @@ Route::delete('/admin/baptismal-records/{id}', [BaptismalRecordController::class
 
 //Confirmation Records Routes
 Route::resource('confirmation', ConfirmationRecordController::class);
+Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::class, 'destroy'])->name('confirmation.destroy');
+
 
 
 
 
 Route::get('/admin/user', [SidebarController::class, 'showUser']);
 Route::get('/admin/document_requests', [SidebarController::class, 'showDocumentRequest']);
-
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
 Route::post('/admin/register', [AdminAuthController::class, 'register']);

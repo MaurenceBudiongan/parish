@@ -52,7 +52,7 @@ class ConfirmationRecordController extends Controller
     public function destroy(ConfirmationRecord $confirmation)
     {
         $confirmation->delete();
-
         return back()->with('success', 'Record deleted successfully.');
     }
+    
 }

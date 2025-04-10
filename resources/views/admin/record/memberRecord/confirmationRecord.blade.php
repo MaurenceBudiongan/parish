@@ -21,6 +21,7 @@
     .confirmationRecord h2 {
         margin-top: 20px;
         color: white;
+        backdrop-filter: blur();
     }
 
     table {
@@ -124,7 +125,7 @@
                     <td>{{ $record->confirmation_date }}</td>
                     <td>
                         <a href="" onclick="return confirm('Edit this record?')">Edit</a>
-                        <form action="" method="POST">
+                        <form action="{{ route('confirmation.destroy', $record->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Delete this record?')">Delete</button>

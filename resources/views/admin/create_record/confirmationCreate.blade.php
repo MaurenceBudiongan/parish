@@ -1,16 +1,30 @@
-
-<div class="baptistCreate">
-<h2>Add Baptismal Record</h2>
+<h2 class="h2">Confirmation Record</h2>
+<div class="confirmationCreate">
 <form action="{{ route('confirmation.store') }}" method="POST">
     @csrf
-    <input type="text" name="event" placeholder="Event" required>
-    <input type="text" name="sponsor" placeholder="Sponsor" required>
-    <input type="date" name="confirmation_date" required>
-    <button type="submit">Save</button>
+    <div>
+        <label>Event:</label>
+        <input type="text" name="event"  required>
+    </div>
+    <div>
+        <label>Sponsor:</label>
+        <input type="text" name="sponsor" required>
+    </div>
+    <div>
+        <label>Confirmation Date:</label>
+        <input type="date" name="confirmation_date" required>
+    </div>
+    <button type="submit"  onclick="return confirm('Save this confirmation record?')">Save Confirmation</button>
 </form>
+</div>
 <style>
-    h2{
-        text-align: center;
+.confirmationCreate{
+    padding: 15px;
+    background-color: var(--c-gray-600);
+    border-radius: 10px;
+}
+.h2{
+        margin-bottom: 20px;
     }
     form{
         position: relative;
@@ -35,7 +49,8 @@
         display: block;
         margin-bottom: 5px;
         font-weight: 600;
-        color: #555;
+        color: var(--c-gray-200);
+        font-size: 12px;
     }
 
     input[type="text"],
@@ -45,6 +60,7 @@
         border: 1px solid #ccc;
         border-radius: 6px;
         transition: 0.3s;
+        font-size: 12px;
     }
 
     input[type="text"]:focus,
@@ -54,16 +70,15 @@
         box-shadow: 0 0 5px rgba(0,123,255,0.5);
     }
 
-    .baptistCreate form button{
+    .confirmationCreate form button{
         padding: 12px;
         width: 100%;
-       
         background: #45FFBC;
         color: black;
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 12px;
         transition: 0.3s;
     }
 
