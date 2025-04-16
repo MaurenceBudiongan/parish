@@ -21,7 +21,7 @@
 
         <div class="form">
             <!-- Sign Up Form -->
-            <div id="register" class="register">
+            <div id="register" class="register" style="display: none;">
                 <form action="{{ route('admin.register') }}" method="POST">
                     @csrf
                     <h3>Admin Sign Up</h3>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Sign In Form -->
-            <div id="login" class="login" style="display: none;">
+            <div id="login" class="login" >
                 <form action="{{ route('admin.login') }}" method="POST">
                     @csrf
                     <h3>Admin Login</h3>
@@ -52,7 +52,9 @@
 
                     <label for="adminpassword">Password</label>
                     <input type="password" name="password" id="adminpassword" placeholder="Enter password" required />
-
+                    @error('admin')
+                        <p class="text-danger" style="font-size: 10px;color: red;">{{ $message }}</p>
+                    @enderror
                     <button type="submit">Log in</button>
                     <p>New here? <a href="javascript:void(0)" onclick="register()">Sign up</a> now to be administrator!</p>
                 </form>

@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="transfer">
             <div class="transfer-logo">
-              <img src="./assets/confirmation.png" />
+              <img src="{{ asset('img/baptismal.png') }}" />
             </div>
             <dl class="transfer-details">
               <div>
@@ -214,17 +214,48 @@ function showDocumentRequest() {
 function toggleDropdown(element) {
     document.getElementById("dropdownmenu").style.display = "block";
     document.getElementById("createdropdownmenu").style.display = "none";
-    
-
 }
 function createtoggleDropdown() {
-  document.getElementById("createdropdownmenu").style.display = "block";
-  document.getElementById("dropdownmenu").style.display = "none";
+    document.getElementById("createdropdownmenu").style.display = "block";
+    document.getElementById("dropdownmenu").style.display = "none";
+}
+function showParishionerCreate() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch("/admin/create_record/parishionerCreate")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
+}
+
+function showConfirmationCreate() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch("/admin/create_record/confirmationCreate")
+            .then((response) => response.text())
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) =>
+                console.error("Error fetching user view:", error)
+            );
+    }
 }
 function showBaptistCreate() {
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
-  
+
     if (maincontent) {
         dashboard.style.color = "#969593";
 
@@ -285,4 +316,5 @@ function showConfirmationRecord() {
                 console.error("Error fetching user view:", error)
             );
     }
+    r;
 }

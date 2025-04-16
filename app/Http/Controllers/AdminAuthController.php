@@ -14,7 +14,7 @@ class AdminAuthController extends Controller
     {
         return view('authentication.adminform');
     }
-
+   
     // Handle registration
     public function register(Request $request)
     {
@@ -48,17 +48,19 @@ public function login(Request $request)
     $credentials = $request->only('admin', 'password');
 
     if (Auth::guard('admin')->attempt($credentials)) {
-        return redirect()->route('admin.dashboard.dashboard');
+        // Redirect to the correct route after successful login
+        return redirect()->route('admin.dashboard.dashboard');  // This matches the route name defined above
     }
 
     return back()->withErrors(['admin' => 'These credentials do not match our records.']);
 }
 
 
+
     // Handle logout
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('authentication.adminform');
     }
 }

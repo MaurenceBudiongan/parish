@@ -3,9 +3,9 @@
 <form action="{{ route('confirmation.store') }}" method="POST">
     @csrf
     <div>
-        <label>Event:</label>
+        <label>Full Name:</label>
         <input type="text" name="event"  required>
-    </div>
+    </div>   
     <div>
         <label>Sponsor:</label>
         <input type="text" name="sponsor" required>

@@ -13,7 +13,7 @@ class BaptismalRecordController extends Controller
         $records = BaptismalRecord::latest()->paginate(10);
         return view('admin.record.memberRecord.baptistRecord', compact('records'));
     }
-   
+
     // Show Create Form
     public function create()
     {

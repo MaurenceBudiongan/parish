@@ -71,7 +71,7 @@ return [
     'admins' => [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class, // Custom provider for AdminForm
-    ],
+    ],  
 ],
 
     /*

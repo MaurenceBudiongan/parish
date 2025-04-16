@@ -39,12 +39,6 @@ public function getDocumentRequestCounts()
         $requests = DocumentRequest::all();
         return view('user.document_requests.index', compact('requests'));
     }
-
-    public function create()
-    {
-        return view('user.document_requests.create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([

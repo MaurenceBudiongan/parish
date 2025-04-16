@@ -46,7 +46,8 @@ body {
     transform: translateX(60px);
     text-decoration: none;
 }
-.dropdown-menu a:hover,a:focus {
+.dropdown-menu a:hover,
+a:focus {
     color: var(--c-text-primary);
 }
 .dropdown.active .dropdown-menu {
@@ -394,7 +395,7 @@ a {
 .tile {
     padding: 1rem;
     border-radius: 8px;
-    background-color: var(--c-gray-100);
+    background-color: var(--c-olive-500);
     color: var(--c-gray-900);
     min-height: 200px;
     display: flex;
