@@ -175,6 +175,28 @@ a {
 @media (max-width: 1200px) {
     .app-body-navigation {
         display: none;
+        position: absolute;
+        top: 10%;
+        left: 75%;
+        z-index: 1;
+        background-color: var(--c-gray-800);
+        padding: 10px;
+    }
+    .navigation {
+        border: 1px solid var(--c-gray-600);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        color: var(--c-text-tertiary);
+        width: 20rem;
+    }
+    .navigation .a i {
+        margin-right: 0.75rem;
+        font-size: 19px;
+     
+    }
+    .navigation .a span {
+        font-size: 10rem;
     }
 }
 
@@ -564,6 +586,8 @@ a {
 .flat-button:hover,
 .flat-button:focus {
     background-color: var(--c-gray-600);
+    color: var(--c-text-primary);
+    box-shadow: 0 0 0 4px var(--c-gray-800), 0 0 0 5px var(--c-text-tertiary);
 }
 
 .mobile-only {

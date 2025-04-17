@@ -8,15 +8,23 @@ use Illuminate\Http\Request;
 class BaptismalRecordController extends Controller
 {
     // View List
-    public function index()
+    public function index(Request $request)
     {
         $records = BaptismalRecord::latest()->paginate(10);
+        if (!$request->ajax()) {
+            // This will stop direct access from browser
+            abort(403, 'Access denied');
+        }
         return view('admin.record.memberRecord.baptistRecord', compact('records'));
     }
 
     // Show Create Form
-    public function create()
+    public function create(Request $request)
     {
+        if (!$request->ajax()) {
+            // This will stop direct access from browser
+            abort(403, 'Access denied');
+        }
         return view('admin.create_record.baptistCreate');
     }
 

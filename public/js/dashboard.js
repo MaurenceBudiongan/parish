@@ -221,6 +221,7 @@ function createtoggleDropdown() {
 }
 function showParishionerCreate() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "none";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
@@ -236,85 +237,101 @@ function showParishionerCreate() {
     }
 }
 
-function showConfirmationCreate() {
-    const maincontent = document.getElementById("maincontent");
-    const dashboard = document.getElementById("dashboard");
-
-    if (maincontent) {
-        dashboard.style.color = "#969593";
-        fetch("/admin/create_record/confirmationCreate")
-            .then((response) => response.text())
-            .then((html) => {
-                maincontent.innerHTML = html;
-            })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
-    }
-}
 function showBaptistCreate() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-
-        fetch("/admin/create_record/baptistCreate")
-            .then((response) => response.text())
+        fetch(loadBaptistCreate, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
             .then((html) => {
                 maincontent.innerHTML = html;
             })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+            });
     }
 }
+
 function showBaptistRecord() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
     const dashboard = document.getElementById("dashboard");
-
+    
     if (maincontent) {
+      
         dashboard.style.color = "#969593";
-        fetch("/admin/baptismal-records")
-            .then((response) => response.text())
+        fetch(loadBaptistRecord, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
             .then((html) => {
                 maincontent.innerHTML = html;
             })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+            });
     }
 }
 function showConfirmationCreate() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch("/admin/create_record/confirmationCreate")
-            .then((response) => response.text())
-            .then((html) => {
-                maincontent.innerHTML = html;
-            })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+        fetch(loadConfirmationCreate, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
     }
 }
 function showConfirmationRecord() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch("/confirmation")
-            .then((response) => response.text())
-            .then((html) => {
-                maincontent.innerHTML = html;
-            })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+        fetch(loadConfirmationRecord, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
     }
-    r;
 }

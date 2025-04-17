@@ -7,14 +7,22 @@ use Illuminate\Http\Request;
 
 class ConfirmationRecordController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $records = ConfirmationRecord::latest()->paginate(10);
+        if (!$request->ajax()) {
+            // This will stop direct access from browser
+            abort(403, 'Access denied');
+        }
         return view('admin.record.memberRecord.confirmationRecord', compact('records'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if (!$request->ajax()) {
+            // This will stop direct access from browser
+            abort(403, 'Access denied');
+        }
         return view('admin.create_record.confirmationCreate');
     }
 
@@ -28,7 +36,7 @@ class ConfirmationRecordController extends Controller
 
         ConfirmationRecord::create($request->all());
 
-        return redirect()->route('confirmation.index')->with('success', 'Record created successfully.');
+        return redirect()->route('admin.dashboard.dashboard')->with('success', 'Record created successfully.');
     }
 
     public function edit(ConfirmationRecord $confirmation)

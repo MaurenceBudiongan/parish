@@ -28,7 +28,7 @@
             </div>
             <div class="app-header-navigation">
                 <div class="tabs">
-                    <a href="#">Register Parishioner</a>
+                    <a href="#">Parishioner</a>
                     <a href="#">Event Management</a>
                     <a href="#">Staff Management</a>
                     <a href="">Reports and Analytics </a>
@@ -52,14 +52,14 @@
                 </div>
             </div>
             <div class="app-header-mobile">
-                <button class="icon-button large">
+                <button class="icon-button large" id="toggleBtn">
                     <i class="ph-list"></i>
                 </button>
             </div>
         </header>
 
         <div class="app-body">
-            <div class="app-body-navigation">
+            <div id="app-body-navigation" class="app-body-navigation">
                 <nav class="navigation">
                     <a class="a"href="">
                         <i class="ph-browsers"></i>
@@ -215,6 +215,18 @@
         function goToSignOutPage() {
             window.location.href = "{{ route('adminform.adminform') }}";
         }
+        document.getElementById('toggleBtn').addEventListener('click', function() {
+            const div = document.getElementById('app-body-navigation');
+            if (div.style.display === 'none' || div.style.display === '') {
+                div.style.display = 'block'; // or 'flex' if using flex layout
+            } else {
+                div.style.display = 'none';
+            }
+        });
+        const loadBaptistCreate = "{{ route('baptismal.create') }}";
+        const loadBaptistRecord = "{{ route('admin.baptismal.index') }}";
+        const loadConfirmationCreate = "{{ route('confirmation.create') }}";
+        const loadConfirmationRecord = "{{ route('confirmation.index') }}";
     </script>
 
 

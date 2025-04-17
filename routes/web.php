@@ -21,9 +21,8 @@ Route::get('/user_main', function () {
     return view('user/document_requests/main'); 
 });
 
-Route::get('/admin/create_record/baptistCreate', function () {
-    return view('/admin/create_record/baptistCreate'); 
-});
+
+
 
 Route::get('/admin/create_record/confirmationCreate', function () {
     return view('/admin/create_record/confirmationCreate'); 
@@ -55,7 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/admin/baptismal-records', [BaptismalRecordController::class, 'index'])->name('admin.baptismal.index');
 
 // Show the create form
-Route::get('/admin/baptismal-records/create', [BaptismalRecordController::class, 'create'])->name('admin.baptismal.create');
+Route::get('/admin/baptismal-records/create', [BaptismalRecordController::class, 'create'])->name('baptismal.create');
 
 // Store the new baptismal record
 Route::post('/admin/baptismal-records', [BaptismalRecordController::class, 'store'])->name('admin.baptismal.store');
@@ -71,6 +70,8 @@ Route::delete('/admin/baptismal-records/{id}', [BaptismalRecordController::class
 
 //Confirmation Records Routes
 Route::resource('confirmation', ConfirmationRecordController::class);
+Route::get('/admin/confirmation/create', [ConfirmationRecordController::class, 'create'])->name('confirmation.create');
+Route::get('/admin/confirmation', [ConfirmationRecordController::class, 'index'])->name('confirmation.index');
 Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::class, 'destroy'])->name('confirmation.destroy');
 
 
