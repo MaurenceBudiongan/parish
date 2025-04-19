@@ -9,17 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('baptismal_records', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname');
-            $table->string('sponsor');
-            $table->date('baptism_date');
+            $table->string('adminfullname');
+            $table->string('admin')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }
-    
     
 
     /**

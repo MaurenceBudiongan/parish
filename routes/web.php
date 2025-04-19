@@ -7,6 +7,7 @@ use App\Http\Controllers\Onclick;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\BaptismalRecordController;
 use App\Http\Controllers\ConfirmationRecordController;
+use App\Http\Controllers\ParishionerController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,25 +22,12 @@ Route::get('/user_main', function () {
     return view('user/document_requests/main'); 
 });
 
-
-
-
-Route::get('/admin/create_record/confirmationCreate', function () {
-    return view('/admin/create_record/confirmationCreate'); 
-});
-
-Route::get('/admin/create_record/parishionerCreate', function () {
+Route::get('/admin/parishionerCreate', function () {
     return view('/admin/create_record/parishionerCreate'); 
 });
 
-Route::get('/admin/record/memberRecord/baptistRecord', function () {
-    return view('/admin/record/memberRecord/baptistRecord'); 
-});
-
-Route::get('/admin/record/memberRecord/confirmationRecord', function () {
-    return view('/admin/record/memberRecord/confirmationRecord'); 
-});
-
+//parishioner
+Route::resource('parishioners', ParishionerController::class);
 
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');

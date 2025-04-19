@@ -226,7 +226,7 @@ function showParishionerCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch("/admin/create_record/parishionerCreate")
+        fetch("/admin/parishionerCreate")
             .then((response) => response.text())
             .then((html) => {
                 maincontent.innerHTML = html;
@@ -235,6 +235,32 @@ function showParishionerCreate() {
                 console.error("Error fetching user view:", error)
             );
     }
+}
+
+function showParishionerRecord() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+  
+  if (maincontent) {
+    
+      dashboard.style.color = "#969593";
+      fetch(loadParishionerRecord, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
 }
 
 function showBaptistCreate() {

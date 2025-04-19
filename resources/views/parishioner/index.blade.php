@@ -1,3 +1,43 @@
+<div class="parishionerRecord">
+    <h2 class="text-2xl font-bold mb-4">Parishioner Records</h2>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Contact</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($parishioners as $person)
+                <tr>
+                    <td>{{ $person->fullname }}</td>
+                    <td>{{ $person->contactnumber }}</td>
+                    <td>
+                        @if ($person->image)
+                            <img src="{{ asset('storage/' . $person->image) }}" alt="Profile Image" width="50"
+                                height="50" style="border-radius: 50%;">
+                        @else
+                            <span>No image</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="">Edit</a>
+                        <form action="{{ route('parishioners.destroy', $person->id) }}" method="POST"
+                            style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Delete this record?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -20,7 +60,7 @@
         --c-text-tertiary: var(--c-gray-500);
     }
 
-    .confirmationRecord h2 {
+    .parishionerRecord h2 {
         text-align: center;
         margin-top: 20px;
     }
@@ -34,12 +74,13 @@
 
     th,
     td {
-        padding: 15px;
+        padding: 10px;
         text-align: left;
         border-bottom: 1px solid #f2f2f2;
     }
 
     td {
+        vertical-align: middle;
         font-size: .6rem;
         color: #000000;
     }
@@ -108,38 +149,3 @@
         text-align: center;
     }
 </style>
-
-
-
-<div class="confirmationRecord">
-    <h2 class="">Confirmation Records</h2>
-    <table class="table-auto w-full">
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Sponsor</th>
-                <th>Confirmation Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($records as $record)
-                <tr>
-                    <td>{{ $record->event }}</td>
-                    <td>{{ $record->sponsor }}</td>
-                    <td>{{ $record->confirmation_date }}</td>
-                    <td>
-                        <a href="" onclick="return confirm('Edit this record?')">Edit</a>
-                        <form action="{{ route('confirmation.destroy', $record->id) }}" method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this record?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this record?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-{{ $records->links() }}

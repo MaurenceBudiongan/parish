@@ -28,7 +28,7 @@
             </div>
             <div class="app-header-navigation">
                 <div class="tabs">
-                    <a href="#">Parishioner</a>
+                    <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#">Event Management</a>
                     <a href="#">Staff Management</a>
                     <a href="">Reports and Analytics </a>
@@ -91,11 +91,11 @@
                             <a href="#" onclick="showDeathRecord()">Death Record</a>
                         </div>
                     </div>
-                    <a class="a" href="#" onclick="showDocumentRequest()">
+                    <a class="a" href="#" >
                         <i class="ph-clipboard-text"></i>
                         <span>Request Management</span>
                     </a>
-                    <a class="a" href="#" onclick="showConfirmationCreate()">
+                    <a class="a" href="#"onclick="showDocumentRequest()">
                         <i class="ph-swap"></i>
                         <span>Sacramental Record</span>
                     </a>
@@ -227,6 +227,7 @@
         const loadBaptistRecord = "{{ route('admin.baptismal.index') }}";
         const loadConfirmationCreate = "{{ route('confirmation.create') }}";
         const loadConfirmationRecord = "{{ route('confirmation.index') }}";
+        const loadParishionerRecord = "{{ route('parishioners.index') }}";
     </script>
 
 
