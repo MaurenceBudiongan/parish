@@ -76,6 +76,9 @@
                             <a href="#" onclick="showParishionerCreate()">Parishioner</a>
                             <a href="#" onclick="showBaptistCreate()">Baptist</a>
                             <a href="#" onclick="showConfirmationCreate()">Confirmation</a>
+                            <a href="#" onclick="showMarriageCreate()">Marriage</a>
+                            <a href="#" onclick="showDeathCreate()">Death</a>
+                            <a href="#" onclick="showDonationCreate()">Donation</a>
                         </div>
                     </div>
 
@@ -89,20 +92,23 @@
                             <a href="#" onclick="showConfirmationRecord()">Confirmation Record</a>
                             <a href="#" onclick="showMarriageRecord()">Marriage Record</a>
                             <a href="#" onclick="showDeathRecord()">Death Record</a>
+                            <a href="#" onclick="showDonationRecord()">Donation Record</a>
                         </div>
                     </div>
-                    <a class="a" href="#" >
-                        <i class="ph-clipboard-text"></i>
-                        <span>Request Management</span>
-                    </a>
                     <a class="a" href="#"onclick="showDocumentRequest()">
                         <i class="ph-swap"></i>
                         <span>Sacramental Record</span>
                     </a>
-                    <a class="a" href="#">
-                        <i class="ph-file-text"></i>
-                        <span>Financial Record</span>
-                    </a>
+                    <div class="dropdown">
+                        <a class="a" href="javascript:void(0);" onclick="financialtoggleDropdown()">
+                            <i class="ph-file-text"></i>
+                            <span>Financial Record</span>
+                        </a>
+                        <div id="financialdropdownmenu" class="dropdown-menu">
+                            <a href="#" onclick="showBaptistRecord()">Payment Transaction</a>
+                            <a href="#" onclick="showConfirmationRecord()">Donation</a>
+                        </div>
+                    </div>
                     <a class="a"href="#">
                         <i class="ph-globe"></i>
                         <span>Events Record</span>
@@ -126,7 +132,7 @@
                         <p>Choose a e-wallet to pay request</p>
                         <div>
                             <button class="card-button mastercard">
-                                <img src="./assets/gcash-logo.png" alt="" />
+                                <img src="{{asset('img/gcash-logo.png')}}" alt="gcash" />
                             </button>
                             <button class="card-button visa">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500"
@@ -228,6 +234,12 @@
         const loadConfirmationCreate = "{{ route('confirmation.create') }}";
         const loadConfirmationRecord = "{{ route('confirmation.index') }}";
         const loadParishionerRecord = "{{ route('parishioners.index') }}";
+        const loadMarriageCreate= "{{ route('marriage.create') }}";
+        const loadMarriageRecord = "{{ route('marriage.index') }}";
+        const loadDeathCreate = "{{ route('death.create') }}";
+        const loadDeathRecord = "{{ route('death.index') }}";
+        const loadDonationCreate= "{{ route('death.create') }}";
+
     </script>
 
 

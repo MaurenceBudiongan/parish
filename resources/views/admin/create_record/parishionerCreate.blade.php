@@ -1,6 +1,6 @@
 <div class="parishCreateContainer">
     <div class="header-menu">
-        <p class="title"> Parish Registration</p>
+        <p class="title"> Parishioner Registration</p>
         <p class="description">This registration applicable only to parishioner in San Pascual Parish Member</p>
     </div>
     <div class="app-body-content">
@@ -126,7 +126,7 @@
 
     .header-menu {
         display: flex;
-        gap: 3rem;
+        gap: 8rem;
         align-items: center
     }
 
@@ -141,7 +141,7 @@
 
     .app-body-content {
         display: flex;
-        gap: 1.5rem;
+        gap: 4rem;
     }
 
     .side-content {
@@ -150,7 +150,7 @@
         align-items: center;
         flex-direction: column;
         border: 1px solid var(--c-gray-600);
-        width: 33%;
+        width: 38%;
         padding: 10px;
     }
 
@@ -169,7 +169,7 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        width: 63%;
+        width: 55%;
         border: 1px solid var(--c-gray-600);
         border-radius: 5px;
         padding: 1rem;
@@ -233,7 +233,7 @@
         border-radius: 3px;
         color: black;
         border: none;
-        background-color: var(--c-olive-500);
+        background-color: var(--c-green-500);
         margin-left: 300px;
         width: 30%;
         height: 1.8rem;

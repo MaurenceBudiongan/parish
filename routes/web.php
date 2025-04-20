@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\Onclick;
@@ -8,11 +9,15 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\BaptismalRecordController;
 use App\Http\Controllers\ConfirmationRecordController;
 use App\Http\Controllers\ParishionerController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MarriageRecordController;
+use App\Http\Controllers\DeathCertificateController;
 
 
 Route::get('/', function () {
     return view('/authentication/adminform'); 
+});
+Route::get('/death', function () {
+    return view('/admin/create_record/deathCreate'); 
 });
 Route::get('/admin/dashboard/dashboard', function () {
     return view('admin.dashboard.dashboard');
@@ -28,6 +33,7 @@ Route::get('/admin/parishionerCreate', function () {
 
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
+
 
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
@@ -62,6 +68,16 @@ Route::get('/admin/confirmation/create', [ConfirmationRecordController::class, '
 Route::get('/admin/confirmation', [ConfirmationRecordController::class, 'index'])->name('confirmation.index');
 Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::class, 'destroy'])->name('confirmation.destroy');
 
+//Marriage Records
+Route::resource('marriage', MarriageRecordController::class)->parameters([
+    'marriage' => 'marriageRecord'
+]);
+//Death Records
+
+
+Route::resource('death', DeathCertificateController::class)->parameters([
+    'death' => 'deathCertificate'
+]);
 
 
 
