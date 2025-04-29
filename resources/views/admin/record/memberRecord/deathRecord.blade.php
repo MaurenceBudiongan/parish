@@ -1,46 +1,47 @@
-<div class="deathRecord">
- <h2>Death Records</h2>
- 
- @if(session('success'))
-     <div class="alert alert-success">{{ session('success') }}</div>
- @endif
-
- <table class="table-auto w-full">
-     <thead>
-         <tr>
-             <th>Full Name</th>
-             <th>Sex</th>
-             <th>Date of Birth</th>
-             <th>Age</th>
-             <th>Death Date</th>
-             <th>Action</th>
-         </tr>
-     </thead>
-     <tbody>
-         @foreach($certificates as $cert)
-             <tr>
-                 <td>{{ $cert->full_name }}</td>
-                 <td>{{ $cert->sex }}</td>
-                 <td>{{ $cert->birth_date }}</td>
-                 <td>{{ $cert->age }}</td>
-                 <td>{{ $cert->death_date }}</td>
-                 <td class="action">
-                     <a href="{{ route('death.edit', $cert->id) }}" class="btn btn-primary btn-sm approve">Edit</a>
-                     <form action="{{ route('death.destroy', $cert->id) }}" method="POST" style="display:inline;">
-                         @csrf
-                         @method('DELETE')
-                         <button type="submit" class="btn reject btn-sm"
-                             onclick="return confirm('Are you sure to delete this record?')">Delete</button>
-                     </form>
-                 </td>
-             </tr>
-         @endforeach
-     </tbody>
- </table>
-
- {{ $certificates->links() }}
+<div class="Record">
+    <h2 class="text-2xl font-bold mb-4">Death Records</h2>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+            <tr>
+                <th>Full Name</th>
+                <th>Sex</th>
+                <th>Date of Birth</th>
+                <th>Age</th>
+                <th>Death Date</th>
+                <th>Action</th>
+            </tr>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($certificates as $cert)
+            <tr>
+                <td>{{ $cert->full_name }}</td>
+                <td>{{ $cert->sex }}</td>
+                <td>{{ $cert->birth_date }}</td>
+                <td>{{ $cert->age }}</td>
+                <td>{{ $cert->death_date }}</td>
+                    <td>
+                        <div class="action">
+                            <form action="">
+                                <button class="edit" type="submit"
+                                    onclick="return confirm('Edit this record?')">Edit</button>
+                            </form>
+                            <form action="{{ route('death.destroy', $cert->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="delete" type="submit" class="btn reject btn-sm"
+                                    onclick="return confirm('Are you sure to delete this record?')">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
-<style>
+{{ $certificates->links() }}
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -63,7 +64,7 @@
         --c-text-tertiary: var(--c-gray-500);
     }
 
-    .deathRecord h2 {
+    .Record h2 {
         text-align: center;
         margin-top: 20px;
     }
@@ -77,12 +78,13 @@
 
     th,
     td {
-        padding: 15px;
+        padding: 10px;
         text-align: left;
         border-bottom: 1px solid #f2f2f2;
     }
 
     td {
+        vertical-align: middle;
         font-size: .6rem;
         color: #000000;
     }
@@ -104,45 +106,9 @@
 
     .action {
         display: flex;
+        flex-direction: row;
         gap: 1rem;
     }
-
-    .action form {
-        margin: 0;
-    }
-
-    .action button {
-        padding: 5px 12px;
-        font-size: .6rem;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .action button.approve {
-        background-color: #28a745;
-        color: #fff;
-    }
-
-    .action button.approve:hover {
-        background-color: #218838;
-    }
-
-    .action button.reject {
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    .action button.reject:hover {
-        background-color: #c82333;
-    }
-
-    .action button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-    }
-
     td span {
         color: #777;
     }
@@ -150,6 +116,21 @@
     td[colspan="9"] {
         text-align: center;
     }
+
+    .edit {
+        padding: .3rem;
+        background-color: var(--c-green-500);
+        border: none;
+    }
+
+    .delete {
+        color: white;
+        padding: .3rem;
+        background-color: rgb(249, 87, 84);
+        border: none;
+    }
 </style>
+
+
 
 

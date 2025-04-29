@@ -38,7 +38,7 @@
                 <button class="user-profile">
                     <span>Jerlyn Kyla Orpilla</span>
                     <span>
-                        <img src="{{ asset('img/kayi.png') }}" />
+                        <img src="{{ asset('img/maria.png') }}" />
                     </span>
                 </button>
                 <div class="app-header-actions-buttons">
@@ -239,6 +239,7 @@
         const loadDeathCreate = "{{ route('death.create') }}";
         const loadDeathRecord = "{{ route('death.index') }}";
         const loadDonationCreate= "{{ route('death.create') }}";
+        const loadDonationRecord= "{{ route('death.index') }}";
 
     </script>
 

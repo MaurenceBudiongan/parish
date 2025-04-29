@@ -1,4 +1,4 @@
-<div class="parishionerRecord">
+<div class="Record">
     <h2 class="text-2xl font-bold mb-4">Parishioner Records</h2>
     <table class="table-auto w-full">
         <thead>
@@ -23,13 +23,18 @@
                         @endif
                     </td>
                     <td>
-                        <a href="">Edit</a>
-                        <form action="{{ route('parishioners.destroy', $person->id) }}" method="POST"
-                            style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="return confirm('Delete this record?')">Delete</button>
-                        </form>
+                        <div class="action">
+                            <form action="">
+                                @csrf
+                                <button class="edit">Edit</button>
+                            </form>
+                            <form action="{{ route('parishioners.destroy', $person->id) }}" method="POST"
+                                style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="delete" onclick="return confirm('Delete this record?')">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -60,7 +65,7 @@
         --c-text-tertiary: var(--c-gray-500);
     }
 
-    .parishionerRecord h2 {
+    .Record h2 {
         text-align: center;
         margin-top: 20px;
     }
@@ -102,50 +107,27 @@
 
     .action {
         display: flex;
+        flex-direction: row;
         gap: 1rem;
     }
-
-    .action form {
-        margin: 0;
-    }
-
-    .action button {
-        padding: 5px 12px;
-        font-size: .6rem;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .action button.approve {
-        background-color: #28a745;
-        color: #fff;
-    }
-
-    .action button.approve:hover {
-        background-color: #218838;
-    }
-
-    .action button.reject {
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    .action button.reject:hover {
-        background-color: #c82333;
-    }
-
-    .action button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-    }
-
     td span {
         color: #777;
     }
 
     td[colspan="9"] {
         text-align: center;
+    }
+
+    .edit {
+        padding: .3rem;
+        background-color: var(--c-green-500);
+        border: none;
+    }
+
+    .delete {
+        color: white;
+        padding: .3rem;
+        background-color: rgb(249, 87, 84);
+        border: none;
     }
 </style>

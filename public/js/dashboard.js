@@ -220,10 +220,9 @@ function createtoggleDropdown() {
     document.getElementById("dropdownmenu").style.display = "none";
 }
 function financialtoggleDropdown() {
-  document.getElementById("financialdropdownmenu").style.display = "block";
-  document.getElementById("createdropdownmenu").style.display = "none";
-  document.getElementById("dropdownmenu").style.display = "none";
-
+    document.getElementById("financialdropdownmenu").style.display = "block";
+    document.getElementById("createdropdownmenu").style.display = "none";
+    document.getElementById("dropdownmenu").style.display = "none";
 }
 function showParishionerCreate() {
     const maincontent = document.getElementById("maincontent");
@@ -390,28 +389,28 @@ function showMarriageCreate() {
     }
 }
 function showMarriageRecord() {
-  const maincontent = document.getElementById("maincontent");
-  document.getElementById("payment-section").style.display = "block";
-  const dashboard = document.getElementById("dashboard");
+    const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
+    const dashboard = document.getElementById("dashboard");
 
-  if (maincontent) {
-      dashboard.style.color = "#969593";
-      fetch(loadMarriageRecord, {
-          headers: {
-              "X-Requested-With": "XMLHttpRequest",
-          },
-      })
-          .then((response) => {
-              if (!response.ok) throw new Error("Fetch failed");
-              return response.text();
-          })
-          .then((html) => {
-              maincontent.innerHTML = html;
-          })
-          .catch((error) => {
-              console.error("Error fetching user view:", error);
-          });
-  }
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch(loadMarriageRecord, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+            });
+    }
 }
 function showDeathCreate() {
     const maincontent = document.getElementById("maincontent");
@@ -484,4 +483,28 @@ function showDonationCreate() {
                 console.error("Error fetching user view:", error);
             });
     }
+}
+function showDonationRecord() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+
+  if (maincontent) {
+      dashboard.style.color = "#969593";
+      fetch(loadDonationRecord, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
 }

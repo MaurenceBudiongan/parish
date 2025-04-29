@@ -1,3 +1,44 @@
+
+
+
+
+<div class="Record">
+    <h2 class="text-2xl font-bold mb-4">Confirmation Records</h2>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Sponsor</th>
+                <th>Confirmation Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($records as $record)
+            <tr>
+                <td>{{ $record->event }}</td>
+                <td>{{ $record->sponsor }}</td>
+                <td>{{ $record->confirmation_date }}</td>
+                <td>
+                    <div class="action">
+                   <form action="">
+                    @csrf
+                    <button class="edit">Edit</button>
+                   </form>
+                    <form action="{{ route('confirmation.destroy', $record->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="delete" type="submit" onclick="return confirm('Delete this record?')">Delete</button>
+                    </form>
+                </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+{{ $records->links() }}
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -20,7 +61,7 @@
         --c-text-tertiary: var(--c-gray-500);
     }
 
-    .confirmationRecord h2 {
+    .Record h2 {
         text-align: center;
         margin-top: 20px;
     }
@@ -34,12 +75,13 @@
 
     th,
     td {
-        padding: 15px;
+        padding: 10px;
         text-align: left;
         border-bottom: 1px solid #f2f2f2;
     }
 
     td {
+        vertical-align: middle;
         font-size: .6rem;
         color: #000000;
     }
@@ -61,45 +103,9 @@
 
     .action {
         display: flex;
+        flex-direction: row;
         gap: 1rem;
     }
-
-    .action form {
-        margin: 0;
-    }
-
-    .action button {
-        padding: 5px 12px;
-        font-size: .6rem;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .action button.approve {
-        background-color: #28a745;
-        color: #fff;
-    }
-
-    .action button.approve:hover {
-        background-color: #218838;
-    }
-
-    .action button.reject {
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    .action button.reject:hover {
-        background-color: #c82333;
-    }
-
-    .action button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-    }
-
     td span {
         color: #777;
     }
@@ -107,39 +113,18 @@
     td[colspan="9"] {
         text-align: center;
     }
+
+    .edit {
+        padding: .3rem;
+        background-color: var(--c-green-500);
+        border: none;
+    }
+
+    .delete {
+        color: white;
+        padding: .3rem;
+        background-color: rgb(249, 87, 84);
+        border: none;
+    }
 </style>
 
-
-
-<div class="confirmationRecord">
-    <h2 class="">Confirmation Records</h2>
-    <table class="table-auto w-full">
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Sponsor</th>
-                <th>Confirmation Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($records as $record)
-                <tr>
-                    <td>{{ $record->event }}</td>
-                    <td>{{ $record->sponsor }}</td>
-                    <td>{{ $record->confirmation_date }}</td>
-                    <td>
-                        <a href="" onclick="return confirm('Edit this record?')">Edit</a>
-                        <form action="{{ route('confirmation.destroy', $record->id) }}" method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this record?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this record?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-{{ $records->links() }}
