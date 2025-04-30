@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SidebarController;
@@ -11,13 +10,11 @@ use App\Http\Controllers\ConfirmationRecordController;
 use App\Http\Controllers\ParishionerController;
 use App\Http\Controllers\MarriageRecordController;
 use App\Http\Controllers\DeathCertificateController;
+use App\Http\Controllers\DonationController;
 
 
 Route::get('/', function () {
-    return view('/authentication/adminform'); 
-});
-Route::get('/death', function () {
-    return view('/admin/create_record/deathCreate'); 
+    return view('/admin/dashboard/dashboard'); 
 });
 Route::get('/admin/dashboard/dashboard', function () {
     return view('admin.dashboard.dashboard');
@@ -26,14 +23,17 @@ Route::get('/admin/dashboard/dashboard', function () {
 Route::get('/user_main', function () {
     return view('user/document_requests/main'); 
 });
-
 Route::get('/admin/parishionerCreate', function () {
     return view('/admin/create_record/parishionerCreate'); 
 });
-
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
-
+//death
+Route::get('/death', function () {
+    return view('/admin/create_record/deathCreate'); 
+});
+//donation
+Route::resource('donation',DonationController::class);
 
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
@@ -44,21 +44,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/baptismal-records', [BaptismalRecordController::class, 'index'])->name('baptismal.index');
 });
 
+
 // List all baptismal records
 Route::get('/admin/baptismal-records', [BaptismalRecordController::class, 'index'])->name('admin.baptismal.index');
-
 // Show the create form
 Route::get('/admin/baptismal-records/create', [BaptismalRecordController::class, 'create'])->name('baptismal.create');
-
 // Store the new baptismal record
 Route::post('/admin/baptismal-records', [BaptismalRecordController::class, 'store'])->name('admin.baptismal.store');
-
 // Show the edit form
 Route::get('/admin/baptismal-records/{id}/edit', [BaptismalRecordController::class, 'edit'])->name('admin.baptismal.edit');
-
 // Update the baptismal record
 Route::put('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'update'])->name('admin.baptismal.update');
-
 // Delete the baptismal record
 Route::delete('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'destroy'])->name('admin.baptismal.destroy');
 
@@ -72,9 +68,8 @@ Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::cla
 Route::resource('marriage', MarriageRecordController::class)->parameters([
     'marriage' => 'marriageRecord'
 ]);
+
 //Death Records
-
-
 Route::resource('death', DeathCertificateController::class)->parameters([
     'death' => 'deathCertificate'
 ]);
@@ -84,14 +79,10 @@ Route::resource('death', DeathCertificateController::class)->parameters([
 
 Route::get('/admin/user', [SidebarController::class, 'showUser']);
 Route::get('/admin/document_requests', [SidebarController::class, 'showDocumentRequest']);
-
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
 Route::post('/admin/register', [AdminAuthController::class, 'register']);
-
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
-
-
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
 
 // counts

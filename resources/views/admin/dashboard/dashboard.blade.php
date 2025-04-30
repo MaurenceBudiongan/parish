@@ -238,7 +238,7 @@
         const loadMarriageRecord = "{{ route('marriage.index') }}";
         const loadDeathCreate = "{{ route('death.create') }}";
         const loadDeathRecord = "{{ route('death.index') }}";
-        const loadDonationCreate= "{{ route('death.create') }}";
+        const loadDonationCreate= "{{ route('donation.create') }}";
         const loadDonationRecord= "{{ route('death.index') }}";
 
     </script>
