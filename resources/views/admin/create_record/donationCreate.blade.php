@@ -1,5 +1,5 @@
 <h2 class="h2">Donation Record</h2>
-<div class="donationCreate">
+<div class="Create">
     <form action="{{ route('donation.store') }}" method="POST">
         @csrf
 
@@ -54,7 +54,7 @@
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap");
 
-    .donationCreate {
+    .Create {
         padding: 15px;
         background-color: var(--c-gray-600, #f0f0f0);
         border-radius: 10px;

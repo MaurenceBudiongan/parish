@@ -7,14 +7,20 @@ use Illuminate\Http\Request;
 
 class DeathCertificateController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (!$request->ajax()) {
+            abort(403, 'Access denied');
+        }
         $certificates = DeathCertificate::latest()->paginate(10);
         return view('admin.record.memberRecord.deathRecord', compact('certificates'));
     }
 
-    public function create()
+    public function create(Request $request )
     {
+        if (!$request->ajax()) {
+            abort(403, 'Access denied');
+        }
         return view('admin.create_record.deathCreate');
     }
 

@@ -1,5 +1,5 @@
 <h2 class="h2">Marriage Record</h2>
-<div class="marriageCreate">
+<div class="Create">
     <form action="{{ route('marriage.store') }}" method="POST">
         @csrf
         <div>
@@ -22,7 +22,7 @@
     </form>
 </div>
 <style>
-    .marriageCreate {
+    .Create {
         padding: 15px;
         background-color: var(--c-gray-600);
         border-radius: 10px;
@@ -75,7 +75,7 @@
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
 
-    .marriageCreate form button {
+    .Create form button {
         padding: 12px;
         width: 100%;
         background: #45FFBC;

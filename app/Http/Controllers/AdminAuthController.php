@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class AdminAuthController extends Controller
 {
     // Show registration form
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
+        if (!$request->ajax()) {
+            abort(403, 'Access denied');
+        }
         return view('authentication.adminform');
     }
    

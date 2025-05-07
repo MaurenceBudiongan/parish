@@ -1,5 +1,5 @@
 <h2 class="h2">Death Record</h2>
-<div class="deathCreate">
+<div class="Create">
     <form action="{{ route('death.store') }}" method="POST">
         @csrf
 
@@ -73,23 +73,21 @@
 </div>
 
 <style>
-     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap");
 
-
-   .deathCreate{
+    .Create {
         padding: 15px;
         background-color: var(--c-gray-600);
         border-radius: 10px;
         border-bottom: 10px;
-        height: 27.6rem;
-        overflow-y: scroll;
+        font-family: 'Be Vietnam Pro', sans-serif;
     }
 
- .h2{
+    .h2 {
         margin-bottom: 20px;
     }
 
-    form{
+    form {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -102,6 +100,8 @@
         margin-bottom: 20px;
         color: #333;
     }
+
+
 
     .form-group {
         margin-bottom: 15px;
@@ -129,19 +129,22 @@
     input[type="date"]:focus {
         border-color: #007bff;
         outline: none;
-        box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
 
-    .deathCreate form button {
+    .Create form button {
         padding: 12px;
-        width: 100%;
         background: #45FFBC;
         color: black;
+        font-weight: bold;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         font-size: 12px;
-        transition: 0.3s;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background: #0056b3;
     }
 </style>
-

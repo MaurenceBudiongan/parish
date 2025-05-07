@@ -11,6 +11,7 @@ use App\Http\Controllers\ParishionerController;
 use App\Http\Controllers\MarriageRecordController;
 use App\Http\Controllers\DeathCertificateController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\MassScheduleController;
 
 
 Route::get('/', function () {
@@ -26,6 +27,9 @@ Route::get('/user_main', function () {
 Route::get('/admin/parishionerCreate', function () {
     return view('/admin/create_record/parishionerCreate'); 
 });
+Route::get('/admin/donation', function () {
+    return view('/admin/record/financialRecord/donationRecord'); 
+});
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
 //death
@@ -34,6 +38,9 @@ Route::get('/death', function () {
 });
 //donation
 Route::resource('donation',DonationController::class);
+//mass_schedules
+Route::resource('mass_schedules', MassScheduleController::class);
+
 
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
@@ -68,7 +75,6 @@ Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::cla
 Route::resource('marriage', MarriageRecordController::class)->parameters([
     'marriage' => 'marriageRecord'
 ]);
-
 //Death Records
 Route::resource('death', DeathCertificateController::class)->parameters([
     'death' => 'deathCertificate'
@@ -104,7 +110,6 @@ Route::get('/admin/dashboar', function () {
 })->name('admin.dashboar');
 
 Route::get('admin/dashboard', function () {
- 
     if (!Auth::check() || !Auth::user()->is_valid) {
         // If kuan fail, mo redirect sa name(adminform.adminform(authentication.adminform))
         return redirect()->route('adminform.adminform');
@@ -124,4 +129,14 @@ Route::put('admin.document_requests/{id}/reject', [DocumentRequestController::cl
 // User routes without authentication
 Route::get('/user/document_requests', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
 Route::post('/user/document_requests', [DocumentRequestController::class, 'store'])->name('user.document_requests.store');
+
+// gcash
+ use App\Http\Controllers\GCashController;
+Route::get('/pay/gcash', function () {
+    return view('gcash.form');
+});
+
+Route::post('/pay/gcash', [GCashController::class, 'initiatePayment'])->name('gcash.pay');
+Route::get('/pay/gcash/success', [GCashController::class, 'success'])->name('gcash.success');
+Route::get('/pay/gcash/failed', [GCashController::class, 'failed'])->name('gcash.failed');
 

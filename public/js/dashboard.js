@@ -214,15 +214,37 @@ function showDocumentRequest() {
 function toggleDropdown(element) {
     document.getElementById("dropdownmenu").style.display = "block";
     document.getElementById("createdropdownmenu").style.display = "none";
+    document.getElementById("financialdropdownmenu").style.display = "none";
+    document.getElementById("eventdropdownmenu").style.display = "none";
+    document.getElementById("clergydropdownmenu").style.display = "none";
 }
 function createtoggleDropdown() {
     document.getElementById("createdropdownmenu").style.display = "block";
     document.getElementById("dropdownmenu").style.display = "none";
+    document.getElementById("financialdropdownmenu").style.display = "none";
+    document.getElementById("eventdropdownmenu").style.display = "none";
+    document.getElementById("clergydropdownmenu").style.display = "none";
 }
 function financialtoggleDropdown() {
     document.getElementById("financialdropdownmenu").style.display = "block";
     document.getElementById("createdropdownmenu").style.display = "none";
     document.getElementById("dropdownmenu").style.display = "none";
+    document.getElementById("eventdropdownmenu").style.display = "none";
+    document.getElementById("clergydropdownmenu").style.display = "none";
+}
+function eventtoggleDropdown() {
+  document.getElementById("eventdropdownmenu").style.display = "block";
+  document.getElementById("financialdropdownmenu").style.display = "none";
+  document.getElementById("createdropdownmenu").style.display = "none";
+  document.getElementById("dropdownmenu").style.display = "none";
+  document.getElementById("clergydropdownmenu").style.display = "none";
+}
+function clergytoggleDropdown() {
+  document.getElementById("clergydropdownmenu").style.display = "block";
+  document.getElementById("eventdropdownmenu").style.display = "none";
+  document.getElementById("financialdropdownmenu").style.display = "none";
+  document.getElementById("createdropdownmenu").style.display = "none";
+  document.getElementById("dropdownmenu").style.display = "none";
 }
 function showParishionerCreate() {
     const maincontent = document.getElementById("maincontent");
@@ -492,6 +514,54 @@ function showDonationRecord() {
   if (maincontent) {
       dashboard.style.color = "#969593";
       fetch(loadDonationRecord, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
+}
+function showMassCreate() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+
+  if (maincontent) {
+      dashboard.style.color = "#969593";
+      fetch(loadMassCreate, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
+}
+function showMassRecord() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+
+  if (maincontent) {
+      dashboard.style.color = "#969593";
+      fetch(loadMassRecord, {
           headers: {
               "X-Requested-With": "XMLHttpRequest",
           },

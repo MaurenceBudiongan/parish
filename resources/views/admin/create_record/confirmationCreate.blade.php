@@ -1,5 +1,5 @@
 <h2 class="h2">Confirmation Record</h2>
-<div class="confirmationCreate">
+<div class="Create">
 <form action="{{ route('confirmation.store') }}" method="POST">
     @csrf
     <div>
@@ -17,72 +17,80 @@
     <button type="submit"  onclick="return confirm('Save this confirmation record?')">Save Confirmation</button>
 </form>
 </div>
-<style>
-.confirmationCreate{
-    padding: 15px;
-    background-color: var(--c-gray-600);
-    border-radius: 10px;
-}
-.h2{
-        margin-bottom: 20px;
-    }
-    form{
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .form-title {
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 20px;
-        color: #333;
-    }
+
+   <style>
+        @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap");
+
+        .Create {
+            padding: 15px;
+            background-color: var(--c-gray-600);
+            border-radius: 10px;
+            border-bottom: 10px;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        .h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
 
- 
-    .form-group {
-        margin-bottom: 15px;
-    }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-        color: var(--c-gray-200);
-        font-size: 12px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    input[type="text"],
-    input[type="date"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        transition: 0.3s;
-        font-size: 12px;
-    }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--c-gray-200);
+            font-size: 12px;
+        }
 
-    input[type="text"]:focus,
-    input[type="date"]:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 5px rgba(0,123,255,0.5);
-    }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-size: 12px;
+        }
 
-    .confirmationCreate form button{
-        padding: 12px;
-        width: 100%;
+        input[type="text"]:focus,
+        input[type="date"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .Create form button {
+            padding: 12px;
         background: #45FFBC;
         color: black;
+        font-weight: bold;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         font-size: 12px;
-        transition: 0.3s;
-    }
+        transition: background-color 0.3s ease;
+        }
 
-    .submit-btn:hover {
-        background: #0056b3;
-    }
-</style>
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+    </style>

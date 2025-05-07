@@ -79,6 +79,7 @@
                             <a href="#" onclick="showMarriageCreate()">Marriage</a>
                             <a href="#" onclick="showDeathCreate()">Death</a>
                             <a href="#" onclick="showDonationCreate()">Donation</a>
+                            <a href="#" onclick="showMassCreate()">Mass/Service Scheduling</a>
                         </div>
                     </div>
 
@@ -106,17 +107,29 @@
                         </a>
                         <div id="financialdropdownmenu" class="dropdown-menu">
                             <a href="#" onclick="showBaptistRecord()">Payment Transaction</a>
-                            <a href="#" onclick="showConfirmationRecord()">Donation</a>
+                            <a href="#" onclick="showDonationRecord()">Donation</a>
                         </div>
                     </div>
-                    <a class="a"href="#">
-                        <i class="ph-globe"></i>
-                        <span>Events Record</span>
-                    </a>
-                    <a class="a" href="#">
-                        <i class="ph-file-plus"></i>
-                        <span>Staff Management</span>
-                    </a>
+                    <div class="dropdown">
+                        <a class="a" href="javascript:void(0);" onclick="eventtoggleDropdown()">
+                            <i class="ph-globe"></i>
+                            <span>Event Record</span>
+                        </a>
+                        <div id="eventdropdownmenu" class="dropdown-menu">
+                            <a href="#" onclick="showMassRecord()">Mass & Service Scheduling</a>
+                            <a href="#" onclick="">Event Announcements</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a class="a" href="javascript:void(0);" onclick="clergytoggleDropdown()">
+                            <i class="ph-file-plus"></i>
+                            <span>Clergy & Staff </span>
+                        </a>
+                        <div id="clergydropdownmenu" class="dropdown-menu">
+                            <a href="#" onclick="">Mass & Service Scheduling</a>
+                            <a href="#" onclick="">Event Announcements</a>
+                        </div>
+                    </div>
                     <a class="a" href="#transfer-section">
                         <i class="ph-clipboard-text"></i>
                         <span>Report Analytics</span>
@@ -132,7 +145,7 @@
                         <p>Choose a e-wallet to pay request</p>
                         <div>
                             <button class="card-button mastercard">
-                                <img src="{{asset('img/gcash-logo.png')}}" alt="gcash" />
+                                <img src="{{ asset('img/gcash-logo.png') }}" alt="gcash" />
                             </button>
                             <button class="card-button visa">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500"
@@ -234,13 +247,14 @@
         const loadConfirmationCreate = "{{ route('confirmation.create') }}";
         const loadConfirmationRecord = "{{ route('confirmation.index') }}";
         const loadParishionerRecord = "{{ route('parishioners.index') }}";
-        const loadMarriageCreate= "{{ route('marriage.create') }}";
+        const loadMarriageCreate = "{{ route('marriage.create') }}";
         const loadMarriageRecord = "{{ route('marriage.index') }}";
         const loadDeathCreate = "{{ route('death.create') }}";
         const loadDeathRecord = "{{ route('death.index') }}";
-        const loadDonationCreate= "{{ route('donation.create') }}";
-        const loadDonationRecord= "{{ route('death.index') }}";
-
+        const loadDonationCreate = "{{ route('donation.create') }}";
+        const loadDonationRecord = "{{ route('donation.index') }}";
+        const loadMassCreate = "{{ route('mass_schedules.create') }}";
+        const loadMassRecord = "{{ route('mass_schedules.index') }}";
     </script>
 
 

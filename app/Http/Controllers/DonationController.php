@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class DonationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (!$request->ajax()) {
+            abort(403, 'Access denied');
+        }
         $donations = Donation::with('member')->latest()->paginate(10);
-        return view('donations.index', compact('donations'));
+        return view('admin.record.financialRecord.donationRecord', compact('donations'));
     }
 
     public function create(Request $request)
@@ -41,7 +44,7 @@ class DonationController extends Controller
     public function edit(Donation $donation)
     {
         $members = Parishioner::all();
-        return view('donations.edit', compact('donation', 'members'));
+        return view('admin.record.financialRecord.donationRecord', compact('donation', 'members'));
     }
 
     public function update(Request $request, Donation $donation)

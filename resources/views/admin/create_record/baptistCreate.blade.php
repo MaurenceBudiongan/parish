@@ -1,5 +1,5 @@
 <h2 class="h2"> Baptismal Record</h2>
-<div class="baptistCreate">
+<div class="Create">
     <form action="{{ route('admin.baptismal.store') }}" method="POST">
         @csrf
         <div>
@@ -20,11 +20,14 @@
     </form>
 
     <style>
-        .baptistCreate {
+        @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap");
+
+        .Create {
             padding: 15px;
             background-color: var(--c-gray-600);
             border-radius: 10px;
             border-bottom: 10px;
+            font-family: 'Be Vietnam Pro', sans-serif;
         }
 
         .h2 {
@@ -76,17 +79,16 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
-        .baptistCreate form button {
+        .Create form button {
             padding: 12px;
-            width: 100%;
-
-            background: #45FFBC;
-            color: black;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: 0.3s;
+        background: #45FFBC;
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.3s ease;
         }
 
         .submit-btn:hover {
