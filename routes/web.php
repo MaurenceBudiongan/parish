@@ -13,6 +13,7 @@ use App\Http\Controllers\DeathCertificateController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\MassScheduleController;
 use App\Http\Controllers\EventAnnouncementController;
+use App\Http\Controllers\PriestController;
 
 Route::get('/', function () {
     return view('/admin/dashboard/dashboard'); 
@@ -51,6 +52,11 @@ Route::resource('donation',DonationController::class);
 Route::resource('mass_schedules', MassScheduleController::class);
 // event announcement
 Route::resource('event_announcements', EventAnnouncementController::class);
+//priest
+Route::resource('priests', PriestController::class);
+Route::get('/priests-login', [PriestController::class, 'showLoginForm'])->name('priests.login.form');
+Route::post('/priests-login', [PriestController::class, 'login'])->name('priests.login.submit');
+
 
 
 
