@@ -1,4 +1,5 @@
-<h2 class="text-2xl font-bold mb-4">Financial Records</h2>
+<div class="Record">
+<h2 class="text-2xl font-bold mb-4">Mass & Schedules Records</h2>
 <table class="table-auto w-full">
     <thead>
         <tr>

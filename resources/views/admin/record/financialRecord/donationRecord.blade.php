@@ -1,5 +1,5 @@
 <div class="Record">
-    <h2 class="text-2xl font-bold mb-4">Financial Records</h2>
+    <h2 class="text-2xl font-bold mb-4">Donation Records</h2>
     <table class="table-auto w-full">
         <thead>
             <tr>

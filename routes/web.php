@@ -12,7 +12,7 @@ use App\Http\Controllers\MarriageRecordController;
 use App\Http\Controllers\DeathCertificateController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\MassScheduleController;
-
+use App\Http\Controllers\EventAnnouncementController;
 
 Route::get('/', function () {
     return view('/admin/dashboard/dashboard'); 
@@ -30,28 +30,35 @@ Route::get('/admin/parishionerCreate', function () {
 Route::get('/admin/donation', function () {
     return view('/admin/record/financialRecord/donationRecord'); 
 });
+
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
 //death
 Route::get('/death', function () {
     return view('/admin/create_record/deathCreate'); 
 });
+//Marriage Records
+Route::resource('marriage', MarriageRecordController::class)->parameters([
+    'marriage' => 'marriageRecord'
+]);
+//Death Records
+Route::resource('death', DeathCertificateController::class)->parameters([
+    'death' => 'deathCertificate'
+]);
 //donation
 Route::resource('donation',DonationController::class);
 //mass_schedules
 Route::resource('mass_schedules', MassScheduleController::class);
+// event announcement
+Route::resource('event_announcements', EventAnnouncementController::class);
 
 
-// Onclicks
-Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
-Route::get('/adminform', [Onclick::class, 'adminform'])->name('adminform.adminform');
+
 
 // Baptismal Record Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/baptismal-records', [BaptismalRecordController::class, 'index'])->name('baptismal.index');
 });
-
-
 // List all baptismal records
 Route::get('/admin/baptismal-records', [BaptismalRecordController::class, 'index'])->name('admin.baptismal.index');
 // Show the create form
@@ -71,15 +78,6 @@ Route::get('/admin/confirmation/create', [ConfirmationRecordController::class, '
 Route::get('/admin/confirmation', [ConfirmationRecordController::class, 'index'])->name('confirmation.index');
 Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::class, 'destroy'])->name('confirmation.destroy');
 
-//Marriage Records
-Route::resource('marriage', MarriageRecordController::class)->parameters([
-    'marriage' => 'marriageRecord'
-]);
-//Death Records
-Route::resource('death', DeathCertificateController::class)->parameters([
-    'death' => 'deathCertificate'
-]);
-
 
 
 
@@ -90,16 +88,6 @@ Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
-
-// counts
-Route::get('/document-counts', function () {
-    return response()->json([
-        'baptismal' => \App\Models\DocumentRequest::where('documenttype', 'Baptismal')->count(),
-        'confirmation' => \App\Models\DocumentRequest::where('documenttype', 'Confirmation')->count(),
-        'marriage' => \App\Models\DocumentRequest::where('documenttype', 'Marriagecertificate')->count(),
-    ]);
-});
-
 
 // Prevent access to dashboard until form is submitted
 Route::get('/admin/dashboar', function () {
@@ -117,7 +105,6 @@ Route::get('admin/dashboard', function () {
     // If ok continue to dashboard
     return view('admin.dashboard.dashboard');
 });
-
 // Admin routes without authentication
 Route::get('/admin/document_requests', [DocumentRequestController::class, 'index'])->name('admin.document_requests.index');
 Route::get('/admin/document_requests/{documentRequest}/edit', [DocumentRequestController::class, 'edit'])->name('admin.document_requests.edit');
@@ -125,18 +112,26 @@ Route::put('/admin/document_requests/{documentRequest}', [DocumentRequestControl
 Route::delete('/admin/document_requests/{documentRequest}', [DocumentRequestController::class, 'destroy'])->name('admin.document_requests.destroy');
 Route::put('admin.document_requests/{id}/approve', [DocumentRequestController::class, 'approve'])->name('admin.document_requests.approve');
 Route::put('admin.document_requests/{id}/reject', [DocumentRequestController::class, 'reject'])->name('admin.document_requests.reject');
-
 // User routes without authentication
 Route::get('/user/document_requests', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
 Route::post('/user/document_requests', [DocumentRequestController::class, 'store'])->name('user.document_requests.store');
-
+// Onclicks
+Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
+Route::get('/adminform', [Onclick::class, 'adminform'])->name('adminform.adminform');
 // gcash
  use App\Http\Controllers\GCashController;
 Route::get('/pay/gcash', function () {
     return view('gcash.form');
 });
-
 Route::post('/pay/gcash', [GCashController::class, 'initiatePayment'])->name('gcash.pay');
 Route::get('/pay/gcash/success', [GCashController::class, 'success'])->name('gcash.success');
 Route::get('/pay/gcash/failed', [GCashController::class, 'failed'])->name('gcash.failed');
 
+// counts
+Route::get('/document-counts', function () {
+    return response()->json([
+        'baptismal' => \App\Models\DocumentRequest::where('documenttype', 'Baptismal')->count(),
+        'confirmation' => \App\Models\DocumentRequest::where('documenttype', 'Confirmation')->count(),
+        'marriage' => \App\Models\DocumentRequest::where('documenttype', 'Marriagecertificate')->count(),
+    ]);
+});

@@ -14,7 +14,7 @@ class MassScheduleController extends Controller
     {
   
         $schedules = MassSchedule::orderBy('date')->paginate(10);
-        return view('admin.record.eventRecord.mass/servicesschedulingRecord', compact('schedules'));
+        return view('admin.record.eventRecord.servicesschedulingRecord', compact('schedules'));
     }
     
     public function create()
@@ -50,13 +50,14 @@ class MassScheduleController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'description' => 'required',  
             'service_type' => 'required',
             'date' => 'required|date',
             'start_time' => 'required',
             'end_time' => 'required',
-            'priest_id' => 'required|exists:users,id',
             'location' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'notes' => 'required'
         ]);
     
         $mass_schedule->update($request->all());

@@ -80,6 +80,7 @@
                             <a href="#" onclick="showDeathCreate()">Death</a>
                             <a href="#" onclick="showDonationCreate()">Donation</a>
                             <a href="#" onclick="showMassCreate()">Mass/Service Scheduling</a>
+                            <a href="#" onclick="showEventCreate()">Event Announcements</a>
                         </div>
                     </div>
 
@@ -93,7 +94,6 @@
                             <a href="#" onclick="showConfirmationRecord()">Confirmation Record</a>
                             <a href="#" onclick="showMarriageRecord()">Marriage Record</a>
                             <a href="#" onclick="showDeathRecord()">Death Record</a>
-                            <a href="#" onclick="showDonationRecord()">Donation Record</a>
                         </div>
                     </div>
                     <a class="a" href="#"onclick="showDocumentRequest()">
@@ -117,7 +117,7 @@
                         </a>
                         <div id="eventdropdownmenu" class="dropdown-menu">
                             <a href="#" onclick="showMassRecord()">Mass & Service Scheduling</a>
-                            <a href="#" onclick="">Event Announcements</a>
+                            <a href="#" onclick="showEventRecord()">Event Announcements</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -126,8 +126,8 @@
                             <span>Clergy & Staff </span>
                         </a>
                         <div id="clergydropdownmenu" class="dropdown-menu">
-                            <a href="#" onclick="">Mass & Service Scheduling</a>
-                            <a href="#" onclick="">Event Announcements</a>
+                            <a href="#" onclick="">Priest Assignment</a>
+                            <a href="#" onclick="">Staff Profile</a>
                         </div>
                     </div>
                     <a class="a" href="#transfer-section">
@@ -255,6 +255,8 @@
         const loadDonationRecord = "{{ route('donation.index') }}";
         const loadMassCreate = "{{ route('mass_schedules.create') }}";
         const loadMassRecord = "{{ route('mass_schedules.index') }}";
+        const loadEventCreate = "{{ route('event_announcements.create') }}";
+        const loadEventRecord = "{{ route('event_announcements.index') }}";
     </script>
 
 

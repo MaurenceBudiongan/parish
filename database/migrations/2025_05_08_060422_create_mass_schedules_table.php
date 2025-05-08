@@ -26,9 +26,6 @@ public function up()
         $table->string('status')->default('Scheduled');
         $table->text('notes')->nullable();
         $table->timestamps();
-
-        // Foreign key (optional)
-        $table->foreign('priest_id')->references('id')->on('users')->onDelete('cascade');
     });
 }
 
