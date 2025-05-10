@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($priests as $priest)
+                @forelse($priests as $priest)
                     <tr>
                         <td>{{ $priest->priest_id }}</td>
                         <td>{{ $priest->first_name }} {{ $priest->last_name }}</td>
@@ -45,7 +45,11 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+               @empty
+                <tr>
+                    <td colspan="10">No staff records found.</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

@@ -36,9 +36,7 @@ class PriestController extends Controller
             'status' => 'required|in:Active,Retired,On Leave'
         ]);
 
-
         $validated['priest_id'] = uniqid();
-
 
         if ($request->hasFile('profile_photo')) {
             $validated['profile_photo'] = $request->file('profile_photo')->store('priests', 'public');

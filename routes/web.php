@@ -14,10 +14,18 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\MassScheduleController;
 use App\Http\Controllers\EventAnnouncementController;
 use App\Http\Controllers\PriestController;
+use App\Http\Controllers\PriestAssignmentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StaffController;
 
 Route::get('/', function () {
     return view('/admin/dashboard/dashboard'); 
 });
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 Route::get('/admin/dashboard/dashboard', function () {
     return view('admin.dashboard.dashboard');
 })->middleware('auth:admin')->name('admin.dashboard.dashboard');
@@ -56,7 +64,12 @@ Route::resource('event_announcements', EventAnnouncementController::class);
 Route::resource('priests', PriestController::class);
 Route::get('/priests-login', [PriestController::class, 'showLoginForm'])->name('priests.login.form');
 Route::post('/priests-login', [PriestController::class, 'login'])->name('priests.login.submit');
-
+//priest Assignment
+Route::resource('priests_assignments', PriestAssignmentController::class);
+//staff
+Route::resource('staff', StaffController::class);
+Route::get('/staff-login', [StaffController::class, 'loginForm'])->name('staff.login');
+Route::post('/staff-login', [StaffController::class, 'login'])->name('staff.login.submit');
 
 
 

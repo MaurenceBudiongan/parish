@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('priests', function (Blueprint $table) {
             $table->id();
-            $table->string('priest_id')->nullable()->unique();
+            $table->string('priest_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
