@@ -2,12 +2,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ asset('css/adminform.css') }}" />
     <title>Online Parish Record Keeping</title>
 </head>
+
 <body>
     <div class="div1"></div>
     <div class="div2"></div>
@@ -16,7 +18,8 @@
     <div class="container">
         <div class="intro">
             <h1>Online Parish Record Keeping</h1>
-            <p>"Requesting parish documents has never been easier! With online services, you can conveniently submit your request from home, saving time and effort while staying connected."</p>
+            <p>"Requesting parish documents has never been easier! With online services, you can conveniently submit
+                your request from home, saving time and effort while staying connected."</p>
         </div>
 
         <div class="form">
@@ -26,16 +29,19 @@
                     @csrf
                     <h3>Admin Sign Up</h3>
                     <label for="adminfullname">Full Name</label>
-                    <input type="text" name="adminfullname" id="adminfullname" placeholder="Enter Fullname" required />
+                    <input type="text" name="adminfullname" id="adminfullname" placeholder="Enter Fullname"
+                        required />
 
                     <label for="admin">Admin</label>
                     <input type="text" name="admin" id="admin" placeholder="Enter Admin" required />
 
                     <label for="adminpassword">Password</label>
-                    <input type="password" name="password" id="adminpassword" placeholder="Enter Admin Password" required />
+                    <input type="password" name="password" id="adminpassword" placeholder="Enter Admin Password"
+                        required />
 
                     <label for="confirmadminpassword">Confirm Password</label>
-                    <input type="password" name="password_confirmation" id="confirmadminpassword" placeholder="Enter Confirm Password" required />
+                    <input type="password" name="password_confirmation" id="confirmadminpassword"
+                        placeholder="Enter Confirm Password" required />
 
                     <button type="submit">Register</button>
                     <p>Already registered admin? <a href="javascript:void(0)" onclick="login()">Log in</a></p>
@@ -43,7 +49,7 @@
             </div>
 
             <!-- Sign In Form -->
-            <div id="login" class="login" >
+            <div id="login" class="login">
                 <form action="{{ route('admin.login') }}" method="POST">
                     @csrf
                     <h3>Admin Login</h3>
@@ -56,7 +62,8 @@
                         <p class="text-danger" style="font-size: 10px;color: red;">{{ $message }}</p>
                     @enderror
                     <button type="submit">Log in</button>
-                    <p>New here? <a href="javascript:void(0)" onclick="register()">Sign up</a> now to be administrator!</p>
+                    <p>New here? <a href="javascript:void(0)" onclick="register()">Sign up</a> now to be administrator!
+                    </p>
                 </form>
             </div>
         </div>
@@ -74,4 +81,5 @@
         }
     </script>
 </body>
+
 </html>

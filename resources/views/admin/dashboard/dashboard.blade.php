@@ -232,7 +232,7 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script>
         function goToSignOutPage() {
-            window.location.href = "{{ route('adminform.adminform') }}";
+            window.location.href = "{{ route('authentication.adminform') }}";
         }
         document.getElementById('toggleBtn').addEventListener('click', function() {
             const div = document.getElementById('app-body-navigation');
@@ -242,6 +242,8 @@
                 div.style.display = 'none';
             }
         });
+         const loadBaptismalCreate = "{{ route('baptismals.create') }}";
+        //
         const loadBaptistCreate = "{{ route('baptismal.create') }}";
         const loadBaptistRecord = "{{ route('admin.baptismal.index') }}";
         const loadConfirmationCreate = "{{ route('confirmation.create') }}";

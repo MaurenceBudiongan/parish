@@ -10,6 +10,10 @@ class Onclick extends Controller
 {
     return view('user/document_requests.create'); // create.blade.php
 }
+ public function staff()
+{
+    return view('staff.login'); // create.blade.php
+}
 }
 
 

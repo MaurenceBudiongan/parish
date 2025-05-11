@@ -11,12 +11,12 @@ class StaffController extends Controller
     public function index()
     {
         $staff = Staff::all();
-        return view('admin.staff.index', compact('staff'));
+        return view('staff.index', compact('staff'));
     }
 
     public function create()
     {
-        return view('admin.staff.create');
+        return view('staff.create');
     }
     public function loginForm()
     {

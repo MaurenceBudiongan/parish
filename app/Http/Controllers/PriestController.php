@@ -10,12 +10,12 @@ class PriestController extends Controller
     public function index()
     {
         $priests = Priest::all();
-        return view('admin.priests.index', compact('priests'));
+        return view('priests.index', compact('priests'));
     }
 
     public function create()
     {
-        return view('admin.priests.create');
+        return view('priests.create');
     }
 
     public function store(Request $request)
@@ -69,7 +69,7 @@ class PriestController extends Controller
             'status' => 'required|in:Active,Retired,On Leave',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+          $validated['priest_id'] = uniqid();
         // Handle profile photo update
         if ($request->hasFile('profile_photo')) {
             // Delete old photo
@@ -97,7 +97,7 @@ class PriestController extends Controller
     }
     public function showLoginForm()
 {
-    return view('admin.priests.login');
+    return view('priests.login');
 }
 
 public function login(Request $request)
@@ -114,7 +114,7 @@ public function login(Request $request)
         $dbName = strtolower($priest->last_name . ',' . $priest->first_name);
 
         if ($inputName === $dbName) {
-            return view('admin.priests.dashboard', ['priest' => $priest]);
+            return view('priests.dashboard', ['priest' => $priest]);
         }
     }
 

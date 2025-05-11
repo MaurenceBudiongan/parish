@@ -296,7 +296,7 @@ function showBaptistCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadBaptistCreate, {
+        fetch(loadBaptismalCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },

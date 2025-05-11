@@ -5,6 +5,7 @@ use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\Onclick;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\BaptismalController;
 use App\Http\Controllers\BaptismalRecordController;
 use App\Http\Controllers\ConfirmationRecordController;
 use App\Http\Controllers\ParishionerController;
@@ -21,9 +22,9 @@ use App\Http\Controllers\StaffController;
 Route::get('/', function () {
     return view('/admin/dashboard/dashboard'); 
 });
-
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/baptismalstry', function () {
+    return view('admin.baptismal.create'); 
+});
 
 
 Route::get('/admin/dashboard/dashboard', function () {
@@ -39,7 +40,14 @@ Route::get('/admin/parishionerCreate', function () {
 Route::get('/admin/donation', function () {
     return view('/admin/record/financialRecord/donationRecord'); 
 });
-
+Route::get('/landingpage', function () {
+    return view('/landingpage/landingpage'); 
+});
+Route::resource('baptismals',BaptismalController::class);
+// Onclicks
+Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
+Route::get('/adminform', [Onclick::class, 'adminform'])->name('authentication.adminform');
+Route::get('/staffclick', [Onclick::class, 'staff'])->name('staffclick');
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
 //death
@@ -134,9 +142,6 @@ Route::put('admin.document_requests/{id}/reject', [DocumentRequestController::cl
 // User routes without authentication
 Route::get('/user/document_requests', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
 Route::post('/user/document_requests', [DocumentRequestController::class, 'store'])->name('user.document_requests.store');
-// Onclicks
-Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
-Route::get('/adminform', [Onclick::class, 'adminform'])->name('adminform.adminform');
 // gcash
  use App\Http\Controllers\GCashController;
 Route::get('/pay/gcash', function () {
