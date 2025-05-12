@@ -20,7 +20,7 @@ class StaffController extends Controller
     }
     public function loginForm()
     {
-        return view('admin.staff.login'); // create this view below
+        return view('staff.login'); // create this view below
     }
     public function login(Request $request)
     {

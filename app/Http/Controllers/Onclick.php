@@ -14,6 +14,10 @@ class Onclick extends Controller
 {
     return view('staff.login'); // create.blade.php
 }
+ public function parishioner()
+{
+    return view('authentication.userform'); // create.blade.php
+}
 }
 
 

@@ -38,7 +38,7 @@
                 <button class="user-profile">
                     <span>Jerlyn Kyla Orpilla</span>
                     <span>
-                        <img src="{{ asset('img/maria.png') }}" />
+                        <img src="{{ asset('img/kayi.png') }}" />
                     </span>
                 </button>
                 <div class="app-header-actions-buttons">
@@ -242,7 +242,11 @@
                 div.style.display = 'none';
             }
         });
-         const loadBaptismalCreate = "{{ route('baptismals.create') }}";
+        const loadBaptismalCreate = "{{ route('baptismals.create') }}";
+        const loadConfirmationsCreate = "{{ route('confirmations.create') }}";
+        const loadMarriagesCreate = "{{ route('marriages.create') }}";
+        const loadDeathsCreate = "{{route('deaths.create')}}"
+
         //
         const loadBaptistCreate = "{{ route('baptismal.create') }}";
         const loadBaptistRecord = "{{ route('admin.baptismal.index') }}";

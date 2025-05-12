@@ -7,16 +7,19 @@ use App\Http\Controllers\Onclick;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\BaptismalController;
 use App\Http\Controllers\BaptismalRecordController;
+use App\Http\Controllers\ConfirmationController;
 use App\Http\Controllers\ConfirmationRecordController;
 use App\Http\Controllers\ParishionerController;
 use App\Http\Controllers\MarriageRecordController;
 use App\Http\Controllers\DeathCertificateController;
+use App\Http\Controllers\DeathController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\MassScheduleController;
 use App\Http\Controllers\EventAnnouncementController;
 use App\Http\Controllers\PriestController;
 use App\Http\Controllers\PriestAssignmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\StaffController;
 
 Route::get('/', function () {
@@ -44,10 +47,14 @@ Route::get('/landingpage', function () {
     return view('/landingpage/landingpage'); 
 });
 Route::resource('baptismals',BaptismalController::class);
+Route::resource('confirmations',ConfirmationController::class);
+Route::resource('marriages',MarriageController::class);
+Route::resource('deaths',DeathController::class);
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
 Route::get('/adminform', [Onclick::class, 'adminform'])->name('authentication.adminform');
 Route::get('/staffclick', [Onclick::class, 'staff'])->name('staffclick');
+Route::get('/parishionerclick', [Onclick::class, 'parishioner'])->name('gets_started');
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
 //death

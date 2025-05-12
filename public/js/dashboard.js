@@ -345,7 +345,7 @@ function showConfirmationCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadConfirmationCreate, {
+        fetch(loadConfirmationsCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -393,7 +393,7 @@ function showMarriageCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadMarriageCreate, {
+        fetch(loadMarriagesCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -441,7 +441,7 @@ function showDeathCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadDeathCreate, {
+        fetch(loadDeathsCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
