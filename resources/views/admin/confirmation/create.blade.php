@@ -1,45 +1,63 @@
 <form action="">
     <div class="certificate">
-    <div class="top">
-        <p>Diocese of Talibon</p>
-        <p class="p2">SAINT VINCENT FERRRER PARISH</p>
-        <p>San Pascual, Ubay, Bohol</p>
-    </div>
-    <div class="mid">
-        <h1 class="h1">CONFIRMATION CERTIFICATE</h1>
-        <p><span>This is to certify that <input class="child_name" type="text" name="child_name"></span>
-            son/daughter of <input type="text" name="mother_name"> and <input type="text" name="father_name">
-            <span class="confirm">was confirmed according to the rite of the Roman Catholic on</span>
-            <br><span class="date"> the <input class="day" type="text" name="day">of <input class="month"
-                    type="text" name="month">,<input class="year" type="number" name="year">by this
-                Excellency</span>
-            <input class="excellency" type="text" name="excellency">.D., Archibishop/Bishop of
-            <input type="text" name="parish_name">.<br>
-            The following are the sponsors/s: <input class="sponsor1" type="text">
-            <input class="sponsor2" type="text">
+        <div class="top">
+            <p>Diocese of Talibon</p>
+            <p class="p2">SAINT VINCENT FERRRER PARISH</p>
+            <p>San Pascual, Ubay, Bohol</p>
+        </div>
+        <div class="mid">
+            <h1 class="h1">CONFIRMATION CERTIFICATE</h1>
+            <p><span>This is to certify that <input class="child_name" type="text" name="child_name"></span>
+                son/daughter of <input type="text" name="mother_name"> and <input type="text" name="father_name">
+                <span class="confirm">was confirmed according to the rite of the Roman Catholic on</span>
+                <br><span class="date"> the <input class="day" type="text" name="day">of <input
+                        class="month" type="text" name="month">,<input class="year" type="number"
+                        name="year">by this
+                    Excellency</span>
+                <input class="excellency" type="text" name="excellency">.D., Archibishop/Bishop of
+                <input type="text" name="parish_name">.<br>
+                The following are the sponsors/s: <input class="sponsor1" type="text">
+                <input class="sponsor2" type="text">
 
 
-            <span class="purpose">Purpose:
-                <textarea name="purpose"></textarea>
-            </span>
+                <span class="purpose">Purpose:
+                    <textarea name="purpose"></textarea>
+                </span>
 
-        </p>
-    </div>
-    <div class="bottom">
-        <div class="priest">
-            <span>REV.FR.DIOSDADO D. RANARA</span>
-            <p>Parish Priest</p>
+            </p>
+        </div>
+        <div class="bottom">
+            <div class="priest">
+                <span>REV.FR.DIOSDADO D. RANARA</span>
+                <p>Parish Priest</p>
+            </div>
         </div>
     </div>
-</div>
+    <button class="saverecord-btn" type="submit">Save Record</button>
 </form>
 <style>
+    .saverecord-btn {
+        margin-top: 20px;
+        border: 1px solid currentColor;
+        color: var(--c-text-tertiary);
+        border-radius: 6px;
+        padding: .5rem .7rem;
+        background-color: transparent;
+        transition: 0.25s ease;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .saverecord-btn:hover {
+        border: 1px solid white;
+    }
+
     .certificate {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 3rem;
-      border: 7px solid var(--c-gray-500);
+        border: 7px solid var(--c-gray-500);
         padding: 10px 0px;
     }
 

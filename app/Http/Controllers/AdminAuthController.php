@@ -51,7 +51,7 @@ public function login(Request $request)
     $credentials = $request->only('admin', 'password');
 
     if (Auth::guard('admin')->attempt($credentials)) {
-        // Redirect to the correct route after successful login
+        // Redirect to the correct route after successful logina
         return redirect()->route('admin.dashboard.dashboard');  // This matches the route name defined above
     }
 

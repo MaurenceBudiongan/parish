@@ -46,6 +46,12 @@ return [
             'driver' => 'session',
             'provider' => 'admins', // Custom provider for Admin
         ],
+
+        'parishioner' => [
+            'driver' => 'session',
+            'provider' => 'parishioners',
+        ],
+
     ],
 
 
@@ -72,6 +78,11 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class, // Custom provider for AdminForm
     ],  
+    'parishioners' => [
+    'driver' => 'eloquent',
+    'model' => App\Models\ParishionerAuth::class,
+],
+
 ],
 
     /*

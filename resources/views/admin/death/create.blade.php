@@ -48,8 +48,25 @@
             </div>
         </div>
     </div>
+        <button class="saverecord-btn" type="submit">Save Record</button>
 </form>
 <style>
+
+    .saverecord-btn {
+        margin-top: 20px;
+        border: 1px solid currentColor;
+        color: var(--c-text-tertiary);
+        border-radius: 6px;
+        padding: .5rem .7rem;
+        background-color: transparent;
+        transition: 0.25s ease;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .saverecord-btn:hover {
+        border: 1px solid white;
+    }
     .mid .age {
         width: 3rem;
     }

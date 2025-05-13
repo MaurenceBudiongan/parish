@@ -114,7 +114,7 @@ Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::cla
 
 
 
-
+//Admin Authentication
 Route::get('/admin/user', [SidebarController::class, 'showUser']);
 Route::get('/admin/document_requests', [SidebarController::class, 'showDocumentRequest']);
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
@@ -122,6 +122,18 @@ Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
+
+//Parishioner Authentication
+use App\Http\Controllers\ParishionerAuthController;
+
+Route::get('/register', [ParishionerAuthController::class, 'showRegisterForm'])->name('user.register');
+Route::post('/register', [ParishionerAuthController::class, 'register'])->name('user.register.process');
+Route::get('/login', [ParishionerAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [ParishionerAuthController::class, 'login'])->name('user.login.process');
+Route::get('/dashboard', function () {
+    return view('user.document_requests.main');
+})->middleware('auth:parishioner')->name('user.document_requests.main');
+
 
 // Prevent access to dashboard until form is submitted
 Route::get('/admin/dashboar', function () {
@@ -139,14 +151,15 @@ Route::get('admin/dashboard', function () {
     // If ok continue to dashboard
     return view('admin.dashboard.dashboard');
 });
-// Admin routes without authentication
+
+//Admin Document Request
 Route::get('/admin/document_requests', [DocumentRequestController::class, 'index'])->name('admin.document_requests.index');
 Route::get('/admin/document_requests/{documentRequest}/edit', [DocumentRequestController::class, 'edit'])->name('admin.document_requests.edit');
 Route::put('/admin/document_requests/{documentRequest}', [DocumentRequestController::class, 'update'])->name('admin.document_requests.update');
 Route::delete('/admin/document_requests/{documentRequest}', [DocumentRequestController::class, 'destroy'])->name('admin.document_requests.destroy');
 Route::put('admin.document_requests/{id}/approve', [DocumentRequestController::class, 'approve'])->name('admin.document_requests.approve');
 Route::put('admin.document_requests/{id}/reject', [DocumentRequestController::class, 'reject'])->name('admin.document_requests.reject');
-// User routes without authentication
+// User Document Request
 Route::get('/user/document_requests', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
 Route::post('/user/document_requests', [DocumentRequestController::class, 'store'])->name('user.document_requests.store');
 // gcash

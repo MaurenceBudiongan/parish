@@ -462,7 +462,7 @@
                 and personalized support for your church community. Our system ensures that important sacramental 
                 records are maintained accurately and accessible when needed.
             </p>
-            <a href="{{route('gets_started')}}" class="cta-btn">Get Started</a>
+            <a href="{{route('login')}}" class="cta-btn">Get Started</a>
         </div>
 
         <div class="hero-images">
