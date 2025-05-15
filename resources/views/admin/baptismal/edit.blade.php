@@ -1,29 +1,28 @@
-<form action="{{ route('baptismals.store') }}" method="POST">
+<form action="{{ route('baptismals.update', $baptismal->id) }}" method="POST">
     @csrf
+    @method('PUT')
     <div class="certificate">
         <div class="top">
             <p>Diocese of Talibon</p>
-            <p class="p2">SAINT VINCENT FERRRER PARISH</p>
+            <p class="p2">SAINT VINCENT FERRER PARISH</p>
             <p>San Pascual, Ubay, Bohol</p>
         </div>
         <div class="mid">
             <h1 class="h1">CERTIFICATE OF BAPTISM</h1>
             <p>
-                Name of Child <span class="semi1">:</span> <input class="child_name" type="text" name="child_name">
-                Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date" name="date_birth">
-                Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place">
-                Name of Father <span class="semi4">:</span> <input class="father_name" type="text"
-                    name="father_name">
-                Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text"
-                    name="mother_name">
+                Name of Child <span class="semi1">:</span> <input class="child_name" type="text" name="child_name" value="{{ $baptismal->child_name }}">
+                Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date" name="date_birth" value="{{ $baptismal->date_birth }}">
+                Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place" value="{{ $baptismal->place }}">
+                Name of Father <span class="semi4">:</span> <input class="father_name" type="text" name="father_name" value="{{ $baptismal->father_name }}">
+                Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text" name="mother_name" value="{{ $baptismal->mother_name }}">
                 <span class="maiden">(Mother's maiden family name)</span>
-                Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text" name="parent_residence">
-                Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date" name="date_baptism">
-                Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister">
-                Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor">
+                Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text" name="parent_residence" value="{{ $baptismal->parent_residence }}">
+                Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date" name="date_baptism" value="{{ $baptismal->date_baptism }}">
+                Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister" value="{{ $baptismal->minister }}">
+                Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor" value="{{ $baptismal->sponsor }}">
 
                 <span class="purpose">Purpose:
-                    <textarea name="purpose"></textarea>
+                    <textarea name="purpose">{{ $baptismal->purpose }}</textarea>
                 </span>
 
             </p>
@@ -35,8 +34,9 @@
             </div>
         </div>
     </div>
-    <button class="saverecord-btn" type="submit">Save Record</button>
+    <button class="saverecord-btn" type="submit">Update Record</button>
 </form>
+
 <style>
     .saverecord-btn {
         margin-top: 20px;

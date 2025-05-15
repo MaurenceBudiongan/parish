@@ -249,14 +249,14 @@
 
         //
         const loadBaptistCreate = "{{ route('baptismal.create') }}";
-        const loadBaptistRecord = "{{ route('admin.baptismal.index') }}";
+        const loadBaptistRecord = "{{ route('baptismals.index') }}";
         const loadConfirmationCreate = "{{ route('confirmation.create') }}";
-        const loadConfirmationRecord = "{{ route('confirmation.index') }}";
+        const loadConfirmationRecord = "{{ route('confirmations.index') }}";
         const loadParishionerRecord = "{{ route('parishioners.index') }}";
         const loadMarriageCreate = "{{ route('marriage.create') }}";
         const loadMarriageRecord = "{{ route('marriage.index') }}";
         const loadDeathCreate = "{{ route('death.create') }}";
-        const loadDeathRecord = "{{ route('death.index') }}";
+        const loadDeathRecord = "{{ route('deaths.index') }}";
         const loadDonationCreate = "{{ route('donation.create') }}";
         const loadDonationRecord = "{{ route('donation.index') }}";
         const loadMassCreate = "{{ route('mass_schedules.create') }}";

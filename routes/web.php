@@ -18,7 +18,6 @@ use App\Http\Controllers\MassScheduleController;
 use App\Http\Controllers\EventAnnouncementController;
 use App\Http\Controllers\PriestController;
 use App\Http\Controllers\PriestAssignmentController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\StaffController;
 

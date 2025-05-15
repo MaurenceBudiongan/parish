@@ -1,5 +1,6 @@
-<form action="{{ route('confirmations.store') }}" method="POST">
+<form action="{{ route('confirmations.update', $confirmation->id) }}" method="POST">
     @csrf
+    @method('PUT')
     <div class="certificate">
         <div class="top">
             <p>Diocese of Talibon</p>
@@ -8,22 +9,36 @@
         </div>
         <div class="mid">
             <h1 class="h1">CONFIRMATION CERTIFICATE</h1>
-            <p><span>This is to certify that <input class="child_name" type="text" name="child_name"></span>
-                son/daughter of <input type="text" name="father_name"> and <input type="text" name="mother_name">
-                <span class="confirm">was confirmed according to the rite of the Roman Catholic on</span>
-                <br><span class="date"> the <input class="day" type="text" name="day">of <input
-                        class="month" type="text" name="month">,<input class="year" type="number"
-                        name="year">by this
-                    Excellency</span>
-                <input class="excellency" type="text" name="excellency">.D., Archibishop/Bishop of
-                <input type="text" name="parish_name">.<br>
-                The following are the sponsors/s: <input class="sponsor1" type="text" name="first_sponsor">
-                <input class="sponsor2" type="text" name="second_sponsor">
+            <p>
+                <span>This is to certify that
+                    <input class="child_name" type="text" name="child_name" value="{{ $confirmation->child_name }}">
+                </span>
+                son/daughter of
+                <input type="text" name="father_name" value="{{ $confirmation->father_name }}">
+                and
+                <input type="text" name="mother_name" value="{{ $confirmation->mother_name }}">
+                <span class="confirm">
+                    was confirmed according to the rite of the Roman Catholic on
+                </span>
+                <br>
+                <span class="date"> the
+                    <input class="day" type="text" name="day" value="{{ $confirmation->day }}">
+                    of
+                    <input class="month" type="text" name="month" value="{{ $confirmation->month }}">
+                    ,
+                    <input class="year" type="number" name="year" value="{{ $confirmation->year }}">
+                    by this Excellency
+                </span>
+                <input class="excellency" type="text" name="excellency" value="{{ $confirmation->excellency }}">.D.,
+                Archibishop/Bishop of
+                <input type="text" name="parish_name" value="{{ $confirmation->parish_name }}">.<br>
+                The following are the sponsors/s:
+                <input class="sponsor1" type="text" name="first_sponsor" value="{{ $confirmation->first_sponsor }}">
+                <input class="sponsor2" type="text" name="second_sponsor" value="{{ $confirmation->second_sponsor }}">
 
                 <span class="purpose">Purpose:
-                    <textarea name="purpose"></textarea>
+                    <textarea name="purpose">{{ $confirmation->purpose }}</textarea>
                 </span>
-
             </p>
         </div>
         <div class="bottom">
@@ -33,8 +48,16 @@
             </div>
         </div>
     </div>
-    <button class="saverecord-btn" type="submit">Save Record</button>
+    <div class="buttons">
+        <button type="submit" class="edit-btn"  onclick="return confirm('Are you sure you want to Edit this record?')">Update</button>
+        <a href="{{ route('confirmations.index') }}">
+            <button type="button" class="delete-btn">Cancel</button>
+        </a>
+    </div>
 </form>
+
+
+
 <style>
     .saverecord-btn {
         margin-top: 20px;
@@ -51,6 +74,30 @@
     .saverecord-btn:hover {
         border: 1px solid white;
     }
+
+    .edit-btn,
+    .delete-btn {
+        margin-top: 10px;
+        border: 1px solid currentColor;
+        color: var(--c-text-tertiary);
+        border-radius: 6px;
+        padding: .5rem .7rem;
+        background-color: transparent;
+        transition: 0.25s ease;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .edit-btn:hover,
+    .delete-btn:hover {
+        border: 1px solid white;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
 
     .certificate {
         display: flex;

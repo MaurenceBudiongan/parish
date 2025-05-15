@@ -5,62 +5,86 @@ namespace App\Http\Controllers;
 use App\Models\Death;
 use Illuminate\Http\Request;
 
+
 class DeathController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $deaths = Death::latest()->paginate(10);
+        return view('admin.death.index', compact('deaths'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
         return view('admin.death.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'deceased_name' => 'required',
+            'residence' => 'required',
+            'age' => 'required',
+            'cause' => 'required',
+            'death_time' => 'required',
+            'place' => 'required',
+            'burial_time' => 'required',
+            'guardian' => 'required',
+            'priest' => 'required',
+            'day' => 'required',
+            'month' => 'required',
+            'year' => 'required',
+            'rectory' => 'required',
+        ]);
+
+        $validated = $request->all();
+        $validated['death_id'] = 'SanPascual-' . mt_rand(10000000, 99999999);
+
+        Death::create($validated);
+
+        return redirect()->route('deaths.index')
+                         ->with('success', 'Death certificate created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Death $death)
+    public function edit($id)
     {
-        //
+        $death = Death::findOrFail($id);
+        return view('admin.death.edit', compact('death'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Death $death)
+    public function update(Request $request, $id)
     {
-        //
+        $death = Death::findOrFail($id);
+
+        $request->validate([
+            'deceased_name' => 'required',
+            'residence' => 'nullable',
+            'age' => 'nullable',
+            'cause' => 'nullable',
+            'death_time' => 'nullable',
+            'place' => 'nullable',
+            'burial_time' => 'nullable',
+            'guardian' => 'nullable',
+            'priest' => 'nullable',
+            'day' => 'required',
+            'month' => 'required',
+            'year' => 'required',
+            'rectory' => 'nullable',
+        ]);
+
+        $death->update($request->all());
+
+        return redirect()->route('deaths.index')
+                         ->with('success', 'Death certificate updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Death $death)
+    public function destroy($id)
     {
-        //
-    }
+        Death::findOrFail($id)->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Death $death)
-    {
-        //
+        return redirect()->route('deaths.index')
+                         ->with('success', 'Death certificate deleted successfully.');
     }
 }

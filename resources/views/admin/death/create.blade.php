@@ -1,4 +1,5 @@
-<form action="">
+<form action="{{ route('deaths.store')}}" method="POST">
+        @csrf
     <div class="certificate">
         <div class="top">
             <p>Diocese of Talibon</p>
@@ -14,7 +15,7 @@
                     <span>minor/single/married,residing in <input class="residence" type="text"
                             name="residence"></span>
                 </span>
-                <span>died at the age of<input class="age" type="text" name="age">.</span><br>
+                <span>died at the age of<input class="age" type="number" name="age">.</span><br>
                 Cause of death <span class="semi1">:</span> <input class="cause" type="text" name="cause">
                 Date and time of Death <span class="semi2">:</span> <input class="date_time" type="text"
                     name="death_time">
@@ -33,7 +34,7 @@
                         signature on
                         this</span>
                     <input class="day" type="text" name="day">day of <input class="month" type="text"
-                        name="month">,<input class="year" type="nnumber" name="year">at the Catholic Priest
+                        name="month">,<input class="year" type="number" name="year">at the Catholic Priest
                     Rectory
                     in
                     <input type="text" name="rectory">.
@@ -48,10 +49,9 @@
             </div>
         </div>
     </div>
-        <button class="saverecord-btn" type="submit">Save Record</button>
+    <button class="saverecord-btn" type="submit">Save Record</button>
 </form>
 <style>
-
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;
@@ -67,6 +67,7 @@
     .saverecord-btn:hover {
         border: 1px solid white;
     }
+
     .mid .age {
         width: 3rem;
     }
