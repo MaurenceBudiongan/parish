@@ -10,16 +10,25 @@
         <div class="mid">
             <h1 class="h1">CERTIFICATE OF BAPTISM</h1>
             <p>
-                Name of Child <span class="semi1">:</span> <input class="child_name" type="text" name="child_name" value="{{ $baptismal->child_name }}">
-                Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date" name="date_birth" value="{{ $baptismal->date_birth }}">
-                Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place" value="{{ $baptismal->place }}">
-                Name of Father <span class="semi4">:</span> <input class="father_name" type="text" name="father_name" value="{{ $baptismal->father_name }}">
-                Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text" name="mother_name" value="{{ $baptismal->mother_name }}">
+                Name of Child <span class="semi1">:</span> <input class="child_name" type="text" name="child_name"
+                    value="{{ $baptismal->child_name }}">
+                Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date" name="date_birth"
+                    value="{{ $baptismal->date_birth }}">
+                Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place"
+                    value="{{ $baptismal->place }}">
+                Name of Father <span class="semi4">:</span> <input class="father_name" type="text"
+                    name="father_name" value="{{ $baptismal->father_name }}">
+                Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text"
+                    name="mother_name" value="{{ $baptismal->mother_name }}">
                 <span class="maiden">(Mother's maiden family name)</span>
-                Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text" name="parent_residence" value="{{ $baptismal->parent_residence }}">
-                Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date" name="date_baptism" value="{{ $baptismal->date_baptism }}">
-                Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister" value="{{ $baptismal->minister }}">
-                Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor" value="{{ $baptismal->sponsor }}">
+                Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text" name="parent_residence"
+                    value="{{ $baptismal->parent_residence }}">
+                Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date" name="date_baptism"
+                    value="{{ $baptismal->date_baptism }}">
+                Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister"
+                    value="{{ $baptismal->minister }}">
+                Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor"
+                    value="{{ $baptismal->sponsor }}">
 
                 <span class="purpose">Purpose:
                     <textarea name="purpose">{{ $baptismal->purpose }}</textarea>

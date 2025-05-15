@@ -14,7 +14,8 @@ class BaptismalController extends Controller
     }
 
     public function create()
-    {
+    { 
+    
         return view('admin.baptismal.create');
     }
     public function store(Request $request)

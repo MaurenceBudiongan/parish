@@ -296,7 +296,7 @@ function showBaptistCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadBaptismalCreate, {
+        fetch(loadBaptistCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -345,7 +345,7 @@ function showConfirmationCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadConfirmationsCreate, {
+        fetch(loadConfirmationCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -393,7 +393,7 @@ function showMarriageCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadMarriagesCreate, {
+        fetch(loadMarriageCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -441,7 +441,7 @@ function showDeathCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        fetch(loadDeathsCreate, {
+        fetch(loadDeathCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -482,6 +482,70 @@ function showDeathRecord() {
             });
     }
 }
+
+function showPriestAssignment() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+
+  if (maincontent) {
+      dashboard.style.color = "#969593";
+      fetch(loadPriestAssignment, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
+}
+
+function showStaffCreate() {
+  const maincontent = document.getElementById("maincontent");
+  document.getElementById("payment-section").style.display = "block";
+  const dashboard = document.getElementById("dashboard");
+
+  if (maincontent) {
+      dashboard.style.color = "#969593";
+      fetch(loadStaffCreate, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+          },
+      })
+          .then((response) => {
+              if (!response.ok) throw new Error("Fetch failed");
+              return response.text();
+          })
+          .then((html) => {
+              maincontent.innerHTML = html;
+          })
+          .catch((error) => {
+              console.error("Error fetching user view:", error);
+          });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function showDonationCreate() {
     const maincontent = document.getElementById("maincontent");
     document.getElementById("payment-section").style.display = "block";

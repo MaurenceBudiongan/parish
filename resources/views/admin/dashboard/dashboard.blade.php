@@ -29,7 +29,7 @@
             <div class="app-header-navigation">
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
-                    <a href="#">Event Management</a>
+                    <a href="#">Priest Management</a>
                     <a href="#">Staff Management</a>
                     <a href="">Reports and Analytics </a>
                 </div>
@@ -126,8 +126,8 @@
                             <span>Clergy & Staff </span>
                         </a>
                         <div id="clergydropdownmenu" class="dropdown-menu">
-                            <a href="#" onclick="">Priest Assignment</a>
-                            <a href="#" onclick="">Staff Profile</a>
+                            <a href="#" onclick="showPriestAssignment()">Priest Assignment</a>
+                            <a href="#" onclick="showStaffCreate()">Staff Profile</a>
                         </div>
                     </div>
                     <a class="a" href="#transfer-section">
@@ -242,20 +242,20 @@
                 div.style.display = 'none';
             }
         });
-        const loadBaptismalCreate = "{{ route('baptismals.create') }}";
-        const loadConfirmationsCreate = "{{ route('confirmations.create') }}";
-        const loadMarriagesCreate = "{{ route('marriages.create') }}";
-        const loadDeathsCreate = "{{route('deaths.create')}}"
 
+        //edit
+
+        const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
+        const loadStaffCreate = "{{ route('staff.create') }}";
         //
-        const loadBaptistCreate = "{{ route('baptismal.create') }}";
+        const loadBaptistCreate = "{{ route('baptismals.create') }}";
         const loadBaptistRecord = "{{ route('baptismals.index') }}";
-        const loadConfirmationCreate = "{{ route('confirmation.create') }}";
+        const loadConfirmationCreate = "{{ route('confirmations.create') }}";
         const loadConfirmationRecord = "{{ route('confirmations.index') }}";
         const loadParishionerRecord = "{{ route('parishioners.index') }}";
-        const loadMarriageCreate = "{{ route('marriage.create') }}";
-        const loadMarriageRecord = "{{ route('marriage.index') }}";
-        const loadDeathCreate = "{{ route('death.create') }}";
+        const loadMarriageCreate = "{{ route('marriages.create') }}";
+        const loadMarriageRecord = "{{ route('marriages.index') }}";
+        const loadDeathCreate = "{{ route('deaths.create') }}";
         const loadDeathRecord = "{{ route('deaths.index') }}";
         const loadDonationCreate = "{{ route('donation.create') }}";
         const loadDonationRecord = "{{ route('donation.index') }}";
