@@ -3,116 +3,112 @@
         <p class="title"> Parishioner Registration</p>
         <p class="description">This registration applicable only to parishioner in San Pascual Parish Member</p>
     </div>
-    <div class="app-body-content">
-        <div class="side-content">
-            <img src="{{ asset('img/kayi.png') }}" alt="profile Image">
-            <p>Jerlyn Orpilla</p>
-        </div>
-        <div class="main-content">
-            <form action="{{ route('parishioners.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <p>Personal Information</p>
-                <div class="form-content">
-                    <div>
-                        <label for="">Full Name</label>
-                        <input type="text" name="fullname" placeholder="Your full name" required>
-                    </div>
-                    <div>
-                        <label for="">Date Of Birth</label>
-                        <input type="date" name="dateofbirth" placeholder="Your birth date" required>
-                    </div>
-                    <div>
-                        <label for="">Gender</label>
-                        <select name="gender" required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
 
-                    </div>
-                    <div>
-                        <label for="">Contact Number</label>
-                        <input type="number" name="contactnumber" placeholder="Your contact number" required
-                            maxlength="11" oninput="this.value = this.value.slice(0, 11)">
-                    </div>
-                    <div>
-                        <label for="">Civil Status</label>
-                        <select name="civil_status" required>
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                            <option value="widowed">Widowed</option>
-                        </select>
-                        <div>
-                            <label for="">Image</label>
-                            <input type="file" name="image" placeholder="Upload your image" required>
-                        </div>
-                    </div>
+    <div class="main-content">
+        <form action="{{ route('parishioners.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <p>Personal Information</p>
+            <div class="form-content">
+                <div>
+                    <label for="">Full Name</label>
+                    <input type="text" name="fullname" required>
                 </div>
-                <p>Address</p>
-                <div class="form-content">
-                    <div>
-                        <label for="street">Street</label>
-                        <input type="text" name="street" placeholder="Your street" required>
-                    </div>
-
-                    <div>
-                        <label for="barangay">Barangay</label>
-                        <input type="text" name="barangay" placeholder="Your barangay" required>
-                    </div>
-
-                    <div>
-                        <label for="city">City/Municipality</label>
-                        <input type="text" name="city" placeholder="Your city or municipality" required>
-                    </div>
-
-                    <div>
-                        <label for="province">Province</label>
-                        <input type="text" name="province" placeholder="Your province" required>
-                    </div>
-
-                    <div>
-                        <label for="zipcode">Zip Code</label>
-                        <input type="number" name="zipcode" placeholder="Your zip code" required>
-                    </div>
+                <div>
+                    <label for="">Date Of Birth</label>
+                    <input type="date" name="dateofbirth" required>
+                </div>
+                <div>
+                    <label for="">Gender</label>
+                    <select name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
 
                 </div>
-                <p>Spiritual Information</p>
-                <div class="form-content">
-                    <div>
-                        <label for="baptized">Baptized?</label>
-                        <select name="baptized" id="baptized" required>
-                            <option value="">Select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-
-                    <div id="baptism-details" style="display: none;">
-                        <div>
-                            <label for="baptism_date">Date of Baptism</label>
-                            <input type="date" name="baptism_date" id="baptism_date">
-                        </div>
-                        <div>
-                            <label for="baptism_church">Church of Baptism</label>
-                            <input type="text" name="baptism_church" id="baptism_church" placeholder="Church name">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="confirmed">Confirmed?</label>
-                        <select name="confirmed" id="confirmed" required>
-                            <option value="">Select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-
+                <div>
+                    <label for="">Contact Number</label>
+                    <input type="number" name="contactnumber" required maxlength="11"
+                        oninput="this.value = this.value.slice(0, 11)">
                 </div>
-                <div class="form-content">
-                    <button type="submit">Save record</button>
+                <div>
+                    <label for="">Civil Status</label>
+                    <select name="civil_status" required>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="widowed">Widowed</option>
+                    </select>
+                    <div>
+                        <label for="">Image</label>
+                        <input type="file" name="image" required>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            <p>Address</p>
+            <div class="form-content">
+                <div>
+                    <label for="street">Street</label>
+                    <input type="text" name="street" required>
+                </div>
+
+                <div>
+                    <label for="barangay">Barangay</label>
+                    <input type="text" name="barangay" required>
+                </div>
+
+                <div>
+                    <label for="city">City/Municipality</label>
+                    <input type="text" name="city" required>
+                </div>
+
+                <div>
+                    <label for="province">Province</label>
+                    <input type="text" name="province" required>
+                </div>
+
+                <div>
+                    <label for="zipcode">Zip Code</label>
+                    <input type="number" name="zipcode" required>
+                </div>
+
+            </div>
+            <p>Spiritual Information</p>
+            <div class="form-content">
+                <div>
+                    <label for="baptized">Baptized?</label>
+                    <select name="baptized" id="baptized" required>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div id="baptism-details" style="display: none;">
+                    <div>
+                        <label for="baptism_date">Date of Baptism</label>
+                        <input type="date" name="baptism_date" id="baptism_date">
+                    </div>
+                    <div>
+                        <label for="baptism_church">Church of Baptism</label>
+                        <input type="text" name="baptism_church" id="baptism_church">
+                    </div>
+                </div>
+                <div>
+                    <label for="confirmed">Confirmed?</label>
+                    <select name="confirmed" id="confirmed" required>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-content">
+                <button type="submit">Save record</button>
+            </div>
+        </form>
     </div>
+</div>
 </div>
 <style>
     .parishCreateContainer {
@@ -123,7 +119,9 @@
         padding: 1rem;
 
     }
-
+.description{
+    color: rgb(238, 69, 69);
+}
     .header-menu {
         display: flex;
         gap: 8rem;
@@ -163,20 +161,21 @@
     .side-content p {
         font-size: 17px;
         color: var(--c-olive-500);
+        margin-bottom: 2rem;
     }
 
     .main-content {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        width: 55%;
+        width: 100%;
         border: 1px solid var(--c-gray-600);
         border-radius: 5px;
-        padding: 1rem;
-        background-color: var(--c-gray-500);
+        padding: 4rem;
+        background-color: var(--c-gray-600);
         color: black;
         overflow-y: scroll;
-        height: 22rem;
+        height: 26rem;
     }
 
     .main-content::-webkit-scrollbar-thumb {
@@ -191,6 +190,9 @@
     .main-content p {
         font-size: 20px;
         font-weight: bold;
+        color: var(--c-green-500);
+        margin-bottom: 2rem;
+
     }
 
     .main-content .form-content {
@@ -208,9 +210,10 @@
 
     .main-content .form-content div input,
     select {
+        margin-bottom: 10px;
         font-size: 12px;
         width: 100%;
-        height: 1.8rem;
+        height: 2.4rem;
         background-color: rgb(255, 255, 255);
         outline: none;
         border-radius: 4px;
@@ -234,9 +237,14 @@
         color: black;
         border: none;
         background-color: var(--c-green-500);
-        margin-left: 300px;
+        margin-left: 525px;
         width: 30%;
-        height: 1.8rem;
+        height: 2.4rem;
+    }
+
+    label {
+        color: white;
+        margin-bottom: 5px;
     }
 </style>
 <script>

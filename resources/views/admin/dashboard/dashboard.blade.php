@@ -22,7 +22,7 @@
                     </span>
                     <h1 class="logo-title">
                         <span>San Pascual_Parish</span>
-                        <span>Record & Request</span>
+                    
                     </h1>
                 </div>
             </div>

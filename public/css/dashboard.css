@@ -189,6 +189,7 @@ a {
         gap: 2rem;
         color: var(--c-text-tertiary);
         width: 20rem;
+        
     }
     .navigation .a i {
         margin-right: 0.75rem;
