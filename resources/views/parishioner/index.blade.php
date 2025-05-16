@@ -6,6 +6,7 @@
                 <th>Full Name</th>
                 <th>Contact</th>
                 <th>City</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                             <span>No image</span>
                         @endif
                     </td>
+                    <td>{{$person->status}}</td>
                     <td>
                         <div class="action">
                             <form action="">
@@ -110,6 +112,7 @@
         flex-direction: row;
         gap: 1rem;
     }
+
     td span {
         color: #777;
     }

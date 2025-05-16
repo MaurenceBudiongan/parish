@@ -77,7 +77,7 @@
                 <div>
                     <label for="baptized">Baptized?</label>
                     <select name="baptized" id="baptized" required>
-                        <option value="">Select</option>
+                        <option value="">--Select--</option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                     </select>
@@ -96,9 +96,17 @@
                 <div>
                     <label for="confirmed">Confirmed?</label>
                     <select name="confirmed" id="confirmed" required>
-                        <option value="">Select</option>
+                        <option value="">--Select--</option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Status:</label>
+                    <select name="status" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
                     </select>
                 </div>
 
@@ -119,9 +127,11 @@
         padding: 1rem;
 
     }
-.description{
-    color: rgb(238, 69, 69);
-}
+
+    .description {
+        color: rgb(238, 69, 69);
+    }
+
     .header-menu {
         display: flex;
         gap: 8rem;

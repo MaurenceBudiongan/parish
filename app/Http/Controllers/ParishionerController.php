@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Parishioner;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ParishionerController extends Controller
 {
@@ -9,7 +12,6 @@ class ParishionerController extends Controller
     {
         $parishioners = Parishioner::all();
         if (!$request->ajax()) {
-            // This will stop direct access from browser
             abort(403, 'Access denied');
         }
         return view('parishioner.index', compact('parishioners'));
@@ -39,16 +41,17 @@ class ParishionerController extends Controller
             'baptism_church' => 'nullable|string',
             'confirmed' => 'required',
         ]);
-    
+
+        $validated['status'] = 'new'; // Default status for new registration
+
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('parishioner_images', 'public');
         }
-    
+
         Parishioner::create($validated);
-    
+
         return redirect()->route('parishioners.index')->with('success', 'Registration saved!');
     }
-    
 
     public function edit(Parishioner $parishioner)
     {
@@ -65,5 +68,22 @@ class ParishionerController extends Controller
     {
         $parishioner->delete();
         return back()->with('success', 'Deleted!');
+    }
+
+    public function report()
+    {
+        $yesterday = Carbon::now()->subDay();
+
+        // Promote 'new' to 'active' if older than 1 day
+        Parishioner::where('status', 'new')
+            ->where('created_at', '<', $yesterday)
+            ->update(['status' => 'active']);
+
+        // Fetch categorized data
+        $active = Parishioner::where('status', 'active')->get();
+        $inactive = Parishioner::where('status', 'inactive')->get();
+        $newParishioners = Parishioner::where('status', 'new')->get();
+
+        return view('parishioner.report', compact('active', 'inactive', 'newParishioners'));
     }
 }

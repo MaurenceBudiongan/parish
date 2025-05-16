@@ -22,7 +22,7 @@
                     </span>
                     <h1 class="logo-title">
                         <span>San Pascual_Parish</span>
-                    
+
                     </h1>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                             <a href="#" onclick="showDeathRecord()">Death Record</a>
                         </div>
                     </div>
-                    <a class="a" href="#"onclick="showDocumentRequest()">
+                    <a class="a" href="#" onclick="showDocumentRequest()">
                         <i class="ph-swap"></i>
                         <span>Sacramental Record</span>
                     </a>
@@ -130,10 +130,16 @@
                             <a href="#" onclick="showStaffCreate()">Staff Profile</a>
                         </div>
                     </div>
-                    <a class="a" href="#transfer-section">
-                        <i class="ph-clipboard-text"></i>
-                        <span>Report Analytics</span>
-                    </a>
+                    <div class="dropdown">
+                        <a class="a" href="javascript:void(0);" onclick="reporttoggleDropdown()">
+                            <i class="ph-clipboard-text"></i>
+                            <span>Report & Analytics </span>
+                        </a>
+                        <div id="reportdropdownmenu" class="dropdown-menu">
+                            <a href="#" onclick="showMemberStatistics()">Member Statistics</a>
+                            <a href="#" onclick="">Financial Report</a>
+                        </div>
+                    </div>
                 </nav>
             </div>
             <div id="maincontent" class="app-body-main-content">
@@ -247,6 +253,8 @@
 
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
+        const loadMemberStatistics = "{{ route('parishioners.report') }}";
+
         //
         const loadBaptistCreate = "{{ route('baptismals.create') }}";
         const loadBaptistRecord = "{{ route('baptismals.index') }}";

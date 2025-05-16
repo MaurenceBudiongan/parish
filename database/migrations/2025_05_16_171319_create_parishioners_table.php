@@ -28,7 +28,9 @@ return new class extends Migration
             $table->date('baptism_date')->nullable();
             $table->string('baptism_church')->nullable();
             $table->string('confirmed');
-            $table->timestamps();
+            $table->enum('status', ['active', 'inactive', 'new'])->default('new');
+            $table->timestamps(); 
+
         });
     }
     
