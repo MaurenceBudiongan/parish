@@ -42,7 +42,6 @@
             line-height: 1.5;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 260px;
             background-color: #1e293b;
@@ -90,7 +89,6 @@
             color: #94a3b8;
         }
 
-        /* Main Content */
         .main {
             flex: 1;
             padding: 40px;
@@ -107,11 +105,13 @@
         .header-info h1 {
             font-size: 28px;
             font-weight: 700;
+            margin-left: 370px;
         }
 
         .header-info p {
             color: var(--text-sub);
             margin-top: 4px;
+            margin-left: 380px;
         }
 
         .user-pic {
@@ -122,7 +122,6 @@
             border: 3px solid var(--accent);
         }
 
-        /* Dashboard Cards */
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -169,7 +168,62 @@
             opacity: 0.85;
         }
 
-        /* Mobile-First Design */
+        #certificate-options {
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .cert-card {
+            padding: 24px;
+            border-radius: var(--radius);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cert-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .cert-card p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .cert-card button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .cert-card button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .cert-card.baptismal {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        }
+
+        .cert-card.marriage {
+            background: linear-gradient(135deg, #f43f5e, #fb7185);
+        }
+
+        .cert-card.death {
+            background: linear-gradient(135deg, #6b7280, #9ca3af);
+        }
+
+        .cert-card.confirmation {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 display: none;
@@ -179,7 +233,8 @@
                 padding: 20px;
             }
 
-            .dashboard-cards {
+            .dashboard-cards,
+            #certificate-options {
                 grid-template-columns: 1fr;
             }
         }
@@ -193,63 +248,202 @@
                 font-size: 24px;
             }
         }
+
+        form {
+            margin-left: 300px;
+            background: #ffffff;
+            padding: 32px;
+            margin-top: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            max-width: 720px;
+            width: 100%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        form label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-top: 20px;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="file"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #f9fafb;
+            color: #1e293b;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        form input:focus,
+        form textarea:focus {
+            border-color: #4f46e5;
+            background: #ffffff;
+        }
+
+        form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        form button[type="submit"] {
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: linear-gradient(to right, #4f46e5, #22d3ee);
+            color: #ffffff;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        form button[type="submit"]:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(to right, #4338ca, #06b6d4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 24px;
+                border-radius: 12px;
+            }
+        }
+
+        .enhanced-message {
+            background: linear-gradient(to bottom right, #f0f9ff, #ecfdf5);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .enhanced-message .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .enhanced-message .icon {
+            width: 60px;
+            margin-bottom: 12px;
+        }
+
+        .enhanced-message h2 {
+            font-size: 1.8rem;
+            color: #1e293b;
+        }
+
+        .enhanced-message .subtext {
+            font-size: 1rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .text-content ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .testimonial {
+            background-color: #ffffff;
+            border-left: 4px solid #4f46e5;
+            margin-top: 20px;
+            padding: 16px;
+            font-style: italic;
+            color: #475569;
+            border-radius: 8px;
+        }
+
+        .testimonial cite {
+            display: block;
+            margin-top: 8px;
+            font-style: normal;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .image-box {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-width: 360px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
 
-<body>
-
-    <!-- Sidebar -->
+<body> <!-- Sidebar -->
     <div class="sidebar">
         <div>
-            <div class="logo">
-                <img src="https://cdn-icons-png.flaticon.com/512/1995/1995542.png" alt="Parish Records Logo">
-                <span>Parish Records</span>
-            </div>
-            <nav class="nav" aria-label="Main Navigation">
-                <a href="#" aria-label="Request Document">📄 Request Document</a>
-                <a href="#" aria-label="Check Status">📊 Check Status</a>
-                <a href="#" aria-label="Mass Schedule">⛪ Mass Schedule</a>
-                <a href="#" aria-label="My Records">💒 My Records</a>
-                <a href="#" aria-label="Donate">💖 Donate</a>
-                <a href="#" aria-label="Contact">📞 Contact</a>
-            </nav>
+            <div class="logo"> <img src="https://cdn-icons-png.flaticon.com/512/1995/1995542.png"
+                    alt="Parish Records Logo"> <span>Parish Records</span> </div>
+            <nav class="nav" aria-label="Main Navigation"> <a onclick="showCertificateOptions()">📄 Request
+                    Document</a> <a href="#">📊 Check Status</a> <a href="#">⛪ Mass Schedule</a> <a
+                    href="#">💒 My
+                    Records</a> <a href="#">💖 Donate</a> <a href="#">📞 Contact</a> </nav>
         </div>
         <footer class="sidebar-footer" aria-label="Footer">© 2025 Parish System</footer>
-    </div>
-
-    <!-- Main Content -->
+    </div> <!-- Main Content -->
     <div class="main">
+        <div>Home</div>
         <header class="header">
             <div class="header-info">
                 <h1 id="greeting">Welcome!</h1>
                 <p>Your records are safely stored and accessible here.</p>
-            </div>
-            <img src="{{ asset('img/kayi.png') }}" alt="User Photo" class="user-pic" loading="lazy">
+            </div> <img src="{{ asset('img/kayi.png') }}" alt="User Photo" class="user-pic" loading="lazy">
         </header>
-
-        <section class="dashboard-cards">
-            <div class="card">
-                <h3>📄 Request Document</h3>
-                <p>Need your baptismal, confirmation, or marriage certificate? Request here.</p>
-                <button onclick="goToRequestPage()">Request Now</button>
-            </div>
-            <div class="card">
-                <h3>📊 Check Status</h3>
-                <p>Track the progress of your document requests in real-time.</p>
-                <button onclick="alert('Opening status page...')">View Status</button>
-            </div>
-            <div class="card">
-                <h3>📅 Upcoming Masses</h3>
-                <p>Don't miss the next parish event. Check mass and event schedules.</p>
-                <button onclick="alert('Opening mass schedule...')">View Schedule</button>
-            </div>
-            <div class="card">
-                <h3>💖 Tithes & Donations</h3>
-                <p>Support your parish by making a donation online.</p>
-                <button onclick="alert('Going to donation page...')">Donate</button>
-            </div>
-        </section>
+        <!-- Certificate Options Section -->
+        <section id="certificate-options"></section>
     </div>
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+    </script>
 
     <script>
         const greeting = document.getElementById("greeting");
@@ -258,8 +452,164 @@
         else if (hour < 18) greeting.textContent = "Good afternoon, Kyla!";
         else greeting.textContent = "Good evening, Kyla!";
 
-        function goToRequestPage() {
-            window.location.href = "{{ route('documentrequest.create') }}";
+        const message = `
+            <div class="enhanced-message">
+                <div class="header">
+                <img src="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Certificate Icon" class="icon">
+                <h2>Smart Parish Certification System</h2>
+                <p class="subtext">Reliable. Fast. Secure.</p>
+                </div>
+
+                <div class="content-grid">
+                <div class="text-content">
+                    <p>Welcome to a more efficient way to access your parish records. Our digital certification service helps you:</p>
+                    <ul>
+                    <li>📥 Request certificates in seconds</li>
+                    <li>🔒 Ensure your data is safe and secure</li>
+                    <li>🕐 Save time with fast processing</li>
+                    <li>📄 Get downloadable, verifiable documents</li>
+                    </ul>
+                    <div class="testimonial">
+                    <blockquote>“It was incredibly easy to get my baptismal certificate. Highly recommended!”</blockquote>
+                    <cite>– Juan S., Parish Member</cite>
+                    </div>
+                </div>
+                <div class="image-box">
+                    <imgsrc="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Parish Records" class="preview-image">
+                </div>
+                </div>
+            </div>
+            `;
+
+        document.getElementById('certificate-options').innerHTML = message;
+
+        function showCertificateOptions() {
+            const section = document.getElementById('certificate-options');
+            section.style.display = 'grid';
+            section.innerHTML = `
+      <div class="cert-card baptismal">
+        <h3>📜 Baptismal Certificate</h3>
+        <p>Request your official baptismal record.</p>
+        <button onclick="showForm('baptism')">Request</button>
+      </div>
+      <div class="cert-card confirmation">
+        <h3>🕊️ Confirmation Certificate</h3>
+        <p>Request your church confirmation certificate.</p>
+        <button onclick="showForm('confirmation')">Request</button>
+      </div>
+      <div class="cert-card marriage">
+        <h3>💍 Marriage Certificate</h3>
+        <p>Get a copy of your church marriage certificate.</p>
+        <button onclick="showForm('marriage')">Request</button>
+      </div>
+      <div class="cert-card death">
+        <h3>⚰️ Death Certificate</h3>
+        <p>Obtain a parish-issued death record.</p>
+        <button onclick="showForm('death')">Request</button>
+      </div>
+    `;
+        }
+
+        function showForm(type) {
+            const formTitles = {
+                baptism: 'Baptism Certificate Request Form',
+                confirmation: 'Confirmation Certificate Request Form',
+                marriage: 'Marriage Certificate Request Form',
+                death: 'Death Certificate Request Form'
+            };
+
+            const formActions = {
+                baptism: "{{ route('baptismrequest.store') }}",
+                confirmation: "{{ route('confirmationrequest.store') }}",
+                marriage: "{{ route('marriagerequest.store') }}",
+                death: "{{ route('deathrequest.store') }}"
+            };
+
+            const formMethods = {
+                baptism: 'POST',
+                confirmation: 'POST',
+                marriage: 'POST',
+                death: 'POST'
+            };
+
+            const formFields = {
+                baptism: `
+             <label> Requester:</label><input name="requester" type="text" required><br>
+            <label>Child Name:</label><input name="childName" type="text" required><br>
+            <label>Date of Birth:</label><input name="dob" type="date" required><br>
+            <label>Date of Baptism (approx.):</label><input name="baptismDate" type="text" required><br>
+            <label>Place of Baptism:</label><input name="baptismPlace" type="text" required><br>
+            <label>Parents' Full Names:</label><input name="parentsNames" type="text" required><br>
+            <label>Purpose of the Request:</label><input name="purpose" type="text" required><br>
+            <label>Your Contact Info:</label><input name="contact" type="text" required><br>
+            <label>Relationship to Baptized:</label><input name="relationship" type="text"><br>
+            <label>ID Proof (if needed):</label><input name="idProof" type="file"><br>
+        `,
+                confirmation: `
+            <label> Requester:</label><input name="requester" type="text" required><br>
+            <label>Full Name of Confirmed Person:</label><input name="confirmedName" type="text" required><br>
+            <label>Date of Birth:</label><input name="dob" type="date" required><br>
+            <label>Date of Confirmation (approx.):</label><input name="confirmationDate" type="text" required><br>
+            <label>Place of Confirmation:</label><input name="confirmationPlace" type="text" required><br>
+            <label>Parents' Full Names:</label><input name="parentsNames" type="text"><br>
+            <label>Sponsor's Name:</label><input name="sponsorName" type="text"><br>
+            <label>Reason for Request:</label><input name="reason" type="text" required><br>
+            <label>Your Contact Info:</label><input name="contact" type="text" required><br>
+            <label>Relationship to Confirmed:</label><input name="relationship" type="text"><br>
+            <label>ID Proof (if needed):</label><input name="idProof" type="file"><br>
+        `,
+                marriage: `
+            <label> Requester:</label><input name="requester" type="text" required><br>
+            <label>Full Name (Spouse 1):</label><input name="spouse1" type="text" required><br>
+            <label>Full Name (Spouse 2):</label><input name="spouse2" type="text" required><br>
+            <label>Date of Marriage:</label><input name="marriageDate" type="date" required><br>
+            <label>Place of Marriage:</label><input name="marriagePlace" type="text" required><br>
+            <label>Officiant Name (if known):</label><input name="officiant" type="text"><br>
+            <label>Purpose of the Request:</label><input name="purpose" type="text" required><br>
+            <label>Your Contact Info:</label><input name="contact" type="text" required><br>
+            <label>Relationship to Couple:</label><input name="relationship" type="text"><br>
+            <label>ID Proof (if needed):</label><input name="idProof" type="file"><br>
+        `,
+                death: `
+            <label> Requester:</label><input name="requester" type="text" required><br>
+            <label>Full Name of Deceased:</label><input name="fullName" type="text" required><br>
+            <label>Date of Death (approx.):</label><input name="deathDate" type="text" required><br>
+            <label>Place of Death:</label><input name="deathPlace" type="text" required><br>
+            <label>Date of Birth / Age at Death:</label><input name="dobOrAge" type="text"><br>
+            <label>Parents' Names (if known):</label><input name="parentsNames" type="text"><br>
+            <label>Spouse's Name (if applicable):</label><input name="spouseName" type="text"><br>
+            <label>Purpose of Request:</label><input name="purpose" type="text" required><br>
+            <label>Your Contact Info:</label><input name="contact" type="text" required><br>
+            <label>Relationship to Deceased:</label><input name="relationship" type="text"><br>
+            <label>ID Proof (if needed):</label><input name="idProof" type="file"><br>
+        `
+            };
+
+            // Assuming csrfToken is already passed from Blade to JS
+            const csrfToken = "{{ csrf_token() }}";
+
+            const mainDiv = document.querySelector('.main');
+            mainDiv.innerHTML = `
+        <header class="header">
+            <div class="header-info">
+                <h1>${formTitles[type]}</h1>
+                <p>Please fill out the details below to request your certificate.</p>
+            </div>
+        </header>
+        <form 
+            style="background:#fff; padding:24px; border-radius:12px; max-width:600px;" 
+            action="${formActions[type]}" 
+            method="${formMethods[type]}" 
+            enctype="multipart/form-data"
+        >
+            <input type="hidden" name="_token" value="${csrfToken}">
+            ${formFields[type]}
+            <br>
+            <button type="submit" style="margin-top:20px; background: linear-gradient(to right, #4f46e5, #22d3ee); color: white; padding: 10px 16px; border: none; border-radius: 8px; font-weight: 600;">
+                Submit Request
+            </button>
+        </form>
+    `;
         }
     </script>
 

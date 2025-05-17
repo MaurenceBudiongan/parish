@@ -20,7 +20,10 @@ use App\Http\Controllers\PriestController;
 use App\Http\Controllers\PriestAssignmentController;
 use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\StaffController;
-
+use App\Http\Controllers\BaptismRequestController;
+use App\Http\Controllers\ConfirmationRequestController;
+use App\Http\Controllers\MarriageRequestController;
+use App\Http\Controllers\DeathRequestController;
 Route::get('/', function () {
     return view('/admin/dashboard/dashboard'); 
 });
@@ -48,14 +51,26 @@ Route::get('/admin/donation', function () {
 Route::get('/landingpage', function () {
     return view('/landingpage/landingpage'); 
 });
+// BAPTISM REQUESTS
+Route::resource('baptismrequest', BaptismRequestController::class);
+
+// CONFIRMATION REQUESTS
+Route::resource('confirmationrequest', ConfirmationRequestController::class);
+
+// MARRIAGE REQUESTS
+Route::resource('marriagerequest', MarriageRequestController::class);
+
+// DEATH REQUESTS
+Route::resource('deathrequest', DeathRequestController::class);
+
+
+
+
+
 Route::resource('baptismals',BaptismalController::class);
 Route::resource('confirmations',ConfirmationController::class);
 Route::resource('marriages',MarriageController::class);
 Route::resource('deaths',DeathController::class);
-
-
-
-
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
 Route::get('/adminform', [Onclick::class, 'adminform'])->name('authentication.adminform');
@@ -181,8 +196,8 @@ Route::get('/pay/gcash/failed', [GCashController::class, 'failed'])->name('gcash
 // counts
 Route::get('/document-counts', function () {
     return response()->json([
-        'baptismal' => \App\Models\DocumentRequest::where('documenttype', 'Baptismal')->count(),
-        'confirmation' => \App\Models\DocumentRequest::where('documenttype', 'Confirmation')->count(),
-        'marriage' => \App\Models\DocumentRequest::where('documenttype', 'Marriagecertificate')->count(),
+        'baptismal' => \App\Models\BaptismRequest::count(),
+        'confirmation' => \App\Models\ConfirmationRequest::count(),
+        'marriage' => \App\Models\MarriageRequest::count(),
     ]);
 });
