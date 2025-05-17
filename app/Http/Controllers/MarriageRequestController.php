@@ -73,4 +73,25 @@ class MarriageRequestController extends Controller
         $marriage_request->delete();
         return redirect()->route('marriage_requests.index')->with('success', 'Request deleted.');
     }
+
+
+
+
+    
+    public function approve($id)
+{
+    $request = MarriageRequest::findOrFail($id);
+    $request->update(['status' => 'APPROVED']);
+    
+    return back()->with('success', 'Request Approved');
+}
+
+public function reject($id)
+{
+    $request = MarriageRequest::findOrFail($id);
+    $request->update(['status' => 'REJECTED']);
+    
+    return back()->with('success', 'Request Rejected');
+}
+
 }

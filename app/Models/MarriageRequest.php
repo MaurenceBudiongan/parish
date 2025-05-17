@@ -20,6 +20,7 @@ class MarriageRequest extends Model
         'contact',
         'relationship',
         'idProof',
+        'status',
     ];
 }
 

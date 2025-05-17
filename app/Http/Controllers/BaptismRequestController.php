@@ -2,19 +2,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\BaptismRequest;
+use App\Models\ConfirmationRequest;
+use App\Models\DeathRequest;
+use App\Models\MarriageRequest;
 use Illuminate\Http\Request;
 
 class BaptismRequestController extends Controller
 {
     public function index()
-    {
-        $requests = BaptismRequest::all();
-        return view('baptism_requests.index', compact('requests'));
+    {    
+    
+        $confirmationrequests = ConfirmationRequest::all();
+        $baptismrequests = BaptismRequest::all();
+        $marriagerequests = MarriageRequest::all();
+        $deathrequests = DeathRequest::all();
+        return view('admin.document_requests.index', compact('baptismrequests','confirmationrequests','marriagerequests','deathrequests'));
     }
 
     public function create()
     {
-        return view('baptism_requests.create');
+        return view('admin.document_requests.index');
     }
 
     public function store(Request $request)
@@ -73,4 +80,24 @@ class BaptismRequestController extends Controller
         $baptism_request->delete();
         return redirect()->route('baptism_requests.index')->with('success', 'Request deleted.');
     }
+
+    
+
+
+    public function approve($id)
+{
+    $request = BaptismRequest::findOrFail($id);
+    $request->update(['status' => 'APPROVED']);
+    
+    return back()->with('success', 'Request Approved');
+}
+
+public function reject($id)
+{
+    $request = BaptismRequest::findOrFail($id);
+    $request->update(['status' => 'REJECTED']);
+    
+    return back()->with('success', 'Request Rejected');
+}
+
 }

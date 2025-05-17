@@ -20,5 +20,6 @@ class BaptismRequest extends Model
         'contact',
         'relationship',
         'idProof',
+        'status',
     ];
 }

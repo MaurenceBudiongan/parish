@@ -8,8 +8,8 @@ class ConfirmationRequestController extends Controller
 {
     public function index()
     {
-        $requests = ConfirmationRequest::all();
-        return view('confirmation_requests.index', compact('requests'));
+        $confirmationrequests = ConfirmationRequest::all();
+           return view('admin.document_requests.index', compact('confirmationrequests'));
     }
 
     public function create()
@@ -75,4 +75,23 @@ class ConfirmationRequestController extends Controller
         $confirmation_request->delete();
         return redirect()->route('confirmation_requests.index')->with('success', 'Request deleted.');
     }
+
+
+    
+    public function approve($id)
+{
+    $request = ConfirmationRequest::findOrFail($id);
+    $request->update(['status' => 'APPROVED']);
+    
+    return back()->with('success', 'Request Approved');
+}
+
+public function reject($id)
+{
+    $request = ConfirmationRequest::findOrFail($id);
+    $request->update(['status' => 'REJECTED']);
+    
+    return back()->with('success', 'Request Rejected');
+}
+
 }

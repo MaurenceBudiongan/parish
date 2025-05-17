@@ -36,6 +36,7 @@ public function getDocumentRequestCounts()
 
     public function userIndex()
     {
+        dd('u');
         $requests = DocumentRequest::all();
         return view('user.document_requests.index', compact('requests'));
     }

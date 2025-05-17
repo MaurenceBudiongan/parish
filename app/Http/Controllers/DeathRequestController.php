@@ -75,4 +75,26 @@ class DeathRequestController extends Controller
         $death_request->delete();
         return redirect()->route('death_requests.index')->with('success', 'Request deleted.');
     }
+
+
+
+
+
+    
+    public function approve($id)
+{
+    $request = DeathRequest::findOrFail($id);
+    $request->update(['status' => 'APPROVED']);
+    
+    return back()->with('success', 'Request Approved');
+}
+
+public function reject($id)
+{
+    $request = DeathRequest::findOrFail($id);
+    $request->update(['status' => 'REJECTED']);
+    
+    return back()->with('success', 'Request Rejected');
+}
+
 }

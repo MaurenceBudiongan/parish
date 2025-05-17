@@ -191,6 +191,27 @@ function showUser() {
             );
     }
 }
+ function showRequestStatus() {
+            const maincontent = document.getElementById("certificate-options");
+            if (maincontent) {
+                dashboard.style.color = "#969593";
+                fetch(loadRequestStatus, {
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                        },
+                    })
+                    .then((response) => {
+                        if (!response.ok) throw new Error("Fetch failed");
+                        return response.text();
+                    })
+                    .then((html) => {
+                        maincontent.innerHTML = html;
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching user view:", error);
+                    });
+            }
+        }
 
 function showDocumentRequest() {
     document.getElementById("payment-section").style.display = "none";
@@ -207,7 +228,7 @@ function showDocumentRequest() {
     if (maincontent) {
         dashboard.style.color = "#969593";
         // Fetch the documentrequest view content
-        fetch("/admin/document_requests") // Adjust the URL as necessary
+        fetch("/baptismrequest") // Adjust the URL as necessary
             .then((response) => response.text()) // Get the response text
             .then((html) => {
                 maincontent.innerHTML = html; // Set the innerHTML to the fetched HTML

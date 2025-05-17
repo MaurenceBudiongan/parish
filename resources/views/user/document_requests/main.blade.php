@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1995/1995542.png" type="image/png">
+      <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/onclick.js') }}"></script>
     <style>
         :root {
@@ -423,10 +424,14 @@
         <div>
             <div class="logo"> <img src="https://cdn-icons-png.flaticon.com/512/1995/1995542.png"
                     alt="Parish Records Logo"> <span>Parish Records</span> </div>
-            <nav class="nav" aria-label="Main Navigation"> <a onclick="showCertificateOptions()">📄 Request
-                    Document</a> <a href="#">📊 Check Status</a> <a href="#">⛪ Mass Schedule</a> <a
-                    href="#">💒 My
-                    Records</a> <a href="#">💖 Donate</a> <a href="#">📞 Contact</a> </nav>
+            <nav class="nav" aria-label="Main Navigation">
+                <a onclick="showCertificateOptions()">📄 Request Document</a>
+                <a onclick="showRequestStatus()">📊  Request Status</a>
+                <a href="#">⛪ Mass Schedule</a>
+                <a href="#">💒 My Records</a>
+                <a href="#">💖 Donate</a>
+                <a href="#">📞 Contact</a>
+            </nav>
         </div>
         <footer class="sidebar-footer" aria-label="Footer">© 2025 Parish System</footer>
     </div> <!-- Main Content -->
@@ -441,11 +446,12 @@
         <!-- Certificate Options Section -->
         <section id="certificate-options"></section>
     </div>
-    <script>
-        const csrfToken = "{{ csrf_token() }}";
-    </script>
+
 
     <script>
+          const csrfToken = "{{ csrf_token() }}";
+        const loadRequestStatus = "{{ route('user.document_requests.index') }}";
+        
         const greeting = document.getElementById("greeting");
         const hour = new Date().getHours();
         if (hour < 12) greeting.textContent = "Good morning, Kyla!";
@@ -483,31 +489,32 @@
 
         document.getElementById('certificate-options').innerHTML = message;
 
+       
         function showCertificateOptions() {
             const section = document.getElementById('certificate-options');
             section.style.display = 'grid';
             section.innerHTML = `
-      <div class="cert-card baptismal">
-        <h3>📜 Baptismal Certificate</h3>
-        <p>Request your official baptismal record.</p>
-        <button onclick="showForm('baptism')">Request</button>
-      </div>
-      <div class="cert-card confirmation">
-        <h3>🕊️ Confirmation Certificate</h3>
-        <p>Request your church confirmation certificate.</p>
-        <button onclick="showForm('confirmation')">Request</button>
-      </div>
-      <div class="cert-card marriage">
-        <h3>💍 Marriage Certificate</h3>
-        <p>Get a copy of your church marriage certificate.</p>
-        <button onclick="showForm('marriage')">Request</button>
-      </div>
-      <div class="cert-card death">
-        <h3>⚰️ Death Certificate</h3>
-        <p>Obtain a parish-issued death record.</p>
-        <button onclick="showForm('death')">Request</button>
-      </div>
-    `;
+                    <div class="cert-card baptismal">
+                        <h3>📜 Baptismal Certificate</h3>
+                        <p>Request your official baptismal record.</p>
+                        <button onclick="showForm('baptism')">Request</button>
+                    </div>
+                    <div class="cert-card confirmation">
+                        <h3>🕊️ Confirmation Certificate</h3>
+                        <p>Request your church confirmation certificate.</p>
+                        <button onclick="showForm('confirmation')">Request</button>
+                    </div>
+                    <div class="cert-card marriage">
+                        <h3>💍 Marriage Certificate</h3>
+                        <p>Get a copy of your church marriage certificate.</p>
+                        <button onclick="showForm('marriage')">Request</button>
+                    </div>
+                    <div class="cert-card death">
+                        <h3>⚰️ Death Certificate</h3>
+                        <p>Obtain a parish-issued death record.</p>
+                        <button onclick="showForm('death')">Request</button>
+                    </div>
+                    `;
         }
 
         function showForm(type) {

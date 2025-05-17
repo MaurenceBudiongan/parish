@@ -21,6 +21,7 @@ class CreateDeathRequestsTable extends Migration
             $table->string('contact');
             $table->string('relationship')->nullable();
             $table->string('idProof')->nullable();
+            $table->string('status')->default('PENDING');
             $table->timestamps();
         });
     }

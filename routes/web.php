@@ -53,24 +53,31 @@ Route::get('/landingpage', function () {
 });
 // BAPTISM REQUESTS
 Route::resource('baptismrequest', BaptismRequestController::class);
+Route::put('baptismrequest/{id}/approve', [BaptismRequestController::class, 'approve'])->name('baptismrequest.approve');
+Route::put('baptismrequest/{id}/reject', [BaptismRequestController::class, 'reject'])->name('baptismrequest.reject');
 
 // CONFIRMATION REQUESTS
 Route::resource('confirmationrequest', ConfirmationRequestController::class);
+Route::put('confirmationrequest/{id}/approve', [ConfirmationRequestController::class, 'approve'])->name('confirmationrequest.approve');
+Route::put('confirmationrequest/{id}/reject', [ConfirmationRequestController::class, 'reject'])->name('confirmationrequest.reject');
 
 // MARRIAGE REQUESTS
 Route::resource('marriagerequest', MarriageRequestController::class);
+Route::put('marriagerequest/{id}/approve', [MarriageRequestController::class, 'approve'])->name('marriagerequest.approve');
+Route::put('marriagerequest/{id}/reject', [MarriageRequestController::class, 'reject'])->name('marriagerequest.reject');
 
 // DEATH REQUESTS
 Route::resource('deathrequest', DeathRequestController::class);
+Route::put('deathnmrequest/{id}/approve', [DeathRequestController::class, 'approve'])->name('deathrequest.approve');
+Route::put('deathnmrequest/{id}/reject', [DeathRequestController::class, 'reject'])->name('deathrequest.reject');
 
-
-
-
-
+// CERTIFICATES
 Route::resource('baptismals',BaptismalController::class);
 Route::resource('confirmations',ConfirmationController::class);
 Route::resource('marriages',MarriageController::class);
 Route::resource('deaths',DeathController::class);
+
+
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
 Route::get('/adminform', [Onclick::class, 'adminform'])->name('authentication.adminform');

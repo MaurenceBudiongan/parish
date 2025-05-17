@@ -29,6 +29,7 @@
         font-family: "Be Vietnam Pro", sans-serif;
         background-color: #ffffff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
     }
 
     th, td {
@@ -103,41 +104,217 @@
         text-align: center;
     }
 </style>
+<label for="">Baptism Certificates Request</label>
 <table>
     <thead>
         <tr>
             <th>Request ID</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Document Type</th>
-            <th>Reason</th>
+            <th>Requester</th>
+            <th>Child Name</th>
+            <th>Date Of Baptism</th>
+            <th>Request Purpose</th>
+            <th>Contact</th>
+            <th>Relationship To Baptized</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @forelse($documentRequests as $request)
+        @forelse($baptismrequests as $request)
         <tr>
-            <td>{{ $request->request_id }}</td>
-            <td>{{ $request->firstname }} {{ $request->lastname }}</td>
-            <td>{{ $request->streetaddress }}, {{ $request->city }}, {{ $request->state }} {{ $request->zip }}</td>
-            <td>{{ $request->email }}</td>
-            <td>{{ $request->phonenumber }}</td>
-            <td>{{ ucfirst($request->documenttype) }}</td>
-            <td>{{ $request->reason }}</td>
+            <td>{{ $request->baptismrequest_id }}</td>
+            <td>{{ $request->requester }}</td>
+            <td>{{ $request->childName }}</td>
+            <td>{{ $request->baptismDate }}</td>
+            <td>{{ $request->purpose }}</td>
+            <td>{{ $request->contact }}</td>
+            <td>{{ $request->relationship }}</td>
             <td>{{ ucfirst($request->status) }}</td>
             <td>
                 <div class="action">
                     @if($request->status == 'PENDING')
-                    <form action="{{ route('admin.document_requests.approve', $request->id) }}" method="POST">
+                    <form action="{{ route('baptismrequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
                     </form>
 
-                    <form action="{{ route('admin.document_requests.reject', $request->id) }}" method="POST">
+                    <form action="{{ route('baptismrequest.reject', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                    </form>
+                    @else
+                    <span>No Action</span>
+                    @endif
+                </div>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="9">No Document Request Found.</td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
+
+
+<label for="">Confirmation Certificates Request</label>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Requester</th>
+            <th>Confimed Person</th>
+            <th>Date Of Confirmation</th>
+            <th>Request Purpose</th>
+            <th>Contact</th>
+            <th>Relationship To Confirmed</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($confirmationrequests as $request)
+        <tr>
+            <td>{{ $request->confirmationrequest_id }}</td>
+            <td>{{ $request->requester }}</td>
+            <td>{{ $request->confirmedName }}</td>
+            <td>{{ $request->confirmationDate }}</td>
+            <td>{{ $request->reason }}</td>
+            <td>{{ $request->contact }}</td>
+            <td>{{ $request->relationship }}</td>
+            <td>{{ ucfirst($request->status) }}</td>
+            <td>
+                <div class="action">
+                    @if($request->status == 'PENDING')
+                    <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                    </form>
+
+                    <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                    </form>
+                    @else
+                    <span>No Action</span>
+                    @endif
+                </div>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="9">No Document Request Found.</td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
+
+
+
+<label for="">Marriage Certificates Request</label>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Requester</th>
+            <th>Confimed Person</th>
+            <th>Date Of Confirmation</th>
+            <th>Request Purpose</th>
+            <th>Contact</th>
+            <th>Relationship To Confirmed</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($marriagerequests as $request)
+        <tr>
+            <td>{{ $request->confirmationrequest_id }}</td>
+            <td>{{ $request->requester }}</td>
+            <td>{{ $request->confirmedName }}</td>
+            <td>{{ $request->confirmationDate }}</td>
+            <td>{{ $request->reason }}</td>
+            <td>{{ $request->contact }}</td>
+            <td>{{ $request->relationship }}</td>
+            <td>{{ ucfirst($request->status) }}</td>
+            <td>
+                <div class="action">
+                    @if($request->status == 'PENDING')
+                    <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                    </form>
+
+                    <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                    </form>
+                    @else
+                    <span>No Action</span>
+                    @endif
+                </div>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="9">No Document Request Found.</td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
+
+
+
+<label for="">Death Certificates Request</label>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Requester</th>
+            <th>Confimed Person</th>
+            <th>Date Of Confirmation</th>
+            <th>Request Purpose</th>
+            <th>Contact</th>
+            <th>Relationship To Confirmed</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($deathrequests as $request)
+        <tr>
+            <td>{{ $request->confirmationrequest_id }}</td>
+            <td>{{ $request->requester }}</td>
+            <td>{{ $request->confirmedName }}</td>
+            <td>{{ $request->confirmationDate }}</td>
+            <td>{{ $request->reason }}</td>
+            <td>{{ $request->contact }}</td>
+            <td>{{ $request->relationship }}</td>
+            <td>{{ ucfirst($request->status) }}</td>
+            <td>
+                <div class="action">
+                    @if($request->status == 'PENDING')
+                    <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                    </form>
+
+                    <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
