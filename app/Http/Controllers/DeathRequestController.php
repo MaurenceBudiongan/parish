@@ -65,17 +65,17 @@ class DeathRequestController extends Controller
         if ($request->hasFile('idProof')) {
             $data['idProof'] = $request->file('idProof')->store('id_proofs');
         }
-
+         $data['deathrequest_id'] = 'req-' . uniqid();
         $death_request->update($data);
         return redirect()->route('death_requests.index')->with('success', 'Request updated.');
     }
 
-    public function destroy(DeathRequest $death_request)
-    {
-        $death_request->delete();
-        return redirect()->route('death_requests.index')->with('success', 'Request deleted.');
-    }
-
+public function destroy($id)
+{
+    $baptism_request = DeathRequest::findOrFail($id);
+    $baptism_request->delete();
+    return redirect()->back()->with('success', 'Request deleted.');
+}
 
 
 

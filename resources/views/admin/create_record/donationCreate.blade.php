@@ -58,7 +58,7 @@
         padding: 15px;
         background-color: var(--c-gray-600, #f0f0f0);
         border-radius: 10px;
-        height: 24.6rem;
+        height: 30rem;
         overflow-y: auto;
         font-family: 'Be Vietnam Pro', sans-serif;
     }

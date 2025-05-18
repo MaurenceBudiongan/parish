@@ -1,4 +1,5 @@
-@foreach ($marriages as $marriage)
+<div class="certification">
+    @foreach ($marriages as $marriage)
         <form action="{{ route('marriages.destroy', $marriage->id) }}" method="POST">
         @csrf
         @method('DELETE')
@@ -80,8 +81,13 @@
         </div>
     </form>
 @endforeach
+</div>
 
 <style>
+      .certification{
+        height: 50.3rem;
+        overflow-y: scroll;
+    }
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;

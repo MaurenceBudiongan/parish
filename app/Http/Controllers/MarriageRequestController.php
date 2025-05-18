@@ -63,16 +63,17 @@ class MarriageRequestController extends Controller
         if ($request->hasFile('idProof')) {
             $data['idProof'] = $request->file('idProof')->store('id_proofs');
         }
-
+         $data['marriagerequest_id'] = 'req-' . uniqid();
         $marriage_request->update($data);
         return redirect()->route('marriage_requests.index')->with('success', 'Request updated.');
     }
 
-    public function destroy(MarriageRequest $marriage_request)
-    {
-        $marriage_request->delete();
-        return redirect()->route('marriage_requests.index')->with('success', 'Request deleted.');
-    }
+public function destroy($id)
+{
+    $baptism_request = MarriageRequest::findOrFail($id);
+    $baptism_request->delete();
+    return redirect()->back()->with('success', 'Request deleted.');
+}
 
 
 

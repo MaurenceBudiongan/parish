@@ -70,11 +70,12 @@ class ConfirmationRequestController extends Controller
         return redirect()->route('confirmation_requests.index')->with('success', 'Request updated.');
     }
 
-    public function destroy(ConfirmationRequest $confirmation_request)
-    {
-        $confirmation_request->delete();
-        return redirect()->route('confirmation_requests.index')->with('success', 'Request deleted.');
-    }
+public function destroy($id)
+{
+    $baptism_request = ConfirmationRequest::findOrFail($id);
+    $baptism_request->delete();
+    return redirect()->back()->with('success', 'Request deleted.');
+}
 
 
     

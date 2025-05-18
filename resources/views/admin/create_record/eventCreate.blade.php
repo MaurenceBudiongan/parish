@@ -66,6 +66,8 @@
         border-radius: 10px;
         border-bottom: 10px;
         font-family: 'Be Vietnam Pro', sans-serif;
+         height: 30rem;
+          overflow-y: scroll;
     }
 
     .h2 {

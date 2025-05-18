@@ -1,3 +1,4 @@
+<div class="certification">
 @forelse($deaths as $death)
 
     <form action="{{ route('deaths.destroy', $death->id) }}" method="POST">
@@ -69,7 +70,12 @@
         <td colspan="8">No assignments found.</td>
     </tr>
 @endforelse
+</div>
 <style>
+      .certification{
+        height: 50.8rem;
+        overflow-y: scroll;
+    }
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;

@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1995/1995542.png" type="image/png">
-      <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/onclick.js') }}"></script>
     <style>
         :root {
@@ -35,6 +35,7 @@
         }
 
         body {
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
             display: flex;
             min-height: 100vh;
             background-color: var(--bg);
@@ -44,6 +45,7 @@
         }
 
         .sidebar {
+
             width: 260px;
             background-color: #1e293b;
             color: #fff;
@@ -165,19 +167,19 @@
             transition: opacity 0.3s ease;
         }
 
-        .card button:hover {
+        .main .card button:hover {
             opacity: 0.85;
         }
 
         #certificate-options {
 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ 
             gap: 24px;
             margin-top: 40px;
         }
 
         .cert-card {
-            padding: 24px;
+            padding: 30px;
             border-radius: var(--radius);
             color: #fff;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
@@ -205,8 +207,8 @@
             transition: background-color 0.3s ease;
         }
 
-        .cert-card button:hover {
-            background-color: rgba(255, 255, 255, 0.4);
+        .mian .cert-card button:hover {
+            transform: translateY(-2px);
         }
 
         .cert-card.baptismal {
@@ -250,11 +252,11 @@
             }
         }
 
-        form {
+        .form {
             margin-left: 300px;
             background: #ffffff;
             padding: 32px;
-            margin-top: 40px;
+          
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
             max-width: 720px;
@@ -264,7 +266,7 @@
             animation: fadeInUp 0.6s ease-out both;
         }
 
-        form label {
+        .form label {
             display: block;
             font-weight: 600;
             color: #1e293b;
@@ -300,7 +302,7 @@
             resize: vertical;
         }
 
-        form button[type="submit"] {
+        .form button[type="submit"] {
             margin-top: 30px;
             padding: 12px 24px;
             background: linear-gradient(to right, #4f46e5, #22d3ee);
@@ -314,7 +316,7 @@
             transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        form button[type="submit"]:hover {
+        .main form button[type="submit"]:hover {
             transform: translateY(-2px);
             background: linear-gradient(to right, #4338ca, #06b6d4);
         }
@@ -339,10 +341,10 @@
         }
 
         .enhanced-message {
-            background: linear-gradient(to bottom right, #f0f9ff, #ecfdf5);
+
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
             animation: fadeInUp 0.5s ease-out;
         }
 
@@ -414,8 +416,29 @@
             width: 100%;
             max-width: 360px;
             border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+         
         }
+
+        #greeting {
+            text-align: center;
+            margin-left: 26rem;
+        }
+
+        .main .p {
+            margin-left: 26rem;
+
+        }
+
+        .docreq {
+            display: grid;
+       
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            padding: 30px;
+        }
+
+
+        
     </style>
 </head>
 
@@ -425,22 +448,21 @@
             <div class="logo"> <img src="https://cdn-icons-png.flaticon.com/512/1995/1995542.png"
                     alt="Parish Records Logo"> <span>Parish Records</span> </div>
             <nav class="nav" aria-label="Main Navigation">
-                <a onclick="showCertificateOptions()">📄 Request Document</a>
-                <a onclick="showRequestStatus()">📊  Request Status</a>
-                <a href="#">⛪ Mass Schedule</a>
-                <a href="#">💒 My Records</a>
+                <a id="documentRequest">📄 Request Document</a>
+                <a id="statusRequest">📊 Request Status</a>
+                <a id="mass">⛪ Mass Schedule</a>
                 <a href="#">💖 Donate</a>
                 <a href="#">📞 Contact</a>
             </nav>
         </div>
         <footer class="sidebar-footer" aria-label="Footer">© 2025 Parish System</footer>
     </div> <!-- Main Content -->
-    <div class="main">
-        <div>Home</div>
+    <div id="main" class="main">
+        <div id="home">Home</div>
         <header class="header">
             <div class="header-info">
                 <h1 id="greeting">Welcome!</h1>
-                <p>Your records are safely stored and accessible here.</p>
+                <p class="p">Your records are safely stored and accessible here.</p>
             </div> <img src="{{ asset('img/kayi.png') }}" alt="User Photo" class="user-pic" loading="lazy">
         </header>
         <!-- Certificate Options Section -->
@@ -449,72 +471,141 @@
 
 
     <script>
-          const csrfToken = "{{ csrf_token() }}";
-        const loadRequestStatus = "{{ route('user.document_requests.index') }}";
-        
+        const csrfToken = "{{ csrf_token() }}";
+        const loadRequestStatus = "{{ route('baptismrequest.userIndex') }}";
+        const loadMass = "{{ route('mass.UserIndex') }}";
+
         const greeting = document.getElementById("greeting");
         const hour = new Date().getHours();
         if (hour < 12) greeting.textContent = "Good morning, Kyla!";
         else if (hour < 18) greeting.textContent = "Good afternoon, Kyla!";
         else greeting.textContent = "Good evening, Kyla!";
 
+        const certificate_options = document.getElementById('certificate-options');
+        const documentRequest = document.getElementById('documentRequest');
+        const statusRequest = document.getElementById('statusRequest');
+
         const message = `
-            <div class="enhanced-message">
-                <div class="header">
-                <img src="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Certificate Icon" class="icon">
+        <div class="enhanced-message">
+            <div class="header">
+        
                 <h2>Smart Parish Certification System</h2>
                 <p class="subtext">Reliable. Fast. Secure.</p>
-                </div>
-
-                <div class="content-grid">
+            </div>
+            <div class="content-grid">
                 <div class="text-content">
                     <p>Welcome to a more efficient way to access your parish records. Our digital certification service helps you:</p>
                     <ul>
-                    <li>📥 Request certificates in seconds</li>
-                    <li>🔒 Ensure your data is safe and secure</li>
-                    <li>🕐 Save time with fast processing</li>
-                    <li>📄 Get downloadable, verifiable documents</li>
+                        <li>📥 Request certificates in seconds</li>
+                        <li>🔒 Ensure your data is safe and secure</li>
+                        <li>🕐 Save time with fast processing</li>
+                        <li>📄 Get downloadable, verifiable documents</li>
                     </ul>
                     <div class="testimonial">
-                    <blockquote>“It was incredibly easy to get my baptismal certificate. Highly recommended!”</blockquote>
-                    <cite>– Juan S., Parish Member</cite>
+                        <blockquote>“It was incredibly easy to get my baptismal certificate. Highly recommended!”</blockquote>
+                        <cite>– Juan S., Parish Member</cite>
                     </div>
                 </div>
                 <div class="image-box">
-                    <imgsrc="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Parish Records" class="preview-image">
-                </div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Parish Records" class="preview-image">
                 </div>
             </div>
-            `;
+        </div>
+    `;
 
-        document.getElementById('certificate-options').innerHTML = message;
+        // Initially show message
+        certificate_options.innerHTML = message;
+        let currentView = 'message'; // Possible values: 'message', 'certificate', 'status', 'mass'
 
-       
+        documentRequest.addEventListener('click', () => {
+            if (currentView === 'certificate') {
+                certificate_options.innerHTML = message;
+                document.getElementById('home').innerHTML = 'Home';
+                currentView = 'message';
+            } else {
+                showCertificateOptions();
+                currentView = 'certificate';
+            }
+        });
+
+        statusRequest.addEventListener('click', () => {
+            if (currentView === 'status' || currentView === showMass()) {
+                certificate_options.innerHTML = message;
+
+                currentView = 'message';
+            } else {
+                showRequestStatus();
+                currentView = 'status';
+            }
+        });
+
+        mass.addEventListener('click', () => {
+            if (currentView === 'mass') {
+                certificate_options.innerHTML = message;
+                currentView = 'message';
+            } else {
+                showMass();
+                currentView = 'mass';
+            }
+        });
+
         function showCertificateOptions() {
-            const section = document.getElementById('certificate-options');
-            section.style.display = 'grid';
-            section.innerHTML = `
-                    <div class="cert-card baptismal">
-                        <h3>📜 Baptismal Certificate</h3>
-                        <p>Request your official baptismal record.</p>
-                        <button onclick="showForm('baptism')">Request</button>
-                    </div>
-                    <div class="cert-card confirmation">
-                        <h3>🕊️ Confirmation Certificate</h3>
-                        <p>Request your church confirmation certificate.</p>
-                        <button onclick="showForm('confirmation')">Request</button>
-                    </div>
-                    <div class="cert-card marriage">
-                        <h3>💍 Marriage Certificate</h3>
-                        <p>Get a copy of your church marriage certificate.</p>
-                        <button onclick="showForm('marriage')">Request</button>
-                    </div>
-                    <div class="cert-card death">
-                        <h3>⚰️ Death Certificate</h3>
-                        <p>Obtain a parish-issued death record.</p>
-                        <button onclick="showForm('death')">Request</button>
-                    </div>
-                    `;
+            document.getElementById('home').innerHTML = 'Home/ Request Certificate';
+            certificate_options.style.display = 'grid';
+            certificate_options.innerHTML = `
+              <div class="docreq">
+            <div class="cert-card baptismal">
+                <h3>📜 Baptismal Certificate</h3>
+                <p>Request your official baptismal record.</p>
+                <button onclick="showForm('baptism')">Request</button>
+            </div>
+            <div class="cert-card confirmation">
+                <h3>🕊️ Confirmation Certificate</h3>
+                <p>Request your church confirmation certificate.</p>
+                <button onclick="showForm('confirmation')">Request</button>
+            </div>
+            <div class="cert-card marriage">
+                <h3>💍 Marriage Certificate</h3>
+                <p>Get a copy of your church marriage certificate.</p>
+                <button onclick="showForm('marriage')">Request</button>
+            </div>
+            <div class="cert-card death">
+                <h3>⚰️ Death Certificate</h3>
+                <p>Obtain a parish-issued death record.</p>
+                <button onclick="showForm('death')">Request</button>
+            </div>
+              </div>
+        `;
+        }
+
+        function showRequestStatus() {
+            const container = document.getElementById('certificate-options');
+            document.getElementById('home').innerHTML = 'Home/ Request Status';
+            fetch(loadRequestStatus)
+                .then(response => response.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    currentView = 'status';
+                })
+                .catch(error => {
+                    console.error('Error loading request status:', error);
+                    container.innerHTML = '<p>Error loading data.</p>';
+                });
+        }
+
+        function showMass() {
+            const container = document.getElementById('certificate-options');
+            document.getElementById('home').innerHTML = 'Home/ Mass Schedule';
+            fetch(loadMass)
+                .then(response => response.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    currentView = 'status';
+                })
+                .catch(error => {
+                    console.error('Error loading request status:', error);
+                    container.innerHTML = '<p>Error loading data.</p>';
+                });
         }
 
         function showForm(type) {
@@ -595,29 +686,29 @@
             // Assuming csrfToken is already passed from Blade to JS
             const csrfToken = "{{ csrf_token() }}";
 
-            const mainDiv = document.querySelector('.main');
+             const mainDiv = document.getElementById('certificate-options');
             mainDiv.innerHTML = `
-        <header class="header">
-            <div class="header-info">
-                <h1>${formTitles[type]}</h1>
-                <p>Please fill out the details below to request your certificate.</p>
-            </div>
-        </header>
-        <form 
-            style="background:#fff; padding:24px; border-radius:12px; max-width:600px;" 
-            action="${formActions[type]}" 
-            method="${formMethods[type]}" 
-            enctype="multipart/form-data"
-        >
-            <input type="hidden" name="_token" value="${csrfToken}">
-            ${formFields[type]}
-            <br>
-            <button type="submit" style="margin-top:20px; background: linear-gradient(to right, #4f46e5, #22d3ee); color: white; padding: 10px 16px; border: none; border-radius: 8px; font-weight: 600;">
-                Submit Request
-            </button>
-        </form>
-    `;
-        }
+                <header class="header">
+                    <div class="header-info">
+                        <h1>${formTitles[type]}</h1>
+                        <p>Please fill out the details below to request your certificate.</p>
+                    </div>
+                </header>
+                <form class="form"
+                    style="background:#fff; padding:24px; border-radius:12px; max-width:600px;" 
+                    action="${formActions[type]}" 
+                    method="${formMethods[type]}" 
+                    enctype="multipart/form-data"
+                >
+                    <input type="hidden" name="_token" value="${csrfToken}">
+                    ${formFields[type]}
+                    <br>
+                    <button type="submit" style="margin-top:20px; background: linear-gradient(to right, #4f46e5, #22d3ee); color: white; padding: 10px 16px; border: none; border-radius: 8px; font-weight: 600;">
+                        Submit Request
+                    </button>
+                </form>
+            `;
+             }
     </script>
 
 </body>

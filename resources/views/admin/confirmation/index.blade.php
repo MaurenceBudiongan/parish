@@ -1,3 +1,4 @@
+<div class="certification">
 @foreach ($confirmations as $confirmation)
     <form action="{{ route('confirmations.destroy', $confirmation->id) }}" method="POST">
         @csrf
@@ -61,9 +62,13 @@
             </div>
     </form>
 @endforeach
-
+</div>
 
 <style>
+      .certification{
+        height: 50.3rem;
+        overflow-y: scroll;
+    }
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;

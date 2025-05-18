@@ -104,6 +104,7 @@
         text-align: center;
     }
 </style>
+
 <label for="">Baptism Certificates Request</label>
 <table>
     <thead>

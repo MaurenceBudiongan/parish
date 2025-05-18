@@ -19,6 +19,15 @@ class BaptismRequestController extends Controller
         return view('admin.document_requests.index', compact('baptismrequests','confirmationrequests','marriagerequests','deathrequests'));
     }
 
+      public function show()
+    {
+        $confirmationrequests = ConfirmationRequest::all();
+        $baptismrequests = BaptismRequest::all();
+        $marriagerequests = MarriageRequest::all();
+        $deathrequests = DeathRequest::all();
+            
+        return view('user.document_requests.index', compact('baptismrequests','confirmationrequests','marriagerequests','deathrequests'));
+    }
     public function create()
     {
         return view('admin.document_requests.index');
@@ -75,11 +84,13 @@ class BaptismRequestController extends Controller
         return redirect()->route('baptism_requests.index')->with('success', 'Request updated.');
     }
 
-    public function destroy(BaptismRequest $baptism_request)
-    {
-        $baptism_request->delete();
-        return redirect()->route('baptism_requests.index')->with('success', 'Request deleted.');
-    }
+public function destroy($id)
+{
+    $baptism_request = BaptismRequest::findOrFail($id);
+    $baptism_request->delete();
+    return redirect()->back()->with('success', 'Request deleted.');
+}
+
 
     
 

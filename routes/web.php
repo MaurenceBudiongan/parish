@@ -25,7 +25,7 @@ use App\Http\Controllers\ConfirmationRequestController;
 use App\Http\Controllers\MarriageRequestController;
 use App\Http\Controllers\DeathRequestController;
 Route::get('/', function () {
-    return view('/admin/dashboard/dashboard'); 
+    return view('admin.dashboard.dashboard'); 
 });
 Route::get('/parishionerReport', function () {
     return view('parishioner.report'); 
@@ -55,6 +55,7 @@ Route::get('/landingpage', function () {
 Route::resource('baptismrequest', BaptismRequestController::class);
 Route::put('baptismrequest/{id}/approve', [BaptismRequestController::class, 'approve'])->name('baptismrequest.approve');
 Route::put('baptismrequest/{id}/reject', [BaptismRequestController::class, 'reject'])->name('baptismrequest.reject');
+Route::get('baptismrequest/index', [BaptismRequestController::class, 'UserIndex'])->name('baptismrequest.userIndex');
 
 // CONFIRMATION REQUESTS
 Route::resource('confirmationrequest', ConfirmationRequestController::class);
@@ -102,6 +103,8 @@ Route::resource('death', DeathCertificateController::class)->parameters([
 Route::resource('donation',DonationController::class);
 //mass_schedules
 Route::resource('mass_schedules', MassScheduleController::class);
+Route::get('/user/mass', [MassScheduleController::class, 'UserIndex'])->name('mass.UserIndex');
+ 
 // event announcement
 Route::resource('event_announcements', EventAnnouncementController::class);
 //priest
@@ -189,7 +192,7 @@ Route::delete('/admin/document_requests/{documentRequest}', [DocumentRequestCont
 Route::put('admin.document_requests/{id}/approve', [DocumentRequestController::class, 'approve'])->name('admin.document_requests.approve');
 Route::put('admin.document_requests/{id}/reject', [DocumentRequestController::class, 'reject'])->name('admin.document_requests.reject');
 // User Document Request
-Route::get('/user/document_requests', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
+Route::get('/user/document_requests/index', [DocumentRequestController::class, 'userIndex'])->name('user.document_requests.index');
 Route::post('/user/document_requests', [DocumentRequestController::class, 'store'])->name('user.document_requests.store');
 // gcash
  use App\Http\Controllers\GCashController;

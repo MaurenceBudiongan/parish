@@ -12,11 +12,14 @@ class MassScheduleController extends Controller
      */
     public function index()
     {
-  
         $schedules = MassSchedule::orderBy('date')->paginate(10);
         return view('admin.record.eventRecord.servicesschedulingRecord', compact('schedules'));
     }
-    
+        public function UserIndex()
+    {
+        $schedules = MassSchedule::all();
+        return view('user.document_requests.mass&servicesschedule', compact('schedules'));
+    }
     public function create()
     {
         return view('admin.create_record.mass&serviceCreate');

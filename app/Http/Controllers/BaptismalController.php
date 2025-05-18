@@ -20,7 +20,7 @@ class BaptismalController extends Controller
     }
     public function store(Request $request)
     {
-     
+
         $request->validate([
             'child_name' => 'required|string|max:255',
             'date_birth' => 'required|date',
