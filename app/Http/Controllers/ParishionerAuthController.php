@@ -10,6 +10,7 @@ class ParishionerAuthController extends Controller
 {
     public function showRegisterForm()
     {
+        
         return view('authentication.userform');
     }
 

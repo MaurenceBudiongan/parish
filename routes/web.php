@@ -25,7 +25,7 @@ use App\Http\Controllers\ConfirmationRequestController;
 use App\Http\Controllers\MarriageRequestController;
 use App\Http\Controllers\DeathRequestController;
 Route::get('/', function () {
-    return view('admin.dashboard.dashboard'); 
+    return view('landingpage/landingpage'); 
 });
 Route::get('/parishionerReport', function () {
     return view('parishioner.report'); 
@@ -84,6 +84,7 @@ Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.c
 Route::get('/adminform', [Onclick::class, 'adminform'])->name('authentication.adminform');
 Route::get('/staffclick', [Onclick::class, 'staff'])->name('staffclick');
 Route::get('/parishionerclick', [Onclick::class, 'parishioner'])->name('gets_started');
+Route::get('/showdashboard', [Onclick::class, 'dashboard'])->name('showdashboard');
 //parishioner
 Route::resource('parishioners', ParishionerController::class);
 Route::get('/parishioner/report', [ParishionerController::class, 'report'])->name('parishioners.report');
@@ -111,6 +112,7 @@ Route::resource('event_announcements', EventAnnouncementController::class);
 Route::resource('priests', PriestController::class);
 Route::get('/priests-login', [PriestController::class, 'showLoginForm'])->name('priests.login.form');
 Route::post('/priests-login', [PriestController::class, 'login'])->name('priests.login.submit');
+Route::post('/priests-logout', [PriestController::class, 'logout'])->name('priests.logout');
 //priest Assignment
 Route::resource('priests_assignments', PriestAssignmentController::class);
 //staff
@@ -154,6 +156,8 @@ Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
+Route::get('/admin/showdashboard', [AdminAuthController::class, 'showdashboard'])->name('admin.showdashboard');
+
 
 //Parishioner Authentication
 use App\Http\Controllers\ParishionerAuthController;

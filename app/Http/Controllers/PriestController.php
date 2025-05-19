@@ -120,4 +120,8 @@ public function login(Request $request)
 
     return redirect()->back()->with('error', 'Invalid priest ID or name format.');
 }
+public function logout(Request $request)
+{
+    return redirect()->route('priests.login.form')->with('success', 'Successfully logged out.');
+}
 }

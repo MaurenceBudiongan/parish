@@ -16,7 +16,11 @@ class Onclick extends Controller
 }
  public function parishioner()
 {
-    return view('authentication.userform'); // create.blade.php
+    return view('landingpage.landingpage'); // create.blade.php
+}
+ public function dashboard()
+{
+    return view('admin.dashboard.dashboard'); // create.blade.php
 }
 }
 

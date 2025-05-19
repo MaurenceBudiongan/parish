@@ -299,7 +299,7 @@
 
                     <div class="row mt-4">
                         <div class="col-12 text-end">
-                            <a href="{{ route('priests.index') }}" class="btn btn-secondary me-2">
+                            <a href="{{ route('admin.showdashboard') }}" class="btn btn-secondary me-2">
                                 <i class="fas fa-times me-1"></i> Cancel
                             </a>
                             <button type="submit" class="btn btn-primary" id="submitBtn">

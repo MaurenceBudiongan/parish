@@ -444,6 +444,7 @@
             <a href="#">Services</a>
             <a href="#">About Us</a>
             <a href="#">Location & Hours</a>
+             <a href="{{ route('priests.login.form') }}">Priest</a>
             <a href="{{ route('staffclick') }}">Staff</a>
             <a href="{{ route('authentication.adminform') }}">Admin</a>
         </nav>

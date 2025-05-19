@@ -50,15 +50,14 @@ public function login(Request $request)
     // Attempt to authenticate with the 'admin' field
     $credentials = $request->only('admin', 'password');
 
-    if (Auth::guard('admin')->attempt($credentials)) {
-        // Redirect to the correct route after successful logina
-        return redirect()->route('admin.dashboard.dashboard');  // This matches the route name defined above
+   if (Auth::guard('admin')->attempt($credentials)) {
+        // Get the authenticated admin
+        $admin = Auth::guard('admin')->user();
+        return view('admin.dashboard.dashboard', compact('admin'));
     }
 
     return back()->withErrors(['admin' => 'These credentials do not match our records.']);
 }
-
-
 
     // Handle logout
     public function logout()
@@ -66,4 +65,10 @@ public function login(Request $request)
         Auth::logout();
         return redirect()->route('authentication.adminform');
     }
-}
+        public function showdashboard()
+    {
+         $admin = Auth::guard('admin')->user();
+        return view('admin.dashboard.dashboard', compact('admin'));
+    }
+    
+} 

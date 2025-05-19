@@ -498,6 +498,7 @@ a {
 }
 .app-body-main-content {
     position: relative;
+     transition: transform 0.5s ease-in;
 }
 .service-section > h2 {
     font-size: 1.5rem;
@@ -787,7 +788,9 @@ a {
         justify-content: flex-start;
     }
 }
-
+.payment-section   {
+      transition: transform 0.5s ease-in;
+}
 .payment-section > h2 {
     font-size: 1.5rem;
 }

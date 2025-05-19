@@ -29,14 +29,14 @@
             <div class="app-header-navigation">
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
-                    <a href="#">Priest Management</a>
+                    <a href="#"  onclick="addPriest()"> Add Priest</a>
                     <a href="#">Staff Management</a>
                     <a href="">Reports and Analytics </a>
                 </div>
             </div>
             <div class="app-header-actions">
                 <button class="user-profile">
-                    <span>Jerlyn Kyla Orpilla</span>
+                    <span>{{$admin->admin}}</span>
                     <span>
                         <img src="{{ asset('img/kayi.png') }}" />
                     </span>
@@ -61,7 +61,7 @@
         <div class="app-body">
             <div id="app-body-navigation" class="app-body-navigation">
                 <nav class="navigation">
-                    <a class="a"href="">
+                    <a class="a" href="#" onclick="showDashboard()">
                         <i class="ph-browsers"></i>
                         <span id="dashboard">Dashboard</span>
                     </a>
@@ -250,7 +250,7 @@
         });
 
         //edit
-
+        const loadAddPriest = "{{ route('priests.create') }}";
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
         const loadMemberStatistics = "{{ route('parishioners.report') }}";
