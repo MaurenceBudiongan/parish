@@ -22,23 +22,30 @@ class DonationController extends Controller
             abort(403, 'Access denied');
         }
         $members = Parishioner::all();
-        
         return view('admin.create_record.donationCreate', compact('members'));
+    }
+        public function financialreport(Request $request)
+    {
+        if (!$request->ajax()) {
+            abort(403, 'Access denied');
+        }
+        $members = Parishioner::all();
+        return view('admin.record.Report&Analytics.financialReport', compact('members'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'member_id' => 'required|exists:parishioners,id',
-            'amount' => 'required|numeric',
-            'donation_type' => 'required|string',
+            'amount' => 'nullable|numeric',
+            'donation_type' => 'required',
             'donation_date' => 'required|date',
-            'payment_method' => 'required|string',
+            'payment_method' => 'nullable',
         ]);
 
         Donation::create($request->all());
 
-        return redirect()->route('donations.index')->with('success', 'Donation recorded successfully.');
+        return redirect()->back()->with('success', 'Donation recorded successfully.');
     }
 
     public function edit(Donation $donation)
@@ -51,21 +58,27 @@ class DonationController extends Controller
     {
         $request->validate([
             'member_id' => 'required|exists:parishioners,id',
-            'amount' => 'required|numeric',
+            'amount' => 'nullable|numeric',
             'donation_type' => 'required|string',
             'donation_date' => 'required|date',
-            'payment_method' => 'required|string',
+            'payment_method' => 'nullable|string',
         ]);
 
         $donation->update($request->all());
 
-        return redirect()->route('donations.index')->with('success', 'Donation updated successfully.');
+        return redirect()->back()->with('success', 'Donation updated successfully.');
     }
 
     public function destroy(Donation $donation)
     {
         $donation->delete();
 
-        return redirect()->route('donations.index')->with('success', 'Donation deleted.');
+        return redirect()->back()->with('success', 'Donation deleted.');
     }
+    public function report()
+    {
+    $donations = Donation::with('member')->latest()->get();
+    return view('admin.record.Report&Analytics.financialReport', compact('donations'));
+}
+
 }

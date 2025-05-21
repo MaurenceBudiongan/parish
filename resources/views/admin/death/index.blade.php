@@ -1,81 +1,83 @@
 <div class="certification">
-@forelse($deaths as $death)
+    @forelse($deaths as $death)
+        <form action="{{ route('deaths.destroy', $death->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
 
-    <form action="{{ route('deaths.destroy', $death->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        
-        <div class="certificate">
-            <div class="top">
-                <p>Diocese of Talibon</p>
-                <p class="p2">SAINT VINCENT FERRRER PARISH</p>
-                <p>San Pascual, Ubay, Bohol</p>
-            </div>
-            <div class="mid">
-                <h1 class="h1">DEATH CERTIFICATE</h1>
-                <p>
-                    <span class="deceased">
-                        <span>This is to certify that</span>
-                        <span><input type="text" value="{{ $death->deceased_name }}" readonly></span>
-                        <span>minor/single/married, residing in
-                            <input class="residence" type="text" value="{{ $death->residence }}" readonly>
+            <div class="certificate">
+                <div class="top">
+                    <p>Diocese of Talibon</p>
+                    <p class="p2">SAINT VINCENT FERRRER PARISH</p>
+                    <p>San Pascual, Ubay, Bohol</p>
+                </div>
+                <div class="mid">
+                    <h1 class="h1">DEATH CERTIFICATE</h1>
+                    <p>
+                        <span class="deceased">
+                            <span>This is to certify that</span>
+                            <span><input type="text" value="{{ $death->deceased_name }}" readonly></span>
+                            <span>minor/single/married, residing in
+                                <input class="residence" type="text" value="{{ $death->residence }}" readonly>
+                            </span>
                         </span>
-                    </span>
-                    <span>died at the age of
-                        <input class="age" type="number" value="{{ $death->age }}" readonly>.
-                    </span><br>
-                    Cause of death <span class="semi1">:</span>
-                    <input class="cause" type="text" value="{{ $death->cause }}" readonly>
-                    Date and time of Death <span class="semi2">:</span>
-                    <input class="date_time" type="text" value="{{ $death->death_time }}" readonly>
-                    Place of Death <span class="semi3">:</span>
-                    <input class="place" type="text" value="{{ $death->place }}" readonly>
-                    Place & Time Of Burial<span class="semi4">:</span>
-                    <input class="burial_time" type="text" value="{{ $death->burial_time }}" readonly>
-                    Name of Spouse (if married) or Name of Parents<br>
-                    if minor or single<span class="semi5">:</span>
-                    <input class="guardian" type="text" value="{{ $death->guardian }}" readonly><br>
-                    Catholic priest who administered <br>
-                    the last rite<span class="semi6">:</span>
-                    <input class="priest" type="text" value="{{ $death->priest }}" readonly><br>
+                        <span>died at the age of
+                            <input class="age" type="number" value="{{ $death->age }}" readonly>.
+                        </span><br>
+                        Cause of death <span class="semi1">:</span>
+                        <input class="cause" type="text" value="{{ $death->cause }}" readonly>
+                        Date and time of Death <span class="semi2">:</span>
+                        <input class="date_time" type="text" value="{{ $death->death_time }}" readonly>
+                        Place of Death <span class="semi3">:</span>
+                        <input class="place" type="text" value="{{ $death->place }}" readonly>
+                        Place & Time Of Burial<span class="semi4">:</span>
+                        <input class="burial_time" type="text" value="{{ $death->burial_time }}" readonly>
+                        Name of Spouse (if married) or Name of Parents<br>
+                        if minor or single<span class="semi5">:</span>
+                        <input class="guardian" type="text" value="{{ $death->guardian }}" readonly><br>
+                        Catholic priest who administered <br>
+                        the last rite<span class="semi6">:</span>
+                        <input class="priest" type="text" value="{{ $death->priest }}" readonly><br>
 
-                    <span class="testimony">
-                        <span style="margin-left: 40px;"> In testimony to the truth of the above data, we affix our
-                            signature on this</span>
-                        <input class="day" type="text" value="{{ $death->day }}" readonly> day of
-                        <input class="month" type="text" value="{{ $death->month }}" readonly>,
-                        <input class="year" type="number" value="{{ $death->year }}" readonly>
-                        at the Catholic Priest Rectory in
-                        <input type="text" value="{{ $death->rectory }}" readonly>.
-                    </span>
-                </p>
-            </div>
-            <div class="bottom">
-                <div class="priest">
-                    <span>REV. FR. DIOSDADO D. RANARA</span>
-                    <p>Parish Priest</p>
+                        <span class="testimony">
+                            <span style="margin-left: 40px;"> In testimony to the truth of the above data, we affix our
+                                signature on this</span>
+                            <input class="day" type="text" value="{{ $death->day }}" readonly> day of
+                            <input class="month" type="text" value="{{ $death->month }}" readonly>,
+                            <input class="year" type="number" value="{{ $death->year }}" readonly>
+                            at the Catholic Priest Rectory in
+                            <input type="text" value="{{ $death->rectory }}" readonly>.
+                        </span>
+                    </p>
+                </div>
+                <div class="bottom">
+                    <div class="priest">
+                        <span>REV. FR. DIOSDADO D. RANARA</span>
+                        <p>Parish Priest</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="buttons">
-            <a href="{{ route('deaths.edit', $death->id) }}">
-                <button type="button" class="edit-btn">Edit</button>
-            </a>
-            <button type="submit" class="delete-btn"
-                onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
-        </div>
-    </form>
+            <div class="buttons">
+                <a href="{{ route('deaths.edit', $death->id) }}">
+                    <button type="button" class="edit-btn">Edit</button>
+                </a>
+                <button type="submit" class="delete-btn"
+                    onclick="return confirm('Are you sure you want to delete this record?')">Delete
+                </button>
+                 <a href="" class="btn btn-success mt-2">Send to Request</a>
+            </div>
+        </form>
     @empty
-    <tr>
-        <td colspan="8">No assignments found.</td>
-    </tr>
-@endforelse
+        <tr>
+            <td colspan="8">No death certification record found.</td>
+        </tr>
+    @endforelse
 </div>
 <style>
-      .certification{
+    .certification {
         height: 50.8rem;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
+
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;

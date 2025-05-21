@@ -47,17 +47,15 @@ class AdminAuthController extends Controller
 // Handle login
 public function login(Request $request)
 {
-    // Attempt to authenticate with the 'admin' field
     $credentials = $request->only('admin', 'password');
 
-   if (Auth::guard('admin')->attempt($credentials)) {
-        // Get the authenticated admin
+    if (Auth::guard('admin')->attempt($credentials)) {
         $admin = Auth::guard('admin')->user();
-        return view('admin.dashboard.dashboard', compact('admin'));
-    }
+        return redirect()->route('admin.showdashboard',compact('admin'));
 
-    return back()->withErrors(['admin' => 'These credentials do not match our records.']);
+    }
 }
+
 
     // Handle logout
     public function logout()

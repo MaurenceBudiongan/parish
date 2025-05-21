@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label for="amount">Amount (₱)</label>
-            <input type="number" name="amount" step="0.01" id="amount" value="{{ old('amount') }}" required>
+            <input type="number" name="amount" step="0.01" id="amount" value="{{ old('amount') }}" >
         </div>
 
         <div class="form-group">
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="payment_method">Payment Method</label>
             <input type="text" name="payment_method" id="payment_method" value="{{ old('payment_method') }}"
-                required>
+                >
         </div>
 
         <div class="form-group">

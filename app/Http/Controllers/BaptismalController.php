@@ -48,6 +48,7 @@ class BaptismalController extends Controller
 
 public function edit(Baptismal $baptismal)
 {
+    dd('fd');
     return view('admin.baptismal.edit', compact('baptismal'));
 }
 
@@ -68,13 +69,13 @@ public function edit(Baptismal $baptismal)
 
         $baptismal->update($request->all());
 
-        return redirect()->route('admin.baptismals.index')->with('success', 'Baptismal updated successfully.');
+        return redirect()->back()->with('success', 'Baptismal updated successfully.');
     }
 
     public function destroy(Baptismal $baptismal)
     {
         $baptismal->delete();
 
-        return redirect()->route('admin.baptismal.index')->with('success', 'Staff deleted successfully.');
+        return redirect()->back()->with('success', 'Staff deleted successfully.');
     }
 }

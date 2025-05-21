@@ -29,6 +29,8 @@ class Parishioner extends Model
         'status',
     ];
 
+
+
     public function isNew()
     {
         return $this->status === 'new' && $this->created_at->gt(now()->subDay());

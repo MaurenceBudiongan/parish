@@ -29,14 +29,14 @@
             <div class="app-header-navigation">
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
-                    <a href="#"  onclick="addPriest()"> Add Priest</a>
-                    <a href="#">Staff Management</a>
+                    <a href="#" onclick="addPriest()"> Add Priest</a>
+                    <a href="#" onclick="addPriest()">Add Staff </a>
                     <a href="">Reports and Analytics </a>
                 </div>
             </div>
             <div class="app-header-actions">
                 <button class="user-profile">
-                    <span>{{$admin->admin}}</span>
+                    <span>{{ $admin->admin }}</span>
                     <span>
                         <img src="{{ asset('img/kayi.png') }}" />
                     </span>
@@ -106,7 +106,7 @@
                             <span>Financial Record</span>
                         </a>
                         <div id="financialdropdownmenu" class="dropdown-menu">
-                            <a href="#" onclick="showBaptistRecord()">Payment Transaction</a>
+                            
                             <a href="#" onclick="showDonationRecord()">Donation</a>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                         </a>
                         <div id="reportdropdownmenu" class="dropdown-menu">
                             <a href="#" onclick="showMemberStatistics()">Member Statistics</a>
-                            <a href="#" onclick="">Financial Report</a>
+                            <a href="#" onclick="showFinancialReport()">Financial Report</a>
                         </div>
                     </div>
                 </nav>
@@ -221,6 +221,10 @@
                             <label>Question</label>
                             <input type="text" placeholder="Type here" />
                         </div>
+                           <div>
+                            <label>Answer </label>
+                            <input type="text" placeholder="Type here" />
+                        </div>
                     </div>
                     <div class="payment-section-footer">
                         <button class="save-button">Save</button>
@@ -254,6 +258,7 @@
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
         const loadMemberStatistics = "{{ route('parishioners.report') }}";
+        const loadfinancialReport = "{{ route('donations.report') }}";
 
         //
         const loadBaptistCreate = "{{ route('baptismals.create') }}";

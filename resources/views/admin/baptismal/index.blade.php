@@ -1,65 +1,86 @@
+<script src="{{ asset('js/dashboard.js') }}"></script>
 <div class="certification">
-@foreach ($baptismals as $baptismal)
-    <form action="{{ route('baptismals.destroy', $baptismal->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <div class="certificate">
-            <div class="top">
-                <p>Diocese of Talibon</p>
-                <p class="p2">SAINT VINCENT FERRER PARISH</p>
-                <p>San Pascual, Ubay, Bohol</p>
-            </div>
-            <div class="mid">
-                <h1 class="h1">CERTIFICATE OF BAPTISM</h1>
-                <p>
-                    Name of Child <span class="semi1">:</span> <input class="child_name" type="text" name="child_name"
-                        value="{{ $baptismal->child_name }}" readonly>
-                    Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date"
-                        name="date_birth" value="{{ $baptismal->date_birth }}" readonly>
-                    Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place"
-                        value="{{ $baptismal->place }}" readonly>
-                    Name of Father <span class="semi4">:</span> <input class="father_name" type="text"
-                        name="father_name" value="{{ $baptismal->father_name }}" readonly>
-                    Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text"
-                        name="mother_name" value="{{ $baptismal->mother_name }}" readonly>
-                    <span class="maiden">(Mother's maiden family name)</span>
-                    Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text"
-                        name="parent_residence" value="{{ $baptismal->parent_residence }}" readonly>
-                    Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date"
-                        name="date_baptism" value="{{ $baptismal->date_baptism }}" readonly>
-                    Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister"
-                        value="{{ $baptismal->minister }}" readonly>
-                    Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor"
-                        value="{{ $baptismal->sponsor }}" readonly>
+    @forelse ($baptismals as $baptismal)
+        <form action="{{ route('baptismals.destroy', $baptismal->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="certificate">
+                <div class="top">
+                    <p>Diocese of Talibon</p>
+                    <p class="p2">SAINT VINCENT FERRER PARISH</p>
+                    <p>San Pascual, Ubay, Bohol</p>
+                </div>
+                <div class="mid">
+                    <h1 class="h1">CERTIFICATE OF BAPTISM</h1>
+                    <p>
+                        Name of Child <span class="semi1">:</span> <input class="child_name" type="text"
+                            name="child_name" value="{{ $baptismal->child_name }}" readonly>
+                        Date of Birth <span class="semi2">:</span> <input class="date_birth" type="date"
+                            name="date_birth" value="{{ $baptismal->date_birth }}" readonly>
+                        Place of Birth <span class="semi3">:</span> <input class="place" type="text" name="place"
+                            value="{{ $baptismal->place }}" readonly>
+                        Name of Father <span class="semi4">:</span> <input class="father_name" type="text"
+                            name="father_name" value="{{ $baptismal->father_name }}" readonly>
+                        Name of Mother <span class="semi5">:</span> <input class="mother_name" type="text"
+                            name="mother_name" value="{{ $baptismal->mother_name }}" readonly>
+                        <span class="maiden">(Mother's maiden family name)</span>
+                        Parent's Residence&nbsp;&nbsp; : <input class="parent_residence" type="text"
+                            name="parent_residence" value="{{ $baptismal->parent_residence }}" readonly>
+                        Date Of Baptism&nbsp;&nbsp;&nbsp;&nbsp;: <input class="date_baptism" type="date"
+                            name="date_baptism" value="{{ $baptismal->date_baptism }}" readonly>
+                        Minister of Baptism&nbsp;&nbsp;: <input class="minister" type="text" name="minister"
+                            value="{{ $baptismal->minister }}" readonly>
+                        Baptismal Sponsor&nbsp;&nbsp;&nbsp;: <input class="Sponsor" type="text" name="sponsor"
+                            value="{{ $baptismal->sponsor }}" readonly>
 
-                    <span class="purpose">Purpose:
-                        <textarea name="purpose" readonly>{{ $baptismal->purpose }}</textarea>
-                    </span>
+                        <span class="purpose">Purpose:
+                            <textarea name="purpose" readonly>{{ $baptismal->purpose }}</textarea>
+                        </span>
 
-                </p>
-            </div>
-            <div class="bottom">
-                <div class="priest">
-                    <span>REV.FR.DIOSDADO D. RANARA</span>
-                    <p>Parish Priest</p>
+                    </p>
+                </div>
+                <div class="bottom">
+                    <div class="priest">
+                        <span>REV.FR.DIOSDADO D. RANARA</span>
+                        <p>Parish Priest</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="buttons">
-            <a href="{{ route('baptismals.edit', $baptismal->id) }}">
-                <button type="button" class="edit-btn">Edit</button>
-            </a>
-            <button type="submit" class="delete-btn"
-                onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
-        </div>
-    </form>
-@endforeach
+            <div class="buttons">
+                <button type="button" class="edit-btn" onclick="showBaptismaledit({{ $baptismal->id }})">Edit</button>
+
+                <button type="submit" class="delete-btn"
+                    onclick="return confirm('Are you sure you want to delete this record?')">Delete
+                </button>
+                <a href="" class="btn btn-success mt-2">Send to Request</a>
+
+            </div>
+        </form>
+    @empty
+        <tr>
+            <td colspan="8">No baptismal certification found.</td>
+        </tr>
+    @endforelse
 </div>
-<style>
-    .certification{
-        height: 50.3rem;
-        overflow-y: scroll;
+<script>
+    function showBaptismaledit(id) {
+        const url = `/baptismals/${id}/edit`; // Assuming RESTful route
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("maincontent").innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error loading edit form:', error);
+            });
     }
+</script>
+<style>
+    .certification {
+        height: 50.3rem;
+        overflow-y: auto;
+    }
+
     .saverecord-btn {
         margin-top: 20px;
         border: 1px solid currentColor;

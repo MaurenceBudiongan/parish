@@ -1,4 +1,4 @@
-<div class="Record"> 
+<div class="Record">
     <h2 class="text-2xl font-bold mb-4">Priest Assignments</h2>
     <table class="table-auto w-full">
         <thead>
@@ -26,10 +26,12 @@
                     <td>
                         <div class="action">
                             <a href="{{ route('priests_assignments.edit', $assignment->id) }}" class="edit">Edit</a>
-                            <form action="{{ route('priests_assignments.destroy', $assignment->id) }}" method="POST" style="display:inline">
+                            <form action="{{ route('priests_assignments.destroy', $assignment->id) }}" method="POST"
+                                style="display:inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="delete" onclick="return confirm('Delete this assignment?')">Delete</button>
+                                <button class="delete"
+                                    onclick="return confirm('Delete this assignment?')">Delete</button>
                             </form>
                         </div>
                     </td>
@@ -63,6 +65,11 @@
         --c-text-primary: var(--c-gray-100);
         --c-text-secondary: var(--c-gray-200);
         --c-text-tertiary: var(--c-gray-500);
+    }
+
+    .Record {
+        height: 30rem;
+        overflow-y: auto;
     }
 
     .Record h2 {

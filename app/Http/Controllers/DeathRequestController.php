@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\DeathRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DeathRequestController extends Controller
 {
@@ -34,10 +36,13 @@ class DeathRequestController extends Controller
         ]);
 
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
-         $data['deathrequest_id'] = 'req-' . uniqid();
+
+        $data['deathrequest_id'] = 'req-' . uniqid();
+
         DeathRequest::create($data);
+
         return redirect()->route('death_requests.index')->with('success', 'Death request submitted.');
     }
 
@@ -63,38 +68,48 @@ class DeathRequestController extends Controller
         ]);
 
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            // Delete old file if exists
+            if ($death_request->idProof) {
+                Storage::disk('public')->delete($death_request->idProof);
+            }
+
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
-         $data['deathrequest_id'] = 'req-' . uniqid();
+
+        // Keep existing deathrequest_id
+        $data['deathrequest_id'] = $death_request->deathrequest_id;
+
         $death_request->update($data);
+
         return redirect()->route('death_requests.index')->with('success', 'Request updated.');
     }
 
-public function destroy($id)
-{
-    $baptism_request = DeathRequest::findOrFail($id);
-    $baptism_request->delete();
-    return redirect()->back()->with('success', 'Request deleted.');
-}
+    public function destroy($id)
+    {
+        $death_request = DeathRequest::findOrFail($id);
 
+        if ($death_request->idProof) {
+            Storage::disk('public')->delete($death_request->idProof);
+        }
 
+        $death_request->delete();
 
+        return redirect()->back()->with('success', 'Request deleted.');
+    }
 
-    
     public function approve($id)
-{
-    $request = DeathRequest::findOrFail($id);
-    $request->update(['status' => 'APPROVED']);
-    
-    return back()->with('success', 'Request Approved');
-}
+    {
+        $request = DeathRequest::findOrFail($id);
+        $request->update(['status' => 'APPROVED']);
 
-public function reject($id)
-{
-    $request = DeathRequest::findOrFail($id);
-    $request->update(['status' => 'REJECTED']);
-    
-    return back()->with('success', 'Request Rejected');
-}
+        return back()->with('success', 'Request Approved');
+    }
 
+    public function reject($id)
+    {
+        $request = DeathRequest::findOrFail($id);
+        $request->update(['status' => 'REJECTED']);
+
+        return back()->with('success', 'Request Rejected');
+    }
 }

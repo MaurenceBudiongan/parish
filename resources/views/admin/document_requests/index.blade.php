@@ -30,6 +30,7 @@
         background-color: #ffffff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 1rem;
+        width: 100%;
     }
 
     th, td {
@@ -168,8 +169,8 @@
         <tr>
             <th>Request ID</th>
             <th>Requester</th>
-            <th>Confimed Person</th>
-            <th>Date Of Confirmation</th>
+            <th>Full Name</th>
+            <th> Confirmation Date</th>
             <th>Request Purpose</th>
             <th>Contact</th>
             <th>Relationship To Confirmed</th>
@@ -227,8 +228,8 @@
         <tr>
             <th>Request ID</th>
             <th>Requester</th>
-            <th>Confimed Person</th>
-            <th>Date Of Confirmation</th>
+            <th>Spouse Name</th>
+            <th>Date Of Marriage</th>
             <th>Request Purpose</th>
             <th>Contact</th>
             <th>Relationship To Confirmed</th>
@@ -239,24 +240,24 @@
     <tbody>
         @forelse($marriagerequests as $request)
         <tr>
-            <td>{{ $request->confirmationrequest_id }}</td>
+            <td>{{ $request->marriagerequest_id }}</td>
             <td>{{ $request->requester }}</td>
-            <td>{{ $request->confirmedName }}</td>
-            <td>{{ $request->confirmationDate }}</td>
-            <td>{{ $request->reason }}</td>
+            <td>{{ $request->spouse1 }}  {{ $request->spouse2 }}</td>
+            <td>{{ $request->marriageDate }}</td>
+            <td>{{ $request->purpose }}</td>
             <td>{{ $request->contact }}</td>
             <td>{{ $request->relationship }}</td>
             <td>{{ ucfirst($request->status) }}</td>
             <td>
                 <div class="action">
                     @if($request->status == 'PENDING')
-                    <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
+                    <form action="{{ route('marriagerequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
                     </form>
 
-                    <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
+                    <form action="{{ route('marriagerequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
@@ -286,8 +287,8 @@
         <tr>
             <th>Request ID</th>
             <th>Requester</th>
-            <th>Confimed Person</th>
-            <th>Date Of Confirmation</th>
+            <th>Deceased Person</th>
+            <th>Date Of Death</th>
             <th>Request Purpose</th>
             <th>Contact</th>
             <th>Relationship To Confirmed</th>
@@ -300,22 +301,22 @@
         <tr>
             <td>{{ $request->confirmationrequest_id }}</td>
             <td>{{ $request->requester }}</td>
-            <td>{{ $request->confirmedName }}</td>
-            <td>{{ $request->confirmationDate }}</td>
-            <td>{{ $request->reason }}</td>
+            <td>{{ $request->fullName }}</td>
+            <td>{{ $request->deathDate }}</td>
+            <td>{{ $request->purpose }}</td>
             <td>{{ $request->contact }}</td>
             <td>{{ $request->relationship }}</td>
             <td>{{ ucfirst($request->status) }}</td>
             <td>
                 <div class="action">
                     @if($request->status == 'PENDING')
-                    <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
+                    <form action="{{ route('deathrequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
                     </form>
 
-                    <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
+                    <form action="{{ route('deathrequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>

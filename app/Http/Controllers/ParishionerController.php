@@ -50,7 +50,7 @@ class ParishionerController extends Controller
 
         Parishioner::create($validated);
 
-        return redirect()->route('parishioners.index')->with('success', 'Registration saved!');
+        return redirect()->back()->with('success', 'Registration saved!');
     }
 
     public function edit(Parishioner $parishioner)

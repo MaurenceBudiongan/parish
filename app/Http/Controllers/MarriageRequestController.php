@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\MarriageRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MarriageRequestController extends Controller
 {
@@ -33,11 +35,13 @@ class MarriageRequestController extends Controller
         ]);
 
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
-         $data['marriagerequest_id'] = 'req-' . uniqid();
+
+        $data['marriagerequest_id'] = 'req-' . uniqid();
         MarriageRequest::create($data);
-        return redirect()->route('marriage_requests.index')->with('success', 'Marriage request submitted.');
+
+        return redirect()->back()->with('success', 'Marriage request submitted.');
     }
 
     public function edit(MarriageRequest $marriage_request)
@@ -61,38 +65,48 @@ class MarriageRequestController extends Controller
         ]);
 
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            // Delete old file if exists
+            if ($marriage_request->idProof) {
+                Storage::disk('public')->delete($marriage_request->idProof);
+            }
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
-         $data['marriagerequest_id'] = 'req-' . uniqid();
+
+        // Keep existing marriagerequest_id
+        $data['marriagerequest_id'] = $marriage_request->marriagerequest_id;
+
         $marriage_request->update($data);
-        return redirect()->route('marriage_requests.index')->with('success', 'Request updated.');
+
+        return redirect()->back()->with('success', 'Request updated.');
     }
 
-public function destroy($id)
-{
-    $baptism_request = MarriageRequest::findOrFail($id);
-    $baptism_request->delete();
-    return redirect()->back()->with('success', 'Request deleted.');
-}
+    public function destroy($id)
+    {
+        $marriage_request = MarriageRequest::findOrFail($id);
 
+        // Delete idProof file from storage
+        if ($marriage_request->idProof) {
+            Storage::disk('public')->delete($marriage_request->idProof);
+        }
 
+        $marriage_request->delete();
 
+        return redirect()->back()->with('success', 'Request deleted.');
+    }
 
-    
     public function approve($id)
-{
-    $request = MarriageRequest::findOrFail($id);
-    $request->update(['status' => 'APPROVED']);
-    
-    return back()->with('success', 'Request Approved');
-}
+    {
+        $request = MarriageRequest::findOrFail($id);
+        $request->update(['status' => 'APPROVED']);
 
-public function reject($id)
-{
-    $request = MarriageRequest::findOrFail($id);
-    $request->update(['status' => 'REJECTED']);
-    
-    return back()->with('success', 'Request Rejected');
-}
+        return back()->with('success', 'Request Approved');
+    }
 
+    public function reject($id)
+    {
+        $request = MarriageRequest::findOrFail($id);
+        $request->update(['status' => 'REJECTED']);
+
+        return back()->with('success', 'Request Rejected');
+    }
 }

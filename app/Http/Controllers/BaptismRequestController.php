@@ -6,12 +6,11 @@ use App\Models\ConfirmationRequest;
 use App\Models\DeathRequest;
 use App\Models\MarriageRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage; // ✅ Add this line
 class BaptismRequestController extends Controller
 {
     public function index()
     {    
-    
         $confirmationrequests = ConfirmationRequest::all();
         $baptismrequests = BaptismRequest::all();
         $marriagerequests = MarriageRequest::all();
@@ -19,15 +18,16 @@ class BaptismRequestController extends Controller
         return view('admin.document_requests.index', compact('baptismrequests','confirmationrequests','marriagerequests','deathrequests'));
     }
 
-      public function show()
+    public function show()
     {
         $confirmationrequests = ConfirmationRequest::all();
         $baptismrequests = BaptismRequest::all();
         $marriagerequests = MarriageRequest::all();
         $deathrequests = DeathRequest::all();
-            
+
         return view('user.document_requests.index', compact('baptismrequests','confirmationrequests','marriagerequests','deathrequests'));
     }
+
     public function create()
     {
         return view('admin.document_requests.index');
@@ -49,11 +49,14 @@ class BaptismRequestController extends Controller
         ]);
 
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            // Store in 'public/id_proofs' folder, accessible via /storage/id_proofs
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
+
         $data['baptismrequest_id'] = 'req-' . uniqid();
         BaptismRequest::create($data);
-        return redirect()->route('baptism_requests.index')->with('success', 'Baptism request submitted.');
+
+        return redirect()->back()->with('success', 'Baptism request submitted.');
     }
 
     public function edit(BaptismRequest $baptism_request)
@@ -75,40 +78,44 @@ class BaptismRequestController extends Controller
             'relationship' => 'nullable',
             'idProof' => 'nullable|file',
         ]);
-    
+
         if ($request->hasFile('idProof')) {
-            $data['idProof'] = $request->file('idProof')->store('id_proofs');
+            // Optionally delete old file if exists
+            if ($baptism_request->idProof) {
+                Storage::disk('public')->delete($baptism_request->idProof);
+            }
+            $data['idProof'] = $request->file('idProof')->store('id_proofs', 'public');
         }
 
         $baptism_request->update($data);
-        return redirect()->route('baptism_requests.index')->with('success', 'Request updated.');
+
+        return redirect()->back()->with('success', 'Request updated.');
     }
 
-public function destroy($id)
-{
-    $baptism_request = BaptismRequest::findOrFail($id);
-    $baptism_request->delete();
-    return redirect()->back()->with('success', 'Request deleted.');
-}
+    public function destroy($id)
+    {
+        $baptism_request = BaptismRequest::findOrFail($id);
+        if ($baptism_request->idProof) {
+            Storage::disk('public')->delete($baptism_request->idProof);
+        }
+        $baptism_request->delete();
 
-
-    
-
+        return redirect()->back()->with('success', 'Request deleted.');
+    }
 
     public function approve($id)
-{
-    $request = BaptismRequest::findOrFail($id);
-    $request->update(['status' => 'APPROVED']);
-    
-    return back()->with('success', 'Request Approved');
-}
+    {
+        $request = BaptismRequest::findOrFail($id);
+        $request->update(['status' => 'APPROVED']);
+        
+        return back()->with('success', 'Request Approved');
+    }
 
-public function reject($id)
-{
-    $request = BaptismRequest::findOrFail($id);
-    $request->update(['status' => 'REJECTED']);
-    
-    return back()->with('success', 'Request Rejected');
-}
-
+    public function reject($id)
+    {
+        $request = BaptismRequest::findOrFail($id);
+        $request->update(['status' => 'REJECTED']);
+        
+        return back()->with('success', 'Request Rejected');
+    }
 }

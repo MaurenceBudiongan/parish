@@ -24,20 +24,24 @@ use App\Http\Controllers\BaptismRequestController;
 use App\Http\Controllers\ConfirmationRequestController;
 use App\Http\Controllers\MarriageRequestController;
 use App\Http\Controllers\DeathRequestController;
+use App\Http\Controllers\RequestSearchController;
+use App\Http\Controllers\DocumentController;
+
 Route::get('/', function () {
-    return view('landingpage/landingpage'); 
+    return view('landingpage.landingpage'); 
 });
 Route::get('/parishionerReport', function () {
     return view('parishioner.report'); 
+});
+
+Route::get('/Send', function () {
+    return view('sendCertificate.sendRequest'); 
 });
 Route::get('/baptismalstry', function () {
     return view('admin.baptismal.create'); 
 });
 
 
-Route::get('/admin/dashboard/dashboard', function () {
-    return view('admin.dashboard.dashboard');
-})->middleware('auth:admin')->name('admin.dashboard.dashboard');
 
 Route::get('/user_main', function () {
     return view('user/document_requests/main'); 
@@ -78,6 +82,11 @@ Route::resource('confirmations',ConfirmationController::class);
 Route::resource('marriages',MarriageController::class);
 Route::resource('deaths',DeathController::class);
 
+//SEND REQUEST
+Route::get('/search-requests', [RequestSearchController::class, 'search'])->name('requests.search');
+Route::get('/get-document/{type}/{id}', [DocumentController::class, 'showDocument'])->name('document.get');
+
+
 
 // Onclicks
 Route::get('/request_form', [Onclick::class, 'create'])->name('documentrequest.create');
@@ -102,6 +111,8 @@ Route::resource('death', DeathCertificateController::class)->parameters([
 ]);
 //donation
 Route::resource('donation',DonationController::class);
+Route::get('/donations/report', [DonationController::class, 'report'])->name('donations.report');
+
 //mass_schedules
 Route::resource('mass_schedules', MassScheduleController::class);
 Route::get('/user/mass', [MassScheduleController::class, 'UserIndex'])->name('mass.UserIndex');

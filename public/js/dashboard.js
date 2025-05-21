@@ -927,3 +927,27 @@ function showMemberStatistics() {
             });
     }
 }
+function showFinancialReport() {
+    const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch(loadfinancialReport, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+            });
+    }
+}
