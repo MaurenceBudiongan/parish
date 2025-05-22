@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Baptismal Certificate</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <style>
         body { font-family: Arial, sans-serif; font-size: 12px; }
         .center { text-align: center; }

@@ -97,6 +97,7 @@ public function download($id)
 {
     $death = Death::findOrFail($id);
     $pdf = Pdf::loadView('admin.record.memberRecord.death_certificate_pdf', compact('death'));
+      $pdf->setOption('encoding', 'UTF-8');
     return $pdf->download('death_certificate_'.$death->id.'.pdf');
 }
 

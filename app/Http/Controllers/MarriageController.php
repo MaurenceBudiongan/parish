@@ -102,6 +102,7 @@ public function download($id)
 {
     $marriage = Marriage::findOrFail($id);
     $pdf = Pdf::loadView('admin.record.memberRecord.marriage_certificate_pdf', compact('marriage'));
+      $pdf->setOption('encoding', 'UTF-8');
     return $pdf->download('marriage_certificate_' . $marriage->id . '.pdf');
 }
 

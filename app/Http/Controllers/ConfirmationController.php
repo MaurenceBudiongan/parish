@@ -85,6 +85,7 @@ public function download($id)
 {
     $confirmation = Confirmation::findOrFail($id);
     $pdf = Pdf::loadView('admin.record.memberRecord.confirmation_certificate_pdf', compact('confirmation'));
+      $pdf->setOption('encoding', 'UTF-8');
     return $pdf->download('confirmation_certificate_' . $confirmation->id . '.pdf');
 }
 

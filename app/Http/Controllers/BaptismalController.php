@@ -72,12 +72,7 @@ public function edit(Baptismal $baptismal)
         return redirect()->back()->with('success', 'Baptismal updated successfully.');
     }
 
-    public function download($id)
-{
-    $baptismal = Baptismal::findOrFail($id);
-    $pdf = Pdf::loadView('admin.record.memberRecord.baptismal_certificate_pdf', compact('baptismal'));
-    return $pdf->download('baptismal_certificate_'.$baptismal->id.'.pdf');
-}
+
 
     public function destroy(Baptismal $baptismal)
     {
@@ -87,5 +82,12 @@ public function edit(Baptismal $baptismal)
     }
 
 
+    public function download($id)
+    {
+        $baptismal = Baptismal::findOrFail($id);
+        $pdf = PDF::loadView('admin.record.memberRecord.baptismal_certificate_pdf', compact('baptismal'));
+        $pdf->setOption('encoding', 'UTF-8');
 
+        return $pdf->download('baptismal_certificate_'.$baptismal->id.'.pdf');
+    }
 }
