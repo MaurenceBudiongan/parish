@@ -951,3 +951,73 @@ function showFinancialReport() {
             });
     }
 }
+function addSendRequest() {
+    const maincontent = document.getElementById("maincontent");
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        fetch(loadsendRequest, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+        .then((response) => {
+            if (!response.ok) throw new Error("Fetch failed");
+            return response.text();
+        })
+        .then((html) => {
+            maincontent.innerHTML = html;
+            attachRequestSearchHandler(); // Attach search handler after loading content
+        })
+        .catch((error) => {
+            console.error("Error fetching user view:", error);
+        });
+    }
+}
+
+function attachRequestSearchHandler() {
+    const input = document.getElementById('request_search');
+    const resultsDiv = document.getElementById('search_results');
+
+    if (!input) return;
+
+    input.addEventListener('input', function () {
+        const term = this.value;
+        if (term.length >= 2) {
+            fetch(`/search-requests?term=${encodeURIComponent(term)}`)
+                .then(res => res.json())
+                .then(data => {
+                    let html = '';
+
+                    const renderIdProof = (path) => {
+                        if (!path) return '<em>No ID Provided</em>';
+                        return `<br><img src="/storage/${path}" alt="ID Proof" style="max-width: 150px; max-height: 150px;">`;
+                    };
+
+                    if (data.baptism.length) {
+                        html += '<h5>Baptism Requests</h5>';
+                        data.baptism.forEach(item => {
+                            html += `
+                                <div class="border p-2 mb-2">
+                                    <strong>Requester:</strong> ${item.requester}<br>
+                                    <strong>Child:</strong> ${item.childName}<br>
+                                    <strong>Date:</strong> ${item.baptismDate}<br>
+                                    <strong>Purpose:</strong> ${item.purpose}<br>
+                                    <strong>ID Proof:</strong> ${renderIdProof(item.idProof)}
+                                    <br>
+                                    <button class="btn btn-success mt-2">Send Certificate</button>
+                                </div>`;
+                        });
+                    }
+
+                    // Repeat similar logic for confirmation, marriage, and death...
+
+                    if (!html) html = '<p>No results found.</p>';
+                    resultsDiv.innerHTML = html;
+                });
+        } else {
+            resultsDiv.innerHTML = '';
+        }
+    });
+}

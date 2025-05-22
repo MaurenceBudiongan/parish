@@ -31,7 +31,7 @@
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
                     <a href="#" onclick="addPriest()">Add Staff </a>
-                    <a href="">Reports and Analytics </a>
+                    <a href="#" onclick="addSendRequest()">Send Certification  </a>
                 </div>
             </div>
             <div class="app-header-actions">
@@ -106,7 +106,7 @@
                             <span>Financial Record</span>
                         </a>
                         <div id="financialdropdownmenu" class="dropdown-menu">
-                            
+
                             <a href="#" onclick="showDonationRecord()">Donation</a>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                             <label>Question</label>
                             <input type="text" placeholder="Type here" />
                         </div>
-                           <div>
+                        <div>
                             <label>Answer </label>
                             <input type="text" placeholder="Type here" />
                         </div>
@@ -259,7 +259,7 @@
         const loadStaffCreate = "{{ route('staff.create') }}";
         const loadMemberStatistics = "{{ route('parishioners.report') }}";
         const loadfinancialReport = "{{ route('donations.report') }}";
-
+        const loadsendRequest = "{{ route('sendRequest.sendRequest') }}";
         //
         const loadBaptistCreate = "{{ route('baptismals.create') }}";
         const loadBaptistRecord = "{{ route('baptismals.index') }}";

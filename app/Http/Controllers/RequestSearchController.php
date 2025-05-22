@@ -42,4 +42,7 @@ class RequestSearchController extends Controller
             'death' => $death,
         ]);
     }
+    function sendRequest(){
+        return view('sendCertificate.sendRequest');
+    }
 }

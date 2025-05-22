@@ -85,6 +85,7 @@ Route::resource('deaths',DeathController::class);
 //SEND REQUEST
 Route::get('/search-requests', [RequestSearchController::class, 'search'])->name('requests.search');
 Route::get('/get-document/{type}/{id}', [DocumentController::class, 'showDocument'])->name('document.get');
+Route::get('/showsendRequest', [RequestSearchController::class, 'sendRequest'])->name('sendRequest.sendRequest');
 
 
 

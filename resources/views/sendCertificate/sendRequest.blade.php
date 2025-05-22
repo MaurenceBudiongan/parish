@@ -1,4 +1,4 @@
-<div class="container">
+<div class="containers">
     <h4>Search Any Request</h4>
     <input type="text" id="request_search" class="form-control"
         placeholder="Type name (child/spouse/fullname/requester)...">
@@ -119,22 +119,21 @@
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        /* Light gray background */
-        margin: 0;
-        padding: 20px;
+
+
+
         display: flex;
         justify-content: center;
         align-items: center;
         /* Align items to the top */
-        height: 100vh;
+
     }
 
-    .container {
+    .containers {
         max-width: 600px;
         width: 100%;
-        background-color: #ffffff;
+        background-color: var(--c-gray-600);
+        ;
         /* White background for the container */
         border-radius: 10px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -144,7 +143,7 @@
     }
 
     h4 {
-        color: #4b8b3b;
+        color: white;
         /* Green */
         text-align: center;
         margin-bottom: 20px;
@@ -166,7 +165,7 @@
         box-shadow: 0 0 5px rgba(75, 139, 59, 0.5);
     }
 
-    #search_results {
+    .containers #search_results {
         margin-top: 20px;
         max-height: 400px;
         /* Limit height of results */
@@ -175,25 +174,22 @@
     }
 
     h5 {
-        color: #5a5a5a;
+        color: white;
         /* Gray */
         margin-top: 20px;
         text-align: left;
     }
 
     .border {
-        border: 1px solid #d3d3d3;
+        border: 1px solid var(--c-gray-500);
         border-radius: 5px;
-        background-color: #f9f9f9;
+            background-color: var(--c-gray-800);
         padding: 15px;
         margin-bottom: 10px;
         transition: background-color 0.3s;
     }
 
-    .border:hover {
-        background-color: #e8e8e8;
-    }
-
+ 
     strong {
         color: #4b8b3b;
         display: inline-block;
@@ -201,7 +197,7 @@
     }
 
     em {
-        color: #7d7d7d;
+        color: white;
         font-style: normal;
     }
 
