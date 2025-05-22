@@ -77,6 +77,7 @@ class DonationController extends Controller
     }
     public function report()
     {
+      
     $donations = Donation::with('member')->latest()->get();
     return view('admin.record.Report&Analytics.financialReport', compact('donations'));
 }
