@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('member_id');
             $table->decimal('amount', 10, 2)->nullable();
+            $table->string('good')->nullable();
             $table->string('donation_type');
             $table->date('donation_date');
             $table->string('payment_method')->nullable();

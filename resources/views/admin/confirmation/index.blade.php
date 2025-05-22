@@ -62,7 +62,8 @@
                 <button type="submit" class="delete-btn"
                     onclick="return confirm('Are you sure you want to delete this record?')">Delete
                 </button>
-                 <a href="" class="btn btn-success mt-2">Send to Request</a>
+                <a href="{{ route('confirmations.download', $confirmation->id) }}" class="saverecord-btn">Download</a>
+                <a href="" class="btn btn-success mt-2">Send to Request</a>
             </div>
         </form>
     @empty

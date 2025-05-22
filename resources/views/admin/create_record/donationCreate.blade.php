@@ -16,8 +16,13 @@
         </div>
 
         <div class="form-group">
-            <label for="amount">Amount (₱)</label>
-            <input type="number" name="amount" step="0.01" id="amount" value="{{ old('amount') }}" >
+            <label for="amount">Amount (₱) (if cash)</label>
+            <input type="text" name="amount" step="0.01" id="amount" value="{{ old('amount') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="good">Goods  (if non-cash)</label>
+            <input type="text" name="good" id="good" value="{{ old('good') }}" required>
         </div>
 
         <div class="form-group">
@@ -32,8 +37,7 @@
 
         <div class="form-group">
             <label for="payment_method">Payment Method</label>
-            <input type="text" name="payment_method" id="payment_method" value="{{ old('payment_method') }}"
-                >
+            <input type="text" name="payment_method" id="payment_method" value="{{ old('payment_method') }}">
         </div>
 
         <div class="form-group">

@@ -51,7 +51,6 @@
         text-align: center;
         font-size: 36px;
         color: #2c3e50;
-        margin-bottom: 40px;
         text-transform: uppercase;
         letter-spacing: 1px;
     }

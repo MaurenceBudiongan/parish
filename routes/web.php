@@ -82,6 +82,14 @@ Route::resource('confirmations',ConfirmationController::class);
 Route::resource('marriages',MarriageController::class);
 Route::resource('deaths',DeathController::class);
 
+//DOWNLOADS
+Route::get('/baptismals/{id}/download', [BaptismalController::class, 'download'])->name('baptismals.download');
+Route::get('/confirmations/{id}/download', [ConfirmationController::class, 'download'])->name('confirmations.download');
+Route::get('/marriages/download/{id}', [MarriageController::class, 'download'])->name('marriages.download');
+Route::get('/deaths/download/{id}', [DeathController::class, 'download'])->name('deaths.download');
+
+
+
 //SEND REQUEST
 Route::get('/search-requests', [RequestSearchController::class, 'search'])->name('requests.search');
 Route::get('/get-document/{type}/{id}', [DocumentController::class, 'showDocument'])->name('document.get');

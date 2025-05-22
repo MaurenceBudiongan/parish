@@ -80,6 +80,7 @@
             display: block;
             border-radius: 6px;
             transition: background 0.3s ease;
+            cursor: pointer;
         }
 
         .nav a:hover {
@@ -448,8 +449,8 @@
             <div class="logo"> <img src="https://cdn-icons-png.flaticon.com/512/1995/1995542.png"
                     alt="Parish Records Logo"> <span>Parish Records</span> </div>
             <nav class="nav" aria-label="Main Navigation">
-                <a id="documentRequest">📄 Request Document</a>
-                <a id="statusRequest">📊 Request Status</a>
+                <a href="#" id="documentRequest">📄 Request Document</a>
+                <a href="#" id="statusRequest">📊 Request Status</a>
                 <a id="mass">⛪ Mass Schedule</a>
                 <a href="#">💖 Donate</a>
                 <a href="#">📞 Contact</a>
@@ -529,7 +530,7 @@
         });
 
         statusRequest.addEventListener('click', () => {
-            if (currentView === 'status' || currentView === showMass()) {
+            if (currentView === 'status') {
                 certificate_options.innerHTML = message;
 
                 currentView = 'message';

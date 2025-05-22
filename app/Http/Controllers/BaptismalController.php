@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Baptismal;
 use Illuminate\Http\Request;
-
+    use Barryvdh\DomPDF\Facade\Pdf;
 class BaptismalController extends Controller
 {
        public function index()       
@@ -72,10 +72,20 @@ public function edit(Baptismal $baptismal)
         return redirect()->back()->with('success', 'Baptismal updated successfully.');
     }
 
+    public function download($id)
+{
+    $baptismal = Baptismal::findOrFail($id);
+    $pdf = Pdf::loadView('admin.record.memberRecord.baptismal_certificate_pdf', compact('baptismal'));
+    return $pdf->download('baptismal_certificate_'.$baptismal->id.'.pdf');
+}
+
     public function destroy(Baptismal $baptismal)
     {
         $baptismal->delete();
 
         return redirect()->back()->with('success', 'Staff deleted successfully.');
     }
+
+
+
 }

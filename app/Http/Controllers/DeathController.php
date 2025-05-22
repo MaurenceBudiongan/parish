@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Death;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class DeathController extends Controller
@@ -44,7 +45,7 @@ class DeathController extends Controller
 
         Death::create($validated);
 
-        return redirect()->route('deaths.index')
+        return redirect()->back()
                          ->with('success', 'Death certificate created successfully.');
     }
 
@@ -76,7 +77,7 @@ class DeathController extends Controller
 
         $death->update($request->all());
 
-        return redirect()->route('deaths.index')
+        return redirect()->back()
                          ->with('success', 'Death certificate updated successfully.');
     }
 
@@ -87,4 +88,16 @@ class DeathController extends Controller
         return redirect()->route('deaths.index')
                          ->with('success', 'Death certificate deleted successfully.');
     }
+
+
+
+
+
+public function download($id)
+{
+    $death = Death::findOrFail($id);
+    $pdf = Pdf::loadView('admin.record.memberRecord.death_certificate_pdf', compact('death'));
+    return $pdf->download('death_certificate_'.$death->id.'.pdf');
+}
+
 }

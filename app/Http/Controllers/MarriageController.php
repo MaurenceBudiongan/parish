@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Marriage;
-
+   use Barryvdh\DomPDF\Facade\Pdf;
 class MarriageController extends Controller
 {
     public function index()
@@ -95,4 +95,14 @@ class MarriageController extends Controller
         return redirect()->route('marriages.index')
                          ->with('success', 'Marriage record deleted successfully.');
     }
+
+ 
+
+public function download($id)
+{
+    $marriage = Marriage::findOrFail($id);
+    $pdf = Pdf::loadView('admin.record.memberRecord.marriage_certificate_pdf', compact('marriage'));
+    return $pdf->download('marriage_certificate_' . $marriage->id . '.pdf');
+}
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Confirmation;
-
+ use Barryvdh\DomPDF\Facade\Pdf;
 class ConfirmationController extends Controller
 {
     public function index()
@@ -37,7 +37,7 @@ class ConfirmationController extends Controller
             $validated['confirmation_id'] = 'SanPascual-' . mt_rand(10000000, 99999999);
             Confirmation::create($validated); 
 
-             return redirect()->route('confirmations.index')
+             return redirect()->back()
                          ->with('success', 'Confirmation record created successfully.');
     }
 
@@ -67,7 +67,7 @@ class ConfirmationController extends Controller
 
         $confirmation->update($request->all());
 
-        return redirect()->route('confirmations.index')
+        return redirect()->back()
                          ->with('success', 'Confirmation record updated successfully.');
     }
 
@@ -78,4 +78,14 @@ class ConfirmationController extends Controller
         return redirect()->route('confirmations.index')
                          ->with('success', 'Confirmation record deleted successfully.');
     }
+
+   
+
+public function download($id)
+{
+    $confirmation = Confirmation::findOrFail($id);
+    $pdf = Pdf::loadView('admin.record.memberRecord.confirmation_certificate_pdf', compact('confirmation'));
+    return $pdf->download('confirmation_certificate_' . $confirmation->id . '.pdf');
+}
+
 }

@@ -82,7 +82,7 @@
          @forelse ($donations as $donation)
              @php $total += $donation->amount; @endphp
              <div class="donation-card">
-                 <div class="donation-amount">₱{{ number_format($donation->amount, 2) }}</div>
+                 <div class="donation-amount">₱{{ number_format($donation->amount, 2) }}    {{ ucfirst($donation->good) }}</div>
                  <div class="donor-name">
                      {{ $donation->member->fullname }}
                  </div>

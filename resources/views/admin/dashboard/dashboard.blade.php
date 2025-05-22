@@ -242,7 +242,7 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script>
         function goToSignOutPage() {
-            window.location.href = "{{ route('authentication.adminform') }}";
+            window.location.href = "{{ route('gets_started') }}";
         }
         document.getElementById('toggleBtn').addEventListener('click', function() {
             const div = document.getElementById('app-body-navigation');

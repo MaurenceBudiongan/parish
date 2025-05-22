@@ -61,7 +61,7 @@ public function login(Request $request)
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('authentication.adminform');
+        return redirect()->route('gets_started');
     }
         public function showdashboard()
     {
