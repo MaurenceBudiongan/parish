@@ -44,10 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <h1 style="text-align: center">+${data.baptismal}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+   
             </a>
           </article>
           <article class="tile">
@@ -62,10 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <h1 style="text-align: center">+${data.confirmation}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+         
             </a>
           </article>
           <article class="tile">
@@ -80,10 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <h1 style="text-align: center">+${data.marriage}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+            
             </a>
           </article>
         </div>
@@ -215,10 +206,7 @@ function showDashboard() {
               <h1 style="text-align: center">+${data.baptismal}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+          
             </a>
           </article>
           <article class="tile">
@@ -233,10 +221,7 @@ function showDashboard() {
               <h1 style="text-align: center">+${data.confirmation}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+             
             </a>
           </article>
           <article class="tile">
@@ -251,10 +236,7 @@ function showDashboard() {
               <h1 style="text-align: center">+${data.marriage}</h1>
             </div>
             <a href="#">
-              <span>See Request</span>
-              <span class="icon-button">
-                <i class="ph-caret-right-bold"></i>
-              </span>
+           
             </a>
           </article>
         </div>

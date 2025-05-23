@@ -30,7 +30,7 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="{{ route('showEvent.showEvent') }}" onclick="showEvent()">Add Staff </a>
+                    <a href="{{ route('showEvent.showEvent') }}" >Add Staff </a>
                     <a href="#" onclick="addSendRequest()">Send Certification </a>
                 </div>
             </div>
@@ -156,10 +156,8 @@
                                 <div class="payment-details">
                                     <h3>Jerlyn</h3>
                                     <div>
-                                        <span>{{ $donation->amount }}</span>
-                                        <button class="icon-button">
-                                            <i class="ph-caret-right-bold"></i>
-                                        </button>
+                                        <span>₱ {{ $donation->amount }}</span>
+    
                                     </div>
                                 </div>
                             </div>

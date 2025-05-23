@@ -9,7 +9,7 @@
          height: 25rem;
          overflow-y: auto;
      }
-
+     
      .report-header {
          text-align: center;
          margin-bottom: 30px;
