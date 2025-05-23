@@ -165,6 +165,7 @@ function showDashboard() {
     document.getElementById("eventdropdownmenu").style.display = "none";
     document.getElementById("clergydropdownmenu").style.display = "none";
     document.getElementById("reportdropdownmenu").style.display = "none";
+    showLoading(); // Show loading spinner
     fetch("/document-counts")
         .then((response) => response.json())
         .then((data) => {
@@ -323,24 +324,27 @@ function showDashboard() {
       </section>
     `;
         })
-        .catch((error) =>
-            console.error("Error fetching document counts:", error)
-        );
+        .catch((error) => {
+            console.error("Error fetching document counts:", error);
+            maincontent.innerHTML = `<div class="error-message">Error loading dashboard. Please try again.</div>`;
+        });
 }
 function showUser() {
     const maincontent = document.getElementById("maincontent");
     const dashboard = document.getElementById("dashboard");
     if (maincontent) {
         dashboard.style.color = "#969593"; // Set the text color to a different color
+        showLoading(); // Show loading spinner
         // Fetch the user view content
         fetch("/admin/user") // Adjust the URL as necessary
             .then((response) => response.text()) // Get the response text
             .then((html) => {
                 maincontent.innerHTML = html; // Set the innerHTML to the fetched HTML
             })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
+            });
     }
 }
 function showRequestStatus() {
@@ -366,28 +370,23 @@ function showRequestStatus() {
 }
 
 function showDocumentRequest() {
-    document.getElementById("payment-section").style.display = "none";
-    document.getElementById("dropdownmenu").style.display = "none";
-    document.getElementById("createdropdownmenu").style.display = "none";
-    document.getElementById("financialdropdownmenu").style.display = "none";
-    document.getElementById("eventdropdownmenu").style.display = "none";
-    document.getElementById("clergydropdownmenu").style.display = "none";
-    document.getElementById("reportdropdownmenu").style.display = "none";
-
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "none";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
-        // Fetch the documentrequest view content
-        fetch("/baptismrequest") // Adjust the URL as necessary
-            .then((response) => response.text()) // Get the response text
+        showLoading(); // Show loading spinner
+        fetch("/admin/documentRequest")
+            .then((response) => response.text())
             .then((html) => {
-                maincontent.innerHTML = html; // Set the innerHTML to the fetched HTML
+                maincontent.innerHTML = html;
+                attachRequestSearchHandler();
             })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
+            });
     }
 }
 function toggleDropdown(element) {
@@ -446,14 +445,16 @@ function showParishionerCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch("/admin/parishionerCreate")
             .then((response) => response.text())
             .then((html) => {
                 maincontent.innerHTML = html;
             })
-            .catch((error) =>
-                console.error("Error fetching user view:", error)
-            );
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
+            });
     }
 }
 
@@ -464,6 +465,7 @@ function showParishionerRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadParishionerRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -478,6 +480,7 @@ function showParishionerRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -489,6 +492,7 @@ function showBaptistCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadBaptistCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -503,6 +507,7 @@ function showBaptistCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -514,6 +519,7 @@ function showBaptistRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadBaptistRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -528,6 +534,7 @@ function showBaptistRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -538,6 +545,7 @@ function showConfirmationCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadConfirmationCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -552,6 +560,7 @@ function showConfirmationCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -562,6 +571,7 @@ function showConfirmationRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadConfirmationRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -576,6 +586,7 @@ function showConfirmationRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -586,6 +597,7 @@ function showMarriageCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadMarriageCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -600,6 +612,7 @@ function showMarriageCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -610,6 +623,7 @@ function showMarriageRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadMarriageRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -624,6 +638,7 @@ function showMarriageRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -634,6 +649,7 @@ function showDeathCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadDeathCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -648,6 +664,7 @@ function showDeathCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -658,6 +675,7 @@ function showDeathRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadDeathRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -672,6 +690,7 @@ function showDeathRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -683,6 +702,7 @@ function showDonationCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadDonationCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -697,6 +717,7 @@ function showDonationCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -707,6 +728,7 @@ function showDonationRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadDonationRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -721,6 +743,7 @@ function showDonationRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -731,6 +754,7 @@ function showMassCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadMassCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -745,6 +769,7 @@ function showMassCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -755,6 +780,7 @@ function showMassRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadMassRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -769,6 +795,7 @@ function showMassRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -780,6 +807,7 @@ function showEventCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadEventCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -794,6 +822,7 @@ function showEventCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -804,6 +833,7 @@ function showEventRecord() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadEventRecord, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -818,6 +848,7 @@ function showEventRecord() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -829,6 +860,7 @@ function showPriestAssignment() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadPriestAssignment, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -843,6 +875,7 @@ function showPriestAssignment() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -858,6 +891,7 @@ function showStaffCreate() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadStaffCreate, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -872,6 +906,7 @@ function showStaffCreate() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -882,6 +917,7 @@ function showMemberStatistics() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadMemberStatistics, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -896,6 +932,7 @@ function showMemberStatistics() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -906,6 +943,7 @@ function showFinancialReport() {
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadfinancialReport, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -920,15 +958,18 @@ function showFinancialReport() {
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
 function addSendRequest() {
     const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "none";
     const dashboard = document.getElementById("dashboard");
 
     if (maincontent) {
         dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
         fetch(loadsendRequest, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -940,10 +981,10 @@ function addSendRequest() {
             })
             .then((html) => {
                 maincontent.innerHTML = html;
-                attachRequestSearchHandler(); // Attach search handler after loading content
             })
             .catch((error) => {
                 console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
             });
     }
 }
@@ -1002,4 +1043,82 @@ function attachRequestSearchHandler() {
             resultsDiv.innerHTML = "";
         }
     });
+}
+
+// Add loading functions at the beginning of the file
+function showLoading() {
+    const maincontent = document.getElementById("maincontent");
+    if (maincontent) {
+        maincontent.innerHTML = `
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading...</p>
+            </div>
+        `;
+    }
+}
+
+function hideLoading() {
+    const loadingContainer = document.querySelector('.loading-container');
+    if (loadingContainer) {
+        loadingContainer.remove();
+    }
+}
+
+// Add CSS styles for loading spinner
+const loadingStyles = `
+<style>
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    gap: 20px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: 500;
+    text-align: center;
+    padding: 20px;
+    background-color: #fdf2f2;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+`;
+
+// Add loading styles to the head
+if (!document.querySelector('#loading-styles')) {
+    const styleElement = document.createElement('style');
+    styleElement.id = 'loading-styles';
+    styleElement.innerHTML = loadingStyles.replace('<style>', '').replace('</style>', '');
+    document.head.appendChild(styleElement);
 }
