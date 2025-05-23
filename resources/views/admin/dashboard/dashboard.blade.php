@@ -31,7 +31,7 @@
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
                     <a href="#s" >Add Staff </a>
-                    <a href="#" onclick="addSendRequest()">Send Certification </a>
+                    <a href="#" onclick="addSendRequest()">Verify Certification </a>
                 </div>
             </div>
             <div class="app-header-actions">

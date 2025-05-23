@@ -7,7 +7,6 @@ use App\Models\BaptismRequest;
 use App\Models\ConfirmationRequest;
 use App\Models\MarriageRequest;
 use App\Models\DeathRequest;
-
 class RequestSearchController extends Controller
 {
     public function search(Request $request)
@@ -42,7 +41,9 @@ class RequestSearchController extends Controller
             'death' => $death,
         ]);
     }
-    function sendRequest(){
-        return view('sendCertificate.sendRequest');
-    }
+
+    public function sendRequest()
+{
+    return view('sendCertificate.sendRequest'); // Match the path where your Blade file is
+}
 }
