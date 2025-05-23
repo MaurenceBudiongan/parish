@@ -43,7 +43,7 @@ class ConfirmationRequestController extends Controller
 
         ConfirmationRequest::create($data);
 
-        return redirect()->route('confirmation_requests.index')->with('success', 'Confirmation request submitted.');
+        return redirect()->back()->with('success', 'Confirmation request submitted.');
     }
 
     public function edit(ConfirmationRequest $confirmation_request)
@@ -80,7 +80,7 @@ class ConfirmationRequestController extends Controller
 
         $confirmation_request->update($data);
 
-        return redirect()->route('confirmation_requests.index')->with('success', 'Request updated.');
+        return redirect()->back()->with('success', 'Request updated.');
     }
 
     public function destroy($id)

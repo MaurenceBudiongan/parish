@@ -177,10 +177,7 @@
                     </div>
                     <div class="payment-section-footer">
                         <button class="save-button">Save</button>
-                        <button class="settings-button">
-                            <i class="ph-gear"></i>
-                            <span>More settings</span>
-                        </button>
+                      
                     </div>
                 </section>
             </div>

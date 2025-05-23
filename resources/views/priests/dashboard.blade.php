@@ -226,7 +226,7 @@
                             onclick="return confirm('Are you sure you want to View Mass/Service Schedule?')">
                             <i class="fas fa-calendar-alt me-1"></i> View Mass/Service Schedule
                         </a>
-                         <a href="{{route('mass.UserIndex')}}" class="btn btn-warning btn-sm me-2"
+                         <a href="{{route('showEvent.showEvent')}}" class="btn btn-warning btn-sm me-2"
                             onclick="return confirm('Are you sure you want to View Event Announcement?')">
                             <i class="fas fa-calendar-alt me-1"></i> View Event
                         </a>

@@ -10,9 +10,11 @@
         height: 30rem;
         overflow-y: scroll;
     }
-    .status{
+
+    .status {
         margin-bottom: 5rem;
     }
+
     h2 {
         text-align: center;
         color: #333;
@@ -87,7 +89,8 @@
         background-color: #6c757d;
         cursor: not-allowed;
     }
-    .pending{
+
+    .pending {
         color: white;
     }
 </style>
@@ -123,14 +126,16 @@
                                     <button type="submit" class="delete"
                                         onclick="return confirm('Are you sure you want to delete this request?')">Delete</button>
                                 </form>
-                                @if ($request->status == 'APPROVED' && $request->certificate_path)
-                                    <a href="{{ route('document.get', ['type' => 'baptismal', 'id' => $request->baptismrequest_id]) }}"
-                                        class="get-document">
+                                @if ($request->status == 'APPROVED')
+                                    <a href="{{ route('receipt.download', ['type' => 'baptism', 'id' => $request->id]) }}"
+                                        target="_blank">
                                         <button type="button" class="get-document">Get Document</button>
                                     </a>
                                 @else
-                                    <button class="pending" disabled>Pending</button>
+                                    <button class="pending" disabled>Get Document</button>
                                 @endif
+
+
 
                             </div>
                         </td>
@@ -174,14 +179,14 @@
                                         onclick="return confirm('Are you sure you want to delete this request?')">Delete</button>
                                 </form>
                                 @if ($request->status == 'APPROVED')
-                                    <form
-                                        action="{{ route('document.get', ['type' => 'confirmation', 'id' => $request->confirmationrequest_id]) }}"
-                                        method="GET" style="display:inline;">
-                                        <button type="submit" class="get-document">Get Document</button>
-                                    </form>
+                                    <a href="{{ route('receipt.download', ['type' => 'confirmation', 'id' => $request->id]) }}"
+                                        target="_blank">
+                                        <button type="button" class="get-document">Get Document</button>
+                                    </a>
                                 @else
-                                    <button class="pending" disabled>Pending</button>
+                                    <button class="pending" disabled>Get Document</button>
                                 @endif
+
                             </div>
                         </td>
                     </tr>
@@ -225,14 +230,14 @@
                                         onclick="return confirm('Are you sure you want to delete this request?')">Delete</button>
                                 </form>
                                 @if ($request->status == 'APPROVED')
-                                    <form
-                                        action="{{ route('document.get', ['type' => 'marriage', 'id' => $request->marriagerequest_id]) }}"
-                                        method="GET" style="display:inline;">
-                                        <button type="submit" class="get-document">Get Document</button>
-                                    </form>
+                                    <a href="{{ route('receipt.download', ['type' => 'marriage', 'id' => $request->id]) }}"
+                                        target="_blank">
+                                        <button type="button" class="get-document">Get Document</button>
+                                    </a>
                                 @else
-                                    <button class="pending" disabled>Pending</button>
+                                    <button class="pending" disabled>Get Document</button>
                                 @endif
+
                             </div>
                         </td>
                     </tr>
@@ -278,14 +283,14 @@
                                         onclick="return confirm('Are you sure you want to delete this request?')">Delete</button>
                                 </form>
                                 @if ($request->status == 'APPROVED')
-                                    <form
-                                        action="{{ route('document.get', ['type' => 'death', 'id' => $request->deathrequest_id]) }}"
-                                        method="GET" style="display:inline;">
-                                        <button type="submit" class="get-document">Get Document</button>
-                                    </form>
+                                    <a href="{{ route('receipt.download', ['type' => 'death', 'id' => $request->id]) }}"
+                                        target="_blank">
+                                        <button type="button" class="get-document">Get Document</button>
+                                    </a>
                                 @else
-                                    <button class="pending" disabled>Pending</button>
+                                    <button class="pending" disabled>Get Document</button>
                                 @endif
+
                             </div>
                         </td>
                     </tr>

@@ -27,7 +27,7 @@ use App\Http\Controllers\DeathRequestController;
 use App\Http\Controllers\RequestSearchController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AdminLoginController;
-use App\Models\EventAnnouncement;
+
 
 Route::get('/', function () {
     return view('landingpage.landingpage'); 
@@ -149,23 +149,9 @@ Route::post('/staff-login', [StaffController::class, 'login'])->name('staff.logi
 
 
 
+use App\Http\Controllers\ReceiptController;
+Route::get('/receipt/{type}/{id}', [ReceiptController::class, 'generateReceipt'])->name('receipt.download');
 
-// Baptismal Record Routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/baptismal-records', [BaptismalRecordController::class, 'index'])->name('baptismal.index');
-});
-// List all baptismal records
-Route::get('/admin/baptismal-records', [BaptismalRecordController::class, 'index'])->name('admin.baptismal.index');
-// Show the create form
-Route::get('/admin/baptismal-records/create', [BaptismalRecordController::class, 'create'])->name('baptismal.create');
-// Store the new baptismal record
-Route::post('/admin/baptismal-records', [BaptismalRecordController::class, 'store'])->name('admin.baptismal.store');
-// Show the edit form
-Route::get('/admin/baptismal-records/{id}/edit', [BaptismalRecordController::class, 'edit'])->name('admin.baptismal.edit');
-// Update the baptismal record
-Route::put('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'update'])->name('admin.baptismal.update');
-// Delete the baptismal record
-Route::delete('/admin/baptismal-records/{id}', [BaptismalRecordController::class, 'destroy'])->name('admin.baptismal.destroy');
 
 //Confirmation Records Routes
 Route::resource('confirmation', ConfirmationRecordController::class);
