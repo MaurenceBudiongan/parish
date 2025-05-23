@@ -23,10 +23,7 @@
                     <td>₱{{ number_format($donation->amount, 2) }}</td>
                     <td>
                         <div class="action">
-                            <form action="">
-                                <button class="edit" type="submit"
-                                    onclick="return confirm('Edit this record?')">Edit</button>
-                            </form>
+
                             <form action="{{ route('donation.destroy', $donation->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
