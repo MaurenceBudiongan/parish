@@ -250,6 +250,27 @@
         margin-left: 525px;
         width: 30%;
         height: 2.4rem;
+        transition: all 0.3s ease;
+    }
+
+    .main-content button:disabled {
+        cursor: not-allowed !important;
+    }
+
+    .submit-loading-spinner {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid transparent;
+        border-top: 2px solid #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     label {
@@ -275,5 +296,19 @@
 
         // Show/hide on load (for pre-filled data)
         toggleBaptismDetails();
+
+        // Form submission loading
+        const form = document.querySelector('form');
+        const submitButton = document.querySelector('button[type="submit"]');
+        
+        if (form && submitButton) {
+            form.addEventListener('submit', function(e) {
+                // Show loading state
+                submitButton.innerHTML = '<span class="submit-loading-spinner"></span>Saving...';
+                submitButton.disabled = true;
+                submitButton.style.opacity = '0.7';
+                submitButton.style.cursor = 'not-allowed';
+            });
+        }
     });
 </script>
