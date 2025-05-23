@@ -27,8 +27,10 @@ use App\Http\Controllers\DeathRequestController;
 use App\Http\Controllers\RequestSearchController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AdminLoginController;
+use App\Models\EventAnnouncement;
+
 Route::get('/', function () {
-    return view('landingpage/landingpage'); 
+    return view('landingpage.landingpage'); 
 });
 Route::get('/parishionerReport', function () {
     return view('parishioner.report'); 
@@ -132,6 +134,7 @@ Route::get('/user/mass', [MassScheduleController::class, 'UserIndex'])->name('ma
  
 // event announcement
 Route::resource('event_announcements', EventAnnouncementController::class);
+Route::get('/showEvent', [EventAnnouncementController::class, 'showevent'])->name('showEvent.showEvent');
 //priest
 Route::resource('priests', PriestController::class);
 Route::get('/priests-login', [PriestController::class, 'showLoginForm'])->name('priests.login.form');

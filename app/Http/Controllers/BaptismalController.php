@@ -48,7 +48,7 @@ class BaptismalController extends Controller
 
 public function edit(Baptismal $baptismal)
 {
-    dd('fd');
+
     return view('admin.baptismal.edit', compact('baptismal'));
 }
 
@@ -81,6 +81,12 @@ public function edit(Baptismal $baptismal)
         return redirect()->back()->with('success', 'Staff deleted successfully.');
     }
 
-
+public function download($id)
+{
+    $baptismal = Baptismal::findOrFail($id);
+    $pdf = Pdf::loadView('admin.record.memberRecord.baptismal_certificate_pdf', compact('baptismal'));
+      $pdf->setOption('encoding', 'UTF-8');
+    return $pdf->download('confirmation_certificate_' . $baptismal->id . '.pdf');
+}
 
 }

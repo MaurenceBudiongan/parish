@@ -49,7 +49,7 @@
             width: 260px;
             background-color: #1e293b;
             color: #fff;
-            padding: 30px 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -174,7 +174,7 @@
 
         #certificate-options {
 
- 
+
             gap: 24px;
             margin-top: 40px;
         }
@@ -257,7 +257,7 @@
             margin-left: 300px;
             background: #ffffff;
             padding: 32px;
-          
+
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
             max-width: 720px;
@@ -417,7 +417,7 @@
             width: 100%;
             max-width: 360px;
             border-radius: 12px;
-         
+
         }
 
         #greeting {
@@ -432,14 +432,11 @@
 
         .docreq {
             display: grid;
-       
+
             grid-template-columns: repeat(2, 1fr);
             gap: 4rem;
             padding: 30px;
         }
-
-
-        
     </style>
 </head>
 
@@ -451,9 +448,9 @@
             <nav class="nav" aria-label="Main Navigation">
                 <a href="#" id="documentRequest">📄 Request Document</a>
                 <a href="#" id="statusRequest">📊 Request Status</a>
-                <a id="mass">⛪ Mass Schedule</a>
-                <a href="#">💖 Donate</a>
-                <a href="#">📞 Contact</a>
+                <a href="#" id="mass">⛪ Mass Schedule</a>
+                <a href="#" id="event">🗓️ Event Announcement</a>
+
             </nav>
         </div>
         <footer class="sidebar-footer" aria-label="Footer">© 2025 Parish System</footer>
@@ -475,6 +472,7 @@
         const csrfToken = "{{ csrf_token() }}";
         const loadRequestStatus = "{{ route('baptismrequest.userIndex') }}";
         const loadMass = "{{ route('mass.UserIndex') }}";
+        const loadEvent = "{{ route('showEvent.showEvent') }}";
 
         const greeting = document.getElementById("greeting");
         const hour = new Date().getHours();
@@ -483,8 +481,7 @@
         else greeting.textContent = "Good evening, Kyla!";
 
         const certificate_options = document.getElementById('certificate-options');
-        const documentRequest = document.getElementById('documentRequest');
-        const statusRequest = document.getElementById('statusRequest');
+        const eventLink = document.getElementById('event');
 
         const message = `
         <div class="enhanced-message">
@@ -532,7 +529,7 @@
         statusRequest.addEventListener('click', () => {
             if (currentView === 'status') {
                 certificate_options.innerHTML = message;
-
+                document.getElementById('home').innerHTML = 'Home';
                 currentView = 'message';
             } else {
                 showRequestStatus();
@@ -543,10 +540,21 @@
         mass.addEventListener('click', () => {
             if (currentView === 'mass') {
                 certificate_options.innerHTML = message;
+                document.getElementById('home').innerHTML = 'Home';
                 currentView = 'message';
             } else {
                 showMass();
                 currentView = 'mass';
+            }
+        });
+        eventLink.addEventListener('click', () => {
+            if (currentView === 'event') {
+                certificate_options.innerHTML = message;
+                document.getElementById('home').innerHTML = 'Home';
+                currentView = 'message';
+            } else {
+                showEvent();
+                currentView = 'event';
             }
         });
 
@@ -601,7 +609,22 @@
                 .then(response => response.text())
                 .then(html => {
                     container.innerHTML = html;
-                    currentView = 'status';
+                    currentView = 'mass';
+                })
+                .catch(error => {
+                    console.error('Error loading request status:', error);
+                    container.innerHTML = '<p>Error loading data.</p>';
+                });
+        }
+
+        function showEvent() {
+            const container = document.getElementById('certificate-options');
+            document.getElementById('home').innerHTML = 'Home/ Request Status';
+            fetch(loadEvent)
+                .then(response => response.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    currentView = 'event';
                 })
                 .catch(error => {
                     console.error('Error loading request status:', error);
@@ -687,7 +710,7 @@
             // Assuming csrfToken is already passed from Blade to JS
             const csrfToken = "{{ csrf_token() }}";
 
-             const mainDiv = document.getElementById('certificate-options');
+            const mainDiv = document.getElementById('certificate-options');
             mainDiv.innerHTML = `
                 <header class="header">
                     <div class="header-info">
@@ -709,7 +732,7 @@
                     </button>
                 </form>
             `;
-             }
+        }
     </script>
 
 </body>

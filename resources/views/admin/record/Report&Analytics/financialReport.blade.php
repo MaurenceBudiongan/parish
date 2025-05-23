@@ -3,10 +3,10 @@
          padding: 2rem;
          background-color: #f4f7fc;
          font-family: 'Segoe UI', sans-serif;
-         height: 30rem;
+ 
          overflow-y: auto;
          border-radius: 10px;
-         height: 30rem;
+         height: 25rem;
          overflow-y: auto;
      }
 

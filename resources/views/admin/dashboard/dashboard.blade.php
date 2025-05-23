@@ -30,7 +30,7 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="#" onclick="addPriest()">Add Staff </a>
+                    <a href="{{route('showEvent.showEvent')}}" onclick="showEvent()">Add Staff </a>
                     <a href="#" onclick="addSendRequest()">Send Certification  </a>
                 </div>
             </div>

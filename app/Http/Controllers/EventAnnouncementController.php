@@ -12,7 +12,11 @@ class EventAnnouncementController extends Controller
         $events = EventAnnouncement::latest()->paginate(10);
         return view('admin.record.eventRecord.eventannouncement', compact('events'));
     }
-    
+      public function showevent()
+    {
+        $events = EventAnnouncement::latest()->paginate(10);
+        return view('user.document_requests.eventAnnouncement', compact('events'));
+    }
     public function create()
     {
         return view('admin.create_record.eventCreate');

@@ -464,7 +464,7 @@ function reporttoggleDropdown() {
     document.getElementById("financialdropdownmenu").style.display = "none";
     document.getElementById("createdropdownmenu").style.display = "none";
     document.getElementById("dropdownmenu").style.display = "none";
-    document.getElementById("payment-section").style.display = "none";
+    document.getElementById("payment-section").style.display = "block";
 }
 function showParishionerCreate() {
     const maincontent = document.getElementById("maincontent");
