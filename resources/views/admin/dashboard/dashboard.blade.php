@@ -30,7 +30,8 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="#s" >Add Staff </a>
+                    <a href="#s">Add Staff </a>
+                    <a href="#" onclick="assignedPriest()"> Assigned Priest</a>
                     <a href="#" onclick="addSendRequest()">Verify Certification </a>
                 </div>
             </div>
@@ -79,6 +80,7 @@
                             <a href="#" onclick="showDonationCreate()">Donation</a>
                             <a href="#" onclick="showMassCreate()">Mass/Service Scheduling</a>
                             <a href="#" onclick="showEventCreate()">Event Announcements</a>
+                            <a href="#" onclick="showPriestAssignment()()">Assign Priests</a>
                         </div>
                     </div>
 
@@ -124,8 +126,8 @@
                             <span>Clergy & Staff </span>
                         </a>
                         <div id="clergydropdownmenu" class="dropdown-menu">
-                            <a href="#" onclick="showPriestAssignment()">Priest Assignment</a>
-                            <a href="#" onclick="showStaffCreate()">Staff Profile</a>
+                            <a href="#" onclick="showAssignedPriest()">Priest Assignment</a>
+                            <a href="#" onclick="">Staff Profile</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -157,7 +159,7 @@
                                     <h3>Jerlyn</h3>
                                     <div>
                                         <span>₱ {{ $donation->amount }}</span>
-    
+
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +179,7 @@
                     </div>
                     <div class="payment-section-footer">
                         <button class="save-button">Save</button>
-                      
+
                     </div>
                 </section>
             </div>
@@ -199,13 +201,15 @@
             }
         });
 
-        
+
         const loadAddPriest = "{{ route('priests.create') }}";
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
         const loadMemberStatistics = "{{ route('parishioners.report') }}";
         const loadfinancialReport = "{{ route('donations.report') }}";
         const loadsendRequest = "{{ route('sendRequest.sendRequest') }}";
+        const loadassignedpriest = "{{ route('priests_assignments.index') }}";
+        const loadpriestindex = "{{ route('priests.index') }}";
         //
         const loadBaptistCreate = "{{ route('baptismals.create') }}";
         const loadBaptistRecord = "{{ route('baptismals.index') }}";

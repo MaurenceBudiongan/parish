@@ -879,7 +879,58 @@ function showPriestAssignment() {
             });
     }
 }
+function showAssignedPriest() {
+    const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
+    const dashboard = document.getElementById("dashboard");
 
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
+        fetch(loadassignedpriest, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
+            });
+    }
+}
+function showpriestindex() {
+    const maincontent = document.getElementById("maincontent");
+    document.getElementById("payment-section").style.display = "block";
+    const dashboard = document.getElementById("dashboard");
+
+    if (maincontent) {
+        dashboard.style.color = "#969593";
+        showLoading(); // Show loading spinner
+        fetch(loadpriestindex, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Fetch failed");
+                return response.text();
+            })
+            .then((html) => {
+                maincontent.innerHTML = html;
+            })
+            .catch((error) => {
+                console.error("Error fetching user view:", error);
+                maincontent.innerHTML = `<div class="error-message">Error loading content. Please try again.</div>`;
+            });
+    }
+}
 function addPriest() {
     window.location.href = loadAddPriest;
 }

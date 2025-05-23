@@ -142,6 +142,7 @@ Route::post('/priests-login', [PriestController::class, 'login'])->name('priests
 Route::post('/priests-logout', [PriestController::class, 'logout'])->name('priests.logout');
 //priest Assignment
 Route::resource('priests_assignments', PriestAssignmentController::class);
+
 //staff
 Route::resource('staff', StaffController::class);
 Route::get('/staff-login', [StaffController::class, 'loginForm'])->name('staff.login');

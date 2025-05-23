@@ -21,9 +21,11 @@ class PriestAssignment extends Model
         'remarks',
     ];
 
-    public function priest()
+      public function priest()
     {
-        return $this->belongsTo(Priest::class);
+        return $this->belongsTo(Priest::class, 'priest_id', 'priest_id');
+        // 'priest_id' is the foreign key on this table,
+        // 'priest_id' is the primary key on the priests table
     }
 }
 
