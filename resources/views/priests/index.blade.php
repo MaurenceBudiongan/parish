@@ -231,9 +231,7 @@
                         </div>
                         <div class="card-footer bg-transparent">
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('priests.edit', $priest) }}" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit me-1"></i> Edit
-                                </a>
+                          
                                 <form action="{{ route('priests.destroy', $priest) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

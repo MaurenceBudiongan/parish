@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Directory</title>
+    <title>Staff Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -167,80 +167,75 @@
 
 <body>
     <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="page-title">Staff Directory</h1>
-        </div>
+        <h1 class="page-title mb-4">Staff Profile</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
-        <div class="row">
-            @forelse($staff as $person)
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card staff-card h-100">
+        @if (!$staff)
+            <p>No staff data available.</p>
+        @else
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card staff-card">
                         <div class="card-header text-center pt-4 pb-3">
                             <div class="profile-img-container mb-3">
-                                @if ($person->photo)
-                                    <img src="{{ asset('storage/' . $person->photo) }}" alt="Staff Photo" class="profile-img">
+                                @if ($staff->photo)
+                                    <img src="{{ asset('storage/' . $staff->photo) }}" alt="Staff Photo"
+                                        class="profile-img">
                                 @else
-                                    <img src="{{ asset('storage/default-profile.jpg') }}" alt="Default Profile" class="profile-img">
+                                    <img src="{{ asset('storage/default-profile.jpg') }}" alt="No Photo"
+                                        class="profile-img">
                                 @endif
                             </div>
-                            <h5 class="staff-name">{{ $person->first_name }} {{ $person->last_name }}</h5>
-                            <span class="position-badge">{{ $person->position }}</span>
-                            <span class="status-badge {{ $person->status == 'Active' ? 'active' : 'inactive' }}">
-                                {{ $person->status }}
+                            <h5 class="staff-name">{{ $staff->first_name }} {{ $staff->last_name }}</h5>
+                            <span class="position-badge">{{ $staff->position }}</span>
+                            <span class="status-badge {{ $staff->status == 'Active' ? 'active' : 'inactive' }}">
+                                {{ $staff->status }}
                             </span>
                         </div>
                         <div class="card-body">
                             <div class="staff-details">
                                 <div class="detail-row">
                                     <span class="detail-label"><i class="fas fa-id-card"></i> Staff ID:</span>
-                                    <span class="detail-value">{{ $person->staff_id }}</span>
+                                    <span class="detail-value">{{ $staff->staff_id }}</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label"><i class="fas fa-phone"></i> Phone:</span>
-                                    <span class="detail-value">{{ $person->phone }}</span>
+                                    <span class="detail-value">{{ $staff->phone }}</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label"><i class="fas fa-building"></i> Department:</span>
-                                    <span class="detail-value">{{ $person->department }}</span>
+                                    <span class="detail-value">{{ $staff->department }}</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label"><i class="fas fa-home"></i> Address:</span>
-                                    <span class="detail-value">{{ $person->address }}</span>
+                                    <span class="detail-value">{{ $staff->address }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer bg-transparent">
+                        <div class="card-footer bg-transparent text-end">
                             <div class="d-flex justify-content-between">
-              
-                                <form action="{{ route('staff.destroy', $person) }}" method="POST">
+                                <a href="{{ route('mass.UserIndex') }}" class="btn btn-warning btn-sm me-2"
+                                    onclick="return confirm('Are you sure you want to View Mass/Service Schedule?')">
+                                    <i class="fas fa-calendar-alt me-1"></i> View Mass/Service Schedule
+                                </a>
+                                <a href="{{ route('showEvent.showEvent') }}" class="btn btn-warning btn-sm me-2"
+                                    onclick="return confirm('Are you sure you want to View Event Announcement?')">
+                                    <i class="fas fa-calendar-alt me-1"></i> View Event
+                                </a>
+
+                                <form action="{{ route('gets_started') }}" method="GET">
                                     @csrf
-                                    @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this staff member?')">
-                                        <i class="fas fa-trash me-1"></i> Delete
+                                        onclick="return confirm('Are you sure you want to Sign Out?')">
+                                        <i class="fas fa-sign-out-alt me-1"></i>Sign Out
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="col-12 text-center py-5">
-                    <div class="empty-state">
-                        <i class="fas fa-users fa-4x mb-3 text-muted"></i>
-                        <h4>No Staff Profiles Found</h4>
-                        <p class="text-muted">Click "Add New Staff" to create your first staff profile.</p>
-                    </div>
-                </div>
-            @endforelse
-        </div>
+            </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

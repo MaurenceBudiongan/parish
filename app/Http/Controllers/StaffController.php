@@ -36,34 +36,43 @@ class StaffController extends Controller
             $expectedName = strtolower(trim("{$staff->last_name},{$staff->first_name}"));
 
             if ($inputName === $expectedName) {
-                // Store in session manually
-                session(['staff_user' => $staff]);
-                return redirect()->route('staff.index');
+                 return view('staff.dashboard', ['staff' => $staff]);
             }
         }
 
         return back()->with('error', 'Invalid Staff ID or Name.');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:staff,email',
-            'phone' => 'nullable',
-            'position' => 'required',
-            'department' => 'required',
-            'address' => 'required|string', 
-            'status' => 'required|in:active,inactive',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email|unique:staff,email',
+        'phone' => 'nullable',
+        'position' => 'required',
+        'department' => 'required',
+        'address' => 'required|string',
+        'status' => 'required|in:active,inactive',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // ✅
+    ]);
 
-            $validated = $request->all();
-            $validated['staff_id'] = 'SanPascual-' . mt_rand(10000000, 99999999);
-            Staff::create($validated); 
+    $validated = $request->all();
+    $validated['staff_id'] = uniqid();
 
-        return redirect()->route('staff.index')->with('success', 'Staff created successfully.');
+    if ($request->hasFile('photo')) {
+        $filename = time().'_'.$request->photo->getClientOriginalName();
+        $path = $request->photo->storeAs('staff_photos', $filename, 'public');
+        $validated['photo'] = $path;
     }
+
+    Staff::create($validated);
+
+    return redirect()->back()->with('success', 'Staff created successfully.');
+}
+
+
+
 
     public function show(Staff $staff)
     {
@@ -76,28 +85,37 @@ class StaffController extends Controller
     }
 
     public function update(Request $request, Staff $staff)
-    {
-        $request->validate([
-              'staff_id' => 'required|unique:staff,staff_id',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:staff,email,' . $staff->id,
-            'phone' => 'nullable',
-            'position' => 'required',
-             'department' => 'required',
-            'address' => 'required',
-            'status' => 'required|in:active,inactive',
-        ]);
+{
+    $request->validate([
+        'staff_id' => 'required|unique:staff,staff_id,' . $staff->id,
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email|unique:staff,email,' . $staff->id,
+        'phone' => 'nullable',
+        'position' => 'required',
+        'department' => 'required',
+        'address' => 'required',
+        'status' => 'required|in:active,inactive',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // ✅
+    ]);
 
-        $staff->update($request->all());
+    $data = $request->all();
 
-        return redirect()->route('staff.index')->with('success', 'Staff updated successfully.');
+    if ($request->hasFile('photo')) {
+        $filename = time().'_'.$request->photo->getClientOriginalName();
+        $path = $request->photo->storeAs('staff_photos', $filename, 'public');
+        $data['photo'] = $path;
     }
+
+    $staff->update($data);
+
+    return redirect()->back()->with('success', 'Staff updated successfully.');
+}
 
     public function destroy(Staff $staff)
     {
         $staff->delete();
 
-        return redirect()->route('staff.index')->with('success', 'Staff deleted successfully.');
+        return redirect()->back()->with('success', 'Staff deleted successfully.');
     }
 }

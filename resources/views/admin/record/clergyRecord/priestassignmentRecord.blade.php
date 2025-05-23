@@ -15,7 +15,7 @@
             <p><strong>Remarks:</strong> {{ $assignment->remarks ?? 'None' }}</p>
 
             <div class="action-buttons">
-                <a href="{{ route('priests_assignments.edit', $assignment->id) }}" class="edit-btn">Edit</a>
+             
                 <form action="{{ route('priests_assignments.destroy', $assignment->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this assignment?');">
                     @csrf
                     @method('DELETE')

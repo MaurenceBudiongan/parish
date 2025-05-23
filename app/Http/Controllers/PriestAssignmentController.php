@@ -77,6 +77,6 @@ class PriestAssignmentController extends Controller
         $assignment = PriestAssignment::findOrFail($id);
         $assignment->delete();
 
-        return redirect()->route('priests_assignments.index')->with('success', 'Assignment deleted successfully.');
+        return redirect()->back()->with('success', 'Assignment deleted successfully.');
     }
 }

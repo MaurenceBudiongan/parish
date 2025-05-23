@@ -30,8 +30,7 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="#s">Add Staff </a>
-                    <a href="#" onclick="assignedPriest()"> Assigned Priest</a>
+                    <a href="{{ route('staff.create') }}">Add Staff </a>
                     <a href="#" onclick="addSendRequest()">Verify Certification </a>
                 </div>
             </div>
@@ -127,7 +126,7 @@
                         </a>
                         <div id="clergydropdownmenu" class="dropdown-menu">
                             <a href="#" onclick="showAssignedPriest()">Priest Assignment</a>
-                            <a href="#" onclick="">Staff Profile</a>
+                            <a href="#" onclick="showStaff()">Staff Profile</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -205,6 +204,7 @@
         const loadAddPriest = "{{ route('priests.create') }}";
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
+        const loadStaff = "{{ route('staff.index') }}";
         const loadMemberStatistics = "{{ route('parishioners.report') }}";
         const loadfinancialReport = "{{ route('donations.report') }}";
         const loadsendRequest = "{{ route('sendRequest.sendRequest') }}";
