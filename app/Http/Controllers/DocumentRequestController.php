@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DocumentRequest;
 use App\Models\BaptismRequest;
+use App\Models\ConfirmationRequest;
+use App\Models\MarriageRequest;
+use App\Models\DeathRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,16 +15,13 @@ class DocumentRequestController extends Controller
  // In your DocumentRequestController.php
 public function index()
 {
-    // Retrieve all document requests (or filter as needed)
-    $documentRequests = DocumentRequest::all(); // Or use pagination, e.g., ->paginate(10)
+    // Fetch all requests for the sacramental records view
+    $baptismrequests = BaptismRequest::all();
+    $confirmationrequests = ConfirmationRequest::all();
+    $marriagerequests = MarriageRequest::all();
+    $deathrequests = DeathRequest::all();
 
-    $counts = [
-        'baptismal' => DocumentRequest::where('documenttype', 'baptismal')->count(),
-        'confirmation' => DocumentRequest::where('documenttype', 'confirmation')->count(),
-        'marriage' => DocumentRequest::where('documenttype', 'marriagecertificate')->count(),
-    ];
-
-    return view('admin.document_requests.index', compact('documentRequests', 'counts'));
+    return view('admin.document_requests.index', compact('baptismrequests', 'confirmationrequests', 'marriagerequests', 'deathrequests'));
 }
 
 public function getDocumentRequestCounts()

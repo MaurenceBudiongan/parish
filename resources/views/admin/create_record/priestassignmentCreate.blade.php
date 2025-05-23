@@ -31,12 +31,12 @@
 
         <div>
             <label>Start Date:</label>
-            <input type="date" name="start_date" required>
+            <input type="date" name="start_date" id="start_date" min="1900-01-01" required>
         </div>
 
         <div>
             <label>End Date (optional):</label>
-            <input type="date" name="end_date">
+            <input type="date" name="end_date" id="end_date" min="1900-01-01">
         </div>
 
         <div>
@@ -165,12 +165,76 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Date validation for start and end dates
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+        
+        // Update end date minimum when start date changes
+        if (startDateInput && endDateInput) {
+            startDateInput.addEventListener('change', function() {
+                endDateInput.min = this.value;
+            });
+        }
+        
+        // Limit year to 4 digits for date inputs
+        function limitYearInput(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value;
+                // If value has more than 10 characters (YYYY-MM-DD), truncate it
+                if (value.length > 10) {
+                    e.target.value = value.substring(0, 10);
+                }
+                
+                // Check if year part is more than 4 digits
+                const parts = value.split('-');
+                if (parts[0] && parts[0].length > 4) {
+                    parts[0] = parts[0].substring(0, 4);
+                    e.target.value = parts.join('-');
+                }
+            });
+            
+            input.addEventListener('keypress', function(e) {
+                const value = e.target.value;
+                const parts = value.split('-');
+                
+                // If we're in the year part and it's already 4 digits, prevent more input
+                if (parts[0] && parts[0].length >= 4 && value.indexOf('-') === -1) {
+                    if (e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // Apply year limitation to all date inputs
+        if (startDateInput) limitYearInput(startDateInput);
+        if (endDateInput) limitYearInput(endDateInput);
+        
+        // Date validation function
+        function validateDates() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+            
+            if (endDate && endDate < startDate) {
+                alert('End date cannot be earlier than start date.');
+                return false;
+            }
+            
+            return true;
+        }
+        
         // Form submission loading
         const form = document.querySelector('form');
         const submitButton = document.querySelector('button[type="submit"]');
         
         if (form && submitButton) {
             form.addEventListener('submit', function(e) {
+                // Validate dates first
+                if (!validateDates()) {
+                    e.preventDefault();
+                    return;
+                }
+                
                 // Only proceed if user confirmed
                 if (confirm('Save this priest assignment?')) {
                     e.preventDefault(); // Prevent default to handle manually

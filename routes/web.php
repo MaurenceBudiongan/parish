@@ -165,6 +165,7 @@ Route::delete('/confirmation/{confirmation}', [ConfirmationRecordController::cla
 //Admin Authentication
 Route::get('/admin/user', [SidebarController::class, 'showUser']);
 Route::get('/admin/document_requests', [SidebarController::class, 'showDocumentRequest']);
+Route::get('/admin/documentRequest', [DocumentRequestController::class, 'index']);
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
 Route::post('/admin/register', [AdminAuthController::class, 'register']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
