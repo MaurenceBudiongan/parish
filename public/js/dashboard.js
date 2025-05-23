@@ -377,7 +377,7 @@ function showDocumentRequest() {
     if (maincontent) {
         dashboard.style.color = "#969593";
         showLoading(); // Show loading spinner
-        fetch("/admin/documentRequest")
+        fetch("/baptismrequest")
             .then((response) => response.text())
             .then((html) => {
                 maincontent.innerHTML = html;

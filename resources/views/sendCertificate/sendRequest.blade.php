@@ -1,4 +1,3 @@
-
 <div class="containers">
     <h4>Search Any Request</h4>
     <input type="text" id="request_search" class="form-control"
@@ -100,7 +99,7 @@
                                     <strong>ID Proof:</strong> ${renderIdProof(item.idProof)}
                                      <br>
 
-    <button class="btn btn-success mt-2">Send Certificate</button>
+    <button type="submit" class="btn btn-success mt-2">Send Certificate</button>
 
 
                                 </div>`;

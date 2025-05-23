@@ -30,7 +30,7 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="{{ route('showEvent.showEvent') }}" >Add Staff </a>
+                    <a href="#s" >Add Staff </a>
                     <a href="#" onclick="addSendRequest()">Send Certification </a>
                 </div>
             </div>
@@ -199,7 +199,7 @@
             }
         });
 
-        //edit
+        
         const loadAddPriest = "{{ route('priests.create') }}";
         const loadPriestAssignment = "{{ route('priests_assignments.create') }}";
         const loadStaffCreate = "{{ route('staff.create') }}";
