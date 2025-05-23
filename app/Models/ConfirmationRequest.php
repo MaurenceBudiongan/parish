@@ -22,5 +22,6 @@ class ConfirmationRequest extends Model
         'relationship',
         'idProof',
         'status',
+        
     ];
 }

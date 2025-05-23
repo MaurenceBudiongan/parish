@@ -83,7 +83,7 @@
                     <button type="button" class="edit-btn">Download</button>
                 </a>
 
-                <a href="" class="btn btn-success mt-2">Send to Request</a>
+     
             </div>
         </form>
     @empty
@@ -95,7 +95,7 @@
 
 <style>
     .certification {
-        height: 50.3rem;
+        height: 53.3rem;
         overflow-y: auto;
     }
 

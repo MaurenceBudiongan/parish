@@ -56,7 +56,7 @@
                     <button type="button" class="edit-btn">Download</button>
                 </a>
 
-                <a href="" class="btn btn-success mt-2">Send to Request</a>
+            
 
             </div>
         </form>
@@ -81,7 +81,7 @@
 </script>
 <style>
     .certification {
-        height: 50.3rem;
+        height: 51.3rem;
         overflow-y: auto;
     }
 

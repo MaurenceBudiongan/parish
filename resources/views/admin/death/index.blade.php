@@ -66,7 +66,7 @@
                 <a href="{{ route('deaths.download', $death->id) }}">
                     <button type="button" class="edit-btn">Download</button>
                 </a>
-                <a href="" class="btn btn-success mt-2">Send to Request</a>
+            
             </div>
         </form>
     @empty
@@ -77,7 +77,7 @@
 </div>
 <style>
     .certification {
-        height: 50.8rem;
+        height: 65.8rem;
         overflow-y: auto;
     }
 

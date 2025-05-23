@@ -22,6 +22,7 @@ class DeathRequest extends Model
         'relationship',
         'idProof',
         'status',
+        
     ];
 }
 

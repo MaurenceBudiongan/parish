@@ -1,3 +1,4 @@
+
 <div class="containers">
     <h4>Search Any Request</h4>
     <input type="text" id="request_search" class="form-control"
@@ -99,7 +100,7 @@
                                     <strong>ID Proof:</strong> ${renderIdProof(item.idProof)}
                                      <br>
 
-    <button type="submit" class="btn btn-success mt-2">Send Certificate</button>
+    <button class="btn btn-success mt-2">Send Certificate</button>
 
 
                                 </div>`;
@@ -183,13 +184,13 @@
     .border {
         border: 1px solid var(--c-gray-500);
         border-radius: 5px;
-            background-color: var(--c-gray-800);
+        background-color: var(--c-gray-800);
         padding: 15px;
         margin-bottom: 10px;
         transition: background-color 0.3s;
     }
 
- 
+
     strong {
         color: #4b8b3b;
         display: inline-block;

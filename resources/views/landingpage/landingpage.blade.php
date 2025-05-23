@@ -378,7 +378,7 @@
             .hero-images {
                 order: -1;
             }
-            
+
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -444,9 +444,9 @@
             <a href="#">Services</a>
             <a href="#">About Us</a>
             <a href="#">Location & Hours</a>
-             <a href="{{ route('priests.login.form') }}">Priest</a>
+            <a href="{{ route('priests.login.form') }}">Priest</a>
             <a href="{{ route('staffclick') }}">Staff</a>
-            <a href="{{ route('authentication.adminform') }}">Admin</a>
+            <a href="{{ route('adminaccess.login') }}">Admin</a>
         </nav>
 
         <button class="contact-btn">Let's Talk</button>
@@ -459,11 +459,11 @@
         <div class="hero-text">
             <h1>San Pascual Parish Record Keeping</h1>
             <p>
-                We provide secure and efficient digital record-keeping for your parish, with organized management 
-                and personalized support for your church community. Our system ensures that important sacramental 
+                We provide secure and efficient digital record-keeping for your parish, with organized management
+                and personalized support for your church community. Our system ensures that important sacramental
                 records are maintained accurately and accessible when needed.
             </p>
-            <a href="{{route('login')}}" class="cta-btn">Get Started</a>
+            <a href="{{ route('login') }}" class="cta-btn">Get Started</a>
         </div>
 
         <div class="hero-images">
@@ -547,9 +547,9 @@
 
         menuToggle.addEventListener('click', () => {
             navbar.classList.toggle('active');
-            menuToggle.innerHTML = navbar.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            menuToggle.innerHTML = navbar.classList.contains('active') ?
+                '<i class="fas fa-times"></i>' :
+                '<i class="fas fa-bars"></i>';
         });
     </script>
 </body>

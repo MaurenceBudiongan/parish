@@ -82,12 +82,5 @@ public function edit(Baptismal $baptismal)
     }
 
 
-    public function download($id)
-    {
-        $baptismal = Baptismal::findOrFail($id);
-        $pdf = PDF::loadView('admin.record.memberRecord.baptismal_certificate_pdf', compact('baptismal'));
-        $pdf->setOption('encoding', 'UTF-8');
 
-        return $pdf->download('baptismal_certificate_'.$baptismal->id.'.pdf');
-    }
 }

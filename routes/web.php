@@ -26,9 +26,9 @@ use App\Http\Controllers\MarriageRequestController;
 use App\Http\Controllers\DeathRequestController;
 use App\Http\Controllers\RequestSearchController;
 use App\Http\Controllers\DocumentController;
-
+use App\Http\Controllers\AdminLoginController;
 Route::get('/', function () {
-    return view('landingpage.landingpage'); 
+    return view('landingpage/landingpage'); 
 });
 Route::get('/parishionerReport', function () {
     return view('parishioner.report'); 
@@ -94,6 +94,10 @@ Route::get('/deaths/download/{id}', [DeathController::class, 'download'])->name(
 Route::get('/search-requests', [RequestSearchController::class, 'search'])->name('requests.search');
 Route::get('/get-document/{type}/{id}', [DocumentController::class, 'showDocument'])->name('document.get');
 Route::get('/showsendRequest', [RequestSearchController::class, 'sendRequest'])->name('sendRequest.sendRequest');
+
+
+Route::post('/baptismals/send-request/{id}', [BaptismalController::class, 'sendRequest'])->name('baptismals.sendRequest');
+
 
 
 
@@ -177,6 +181,9 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name(
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('admin.logout');
 Route::get('/admin/showdashboard', [AdminAuthController::class, 'showdashboard'])->name('admin.showdashboard');
+
+Route::get('/adminaccess/login', [AdminLoginController::class, 'showLoginForm'])->name('adminaccess.login');
+Route::post('/admin/logins', [AdminLoginController::class, 'logins'])->name('adminaccess.logins');
 
 
 //Parishioner Authentication
