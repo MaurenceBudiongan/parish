@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <label for="">Date Of Birth</label>
-                    <input type="date" name="dateofbirth" required>
+                    <input type="date" name="dateofbirth" id="dateofbirth" min="1900-01-01" max="" required>
                 </div>
                 <div>
                     <label for="">Gender</label>
@@ -28,8 +28,7 @@
                 </div>
                 <div>
                     <label for="">Contact Number</label>
-                    <input type="number" name="contactnumber" required maxlength="11"
-                        oninput="this.value = this.value.slice(0, 11)">
+                    <input type="text" name="contactnumber" id="contactnumber" placeholder="+63 9XXXXXXXXX" value="+63 " required maxlength="14">
                 </div>
                 <div>
                     <label for="">Civil Status</label>
@@ -86,7 +85,7 @@
                 <div id="baptism-details" style="display: none;">
                     <div>
                         <label for="baptism_date">Date of Baptism</label>
-                        <input type="date" name="baptism_date" id="baptism_date">
+                        <input type="date" name="baptism_date" id="baptism_date" min="1900-01-01" max="">
                     </div>
                     <div>
                         <label for="baptism_church">Church of Baptism</label>
@@ -277,6 +276,23 @@
         color: white;
         margin-bottom: 5px;
     }
+
+    #contactnumber {
+        font-family: monospace;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+
+    #contactnumber::placeholder {
+        color: #999 !important;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    #contactnumber:focus {
+        border: 2px solid var(--c-green-500);
+        box-shadow: 0 0 5px rgba(69, 255, 188, 0.3);
+    }
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -301,8 +317,190 @@
         const form = document.querySelector('form');
         const submitButton = document.querySelector('button[type="submit"]');
         
+        // Set max dates to today
+        const today = new Date().toISOString().split('T')[0];
+        const dobInput = document.getElementById('dateofbirth');
+        const baptismDateInput = document.getElementById('baptism_date');
+        
+        if (dobInput) dobInput.max = today;
+        if (baptismDateInput) baptismDateInput.max = today;
+        
+        // Limit year to 4 digits for all date inputs
+        function limitYearInput(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value;
+                // If value has more than 10 characters (YYYY-MM-DD), truncate it
+                if (value.length > 10) {
+                    e.target.value = value.substring(0, 10);
+                }
+                
+                // Check if year part is more than 4 digits
+                const parts = value.split('-');
+                if (parts[0] && parts[0].length > 4) {
+                    parts[0] = parts[0].substring(0, 4);
+                    e.target.value = parts.join('-');
+                }
+            });
+            
+            input.addEventListener('keypress', function(e) {
+                const value = e.target.value;
+                const parts = value.split('-');
+                
+                // If we're in the year part and it's already 4 digits, prevent more input
+                if (parts[0] && parts[0].length >= 4 && value.indexOf('-') === -1) {
+                    if (e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // Apply year limitation to all date inputs
+        if (dobInput) limitYearInput(dobInput);
+        if (baptismDateInput) limitYearInput(baptismDateInput);
+        
+        // Philippine Phone Number Formatting - NUMBERS ONLY
+        const contactInput = document.getElementById('contactnumber');
+        if (contactInput) {
+            const PREFIX = '+63 ';
+            
+            // Force initial value
+            contactInput.value = PREFIX;
+            
+            // Function to fix and validate input
+            function fixInput() {
+                let currentValue = contactInput.value;
+                
+                // Always ensure it starts with prefix
+                if (!currentValue.startsWith(PREFIX)) {
+                    // Extract only digits from whatever is there
+                    let digits = currentValue.replace(/\D/g, '');
+                    // Make sure first digit is 9
+                    if (digits && !digits.startsWith('9')) {
+                        digits = '9' + digits.replace(/^[^9]/, '');
+                    }
+                    // Limit to 10 digits
+                    digits = digits.substring(0, 10);
+                    // Set with prefix
+                    contactInput.value = PREFIX + digits;
+                } else {
+                    // Clean up the numbers part - remove any non-digits
+                    let numbers = currentValue.substring(PREFIX.length).replace(/\D/g, '');
+                    if (numbers && !numbers.startsWith('9')) {
+                        numbers = '9' + numbers.replace(/^[^9]/, '');
+                    }
+                    numbers = numbers.substring(0, 10);
+                    contactInput.value = PREFIX + numbers;
+                }
+                
+                // Keep cursor after prefix
+                if (contactInput.selectionStart < PREFIX.length) {
+                    contactInput.setSelectionRange(PREFIX.length, PREFIX.length);
+                }
+            }
+            
+            // Prevent non-numeric input on keypress
+            contactInput.addEventListener('keypress', function(e) {
+                // Allow navigation keys
+                if (['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key)) {
+                    return true;
+                }
+                
+                // If cursor is in prefix area, only allow navigation
+                if (contactInput.selectionStart < PREFIX.length) {
+                    if (!['ArrowRight', 'Tab', 'End'].includes(e.key)) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+                
+                // Only allow numbers (0-9) for the phone number part
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Check if we already have 10 digits
+                let currentNumbers = contactInput.value.substring(PREFIX.length).replace(/\D/g, '');
+                if (currentNumbers.length >= 10) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+            // Handle other events
+            const events = ['input', 'keyup', 'paste', 'cut', 'focus', 'blur'];
+            events.forEach(eventType => {
+                contactInput.addEventListener(eventType, function(e) {
+                    // For paste events, extract only numbers
+                    if (eventType === 'paste') {
+                        e.preventDefault();
+                        let pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                        let numbers = pastedText.replace(/\D/g, '');
+                        
+                        if (numbers && !numbers.startsWith('9')) {
+                            numbers = '9' + numbers.replace(/^[^9]/, '');
+                        }
+                        numbers = numbers.substring(0, 10);
+                        
+                        contactInput.value = PREFIX + numbers;
+                        return;
+                    }
+                    
+                    // For destructive events, prevent them if they affect prefix
+                    if (['cut'].includes(eventType)) {
+                        if (contactInput.selectionStart < PREFIX.length) {
+                            e.preventDefault();
+                            return;
+                        }
+                    }
+                    
+                    // Always fix the input after any event
+                    setTimeout(fixInput, 1);
+                });
+            });
+            
+            // Continuous checking to ensure integrity
+            setInterval(fixInput, 100);
+            
+            // Validation on blur
+            contactInput.addEventListener('blur', function() {
+                const numbers = contactInput.value.substring(PREFIX.length);
+                if (numbers.length > 0 && numbers.length < 10) {
+                    contactInput.setCustomValidity('Phone number must be exactly 10 digits starting with 9');
+                } else if (numbers.length > 0 && !numbers.startsWith('9')) {
+                    contactInput.setCustomValidity('Phone number must start with 9');
+                } else {
+                    contactInput.setCustomValidity('');
+                }
+            });
+            
+            // Prevent right-click to avoid paste operations
+            contactInput.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        }
+        
+        // Date validation
+        function validateDates() {
+            const dob = new Date(dobInput.value);
+            const baptismDate = baptismDateInput.value ? new Date(baptismDateInput.value) : null;
+            
+            if (baptismDate && dob && baptismDate < dob) {
+                alert('Baptism date cannot be earlier than date of birth.');
+                return false;
+            }
+            return true;
+        }
+        
         if (form && submitButton) {
             form.addEventListener('submit', function(e) {
+                // Validate dates first
+                if (!validateDates()) {
+                    e.preventDefault();
+                    return;
+                }
+                
                 // Show loading state
                 submitButton.innerHTML = '<span class="submit-loading-spinner"></span>Saving...';
                 submitButton.disabled = true;

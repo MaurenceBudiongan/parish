@@ -1,4 +1,3 @@
-
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
@@ -138,13 +137,13 @@
                     <form action="{{ route('baptismrequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                        <button type="submit" class="approve">Approve</button>
                     </form>
 
                     <form action="{{ route('baptismrequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                        <button type="submit" class="reject">Reject</button>
                     </form>
                     @else
                     <span>No Action</span>
@@ -195,13 +194,13 @@
                     <form action="{{ route('confirmationrequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                        <button type="submit" class="approve">Approve</button>
                     </form>
 
                     <form action="{{ route('confirmationrequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                        <button type="submit" class="reject">Reject</button>
                     </form>
                     @else
                     <span>No Action</span>
@@ -254,13 +253,13 @@
                     <form action="{{ route('marriagerequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                        <button type="submit" class="approve">Approve</button>
                     </form>
 
                     <form action="{{ route('marriagerequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                        <button type="submit" class="reject">Reject</button>
                     </form>
                     @else
                     <span>No Action</span>
@@ -299,7 +298,7 @@
     <tbody>
         @forelse($deathrequests as $request)
         <tr>
-            <td>{{ $request->confirmationrequest_id }}</td>
+            <td>{{ $request->deathrequest_id }}</td>
             <td>{{ $request->requester }}</td>
             <td>{{ $request->fullName }}</td>
             <td>{{ $request->deathDate }}</td>
@@ -313,13 +312,13 @@
                     <form action="{{ route('deathrequest.approve', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="approve" onclick="return confirm('Approve this request?')" >Approve</button>
+                        <button type="submit" class="approve">Approve</button>
                     </form>
 
                     <form action="{{ route('deathrequest.reject', $request->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="reject" onclick="return confirm('Reject this request?')" >Reject</button>
+                        <button type="submit" class="reject">Reject</button>
                     </form>
                     @else
                     <span>No Action</span>
@@ -334,3 +333,66 @@
         @endforelse
     </tbody>
 </table>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Add loading styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .action-loading-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid transparent;
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 5px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .action button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Handle all approve/reject form submissions
+    const forms = document.querySelectorAll('.action form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default submission
+            
+            const button = form.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            const isApprove = button.classList.contains('approve');
+            const isReject = button.classList.contains('reject');
+            
+            let confirmMessage = '';
+            if (isApprove) {
+                confirmMessage = 'Approve this request?';
+            } else if (isReject) {
+                confirmMessage = 'Reject this request?';
+            }
+            
+            // Show confirmation dialog
+            if (confirm(confirmMessage)) {
+                // Show loading state
+                button.innerHTML = `<span class="action-loading-spinner"></span>${isApprove ? 'Approving...' : 'Rejecting...'}`;
+                button.disabled = true;
+                
+                // Submit the form after a brief delay
+                setTimeout(() => {
+                    form.submit();
+                }, 100);
+            }
+        });
+    });
+});
+</script>

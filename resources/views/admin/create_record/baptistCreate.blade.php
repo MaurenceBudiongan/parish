@@ -13,7 +13,7 @@
 
         <div>
             <label>Baptism Date:</label>
-            <input type="date" name="baptism_date" required>
+            <input type="date" name="baptism_date" id="baptism_date" min="1900-01-01" max="" required>
         </div>
 
         <button type="submit" onclick="return confirm('Save this baptist record?')">Save Record</button>
@@ -118,6 +118,47 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Set max date to today
+            const today = new Date().toISOString().split('T')[0];
+            const baptismDateInput = document.getElementById('baptism_date');
+            
+            if (baptismDateInput) {
+                baptismDateInput.max = today;
+            }
+            
+            // Limit year to 4 digits for date input
+            function limitYearInput(input) {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value;
+                    // If value has more than 10 characters (YYYY-MM-DD), truncate it
+                    if (value.length > 10) {
+                        e.target.value = value.substring(0, 10);
+                    }
+                    
+                    // Check if year part is more than 4 digits
+                    const parts = value.split('-');
+                    if (parts[0] && parts[0].length > 4) {
+                        parts[0] = parts[0].substring(0, 4);
+                        e.target.value = parts.join('-');
+                    }
+                });
+                
+                input.addEventListener('keypress', function(e) {
+                    const value = e.target.value;
+                    const parts = value.split('-');
+                    
+                    // If we're in the year part and it's already 4 digits, prevent more input
+                    if (parts[0] && parts[0].length >= 4 && value.indexOf('-') === -1) {
+                        if (e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                            e.preventDefault();
+                        }
+                    }
+                });
+            }
+            
+            // Apply year limitation to date input
+            if (baptismDateInput) limitYearInput(baptismDateInput);
+            
             // Form submission loading
             const form = document.querySelector('form');
             const submitButton = document.querySelector('button[type="submit"]');
