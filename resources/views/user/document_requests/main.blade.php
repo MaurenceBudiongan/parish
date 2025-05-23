@@ -75,7 +75,7 @@
         .nav a {
             color: #cbd5e1;
             text-decoration: none;
-            padding: 12px 14px;
+            padding: 25px 14px;
             margin-bottom: 10px;
             display: block;
             border-radius: 6px;
