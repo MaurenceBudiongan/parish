@@ -30,8 +30,8 @@
                 <div class="tabs">
                     <a href="#" onclick="showParishionerRecord()">Parishioner</a>
                     <a href="#" onclick="addPriest()"> Add Priest</a>
-                    <a href="{{route('showEvent.showEvent')}}" onclick="showEvent()">Add Staff </a>
-                    <a href="#" onclick="addSendRequest()">Send Certification  </a>
+                    <a href="{{ route('showEvent.showEvent') }}" onclick="showEvent()">Add Staff </a>
+                    <a href="#" onclick="addSendRequest()">Send Certification </a>
                 </div>
             </div>
             <div class="app-header-actions">
@@ -46,9 +46,7 @@
                         <i class="ph-sign-out"></i>
                     </button>
 
-                    <button class="icon-button large">
-                        <i class="ph-chat-circle-dots"></i>
-                    </button>
+
                 </div>
             </div>
             <div class="app-header-mobile">
@@ -146,74 +144,27 @@
             </div>
             <div class="app-body-sidebar">
                 <section id="payment-section" class="payment-section">
-                    <h2>Recent Payment</h2>
-                    <div class="payment-section-header">
-                        <p>Choose a e-wallet to pay request</p>
-                        <div>
-                            <button class="card-button mastercard">
-                                <img src="{{ asset('img/gcash-logo.png') }}" alt="gcash" />
-                            </button>
-                            <button class="card-button visa">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500"
-                                    viewBox="0 0 141.732 141.732">
-                                    <g fill="currentColor">
-                                        <path
-                                            d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
-                                    </g>
-                                    <path
-                                        d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z"
-                                        fill="currentColor" />
-                                    <path fill="none" d="M0 0h141.732v141.732H0z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                    <h2>Recent Donation</h2>
+
                     <div class="payments">
-                        <div class="payment">
-                            <div class="card green">
-                                <span>02/25</span>
-                                <span> •••• 8394 </span>
-                            </div>
-                            <div class="payment-details">
-                                <h3>Jerlyn</h3>
-                                <div>
-                                    <span>₱ 70</span>
-                                    <button class="icon-button">
-                                        <i class="ph-caret-right-bold"></i>
-                                    </button>
+                        @foreach ($donations as $donation)
+                            <div class="payment">
+                                <div class="card green">
+                                    <span>{{ $donation->created_at }}</span>
+                                    <span> {{ $donation->donation_id }}</span>
+                                </div>
+                                <div class="payment-details">
+                                    <h3>Jerlyn</h3>
+                                    <div>
+                                        <span>{{ $donation->amount }}</span>
+                                        <button class="icon-button">
+                                            <i class="ph-caret-right-bold"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="payment">
-                            <div class="card olive">
-                                <span>03/25</span>
-                                <span> •••• 3765 </span>
-                            </div>
-                            <div class="payment-details">
-                                <h3>Mary</h3>
-                                <div>
-                                    <span>₱ 90</span>
-                                    <button class="icon-button">
-                                        <i class="ph-caret-right-bold"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="payment">
-                            <div class="card gray">
-                                <span>03/25</span>
-                                <span> •••• 6583 </span>
-                            </div>
-                            <div class="payment-details">
-                                <h3>Angelica</h3>
-                                <div>
-                                    <span>₱ 50</span>
-                                    <button class="icon-button">
-                                        <i class="ph-caret-right-bold"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                     <div class="faq">
                         <p>Most frequently asked questions</p>

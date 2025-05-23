@@ -33,20 +33,23 @@ class DonationController extends Controller
         return view('admin.record.Report&Analytics.financialReport', compact('members'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'member_id' => 'required|exists:parishioners,id',
-            'amount' => 'nullable|numeric',
-            'donation_type' => 'required',
-            'donation_date' => 'required|date',
-            'payment_method' => 'nullable',
-        ]);
+ public function store(Request $request)
+{
+    $validated = $request->validate([
+        'member_id' => 'required|exists:parishioners,id',
+        'amount' => 'nullable|numeric',
+        'donation_type' => 'required',
+        'donation_date' => 'required|date',
+        'payment_method' => 'nullable',
+    ]);
 
-        Donation::create($request->all());
+    $validated['donation_id'] = mt_rand(10000000, 99999999);
 
-        return redirect()->back()->with('success', 'Donation recorded successfully.');
-    }
+    Donation::create($validated);
+
+    return redirect()->back()->with('success', 'Donation recorded successfully.');
+}
+
 
     public function edit(Donation $donation)
     {
@@ -81,5 +84,9 @@ class DonationController extends Controller
     $donations = Donation::with('member')->latest()->get();
     return view('admin.record.Report&Analytics.financialReport', compact('donations'));
 }
+
+
+
+
 
 }

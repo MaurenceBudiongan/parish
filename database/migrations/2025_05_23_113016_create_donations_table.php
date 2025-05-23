@@ -6,14 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+/**
+     * Run the migrations.
+     */
     public function up(): void
-    {
-        Schema::create('donations', function (Blueprint $table) {
+            {
+            Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
+            $table->string('donation_id')->unique();
             $table->decimal('amount', 10, 2)->nullable();
             $table->string('good')->nullable();
             $table->string('donation_type');
@@ -22,17 +23,16 @@ return new class extends Migration
             $table->string('reference_no')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
-        
             $table->foreign('member_id')->references('id')->on('parishioners')->onDelete('cascade');
-        });
-        
+            });
+
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down():void
-    {
-        Schema::dropIfExists('donations');
-    }
+            /**
+                 * Reverse the migrations.
+                 */
+            public function down():void
+            {
+            Schema::dropIfExists('donations');
+            }
 };

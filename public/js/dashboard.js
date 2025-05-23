@@ -98,15 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <section id="transfer-section" class="transfer-section">
         <div class="transfer-section-header">
           <h2>Latest Request</h2>
-          <div class="filter-options">
-            <p>Filter selected: Approved</p>
-            <button class="icon-button">
-              <i class="ph-funnel"></i>
-            </button>
-            <button class="icon-button">
-              <i class="ph-plus"></i>
-            </button>
-          </div>
         </div>
         <div class="transfers">
           <div class="transfer">
@@ -120,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
               <div>
                 <dt>4012028394</dt>
-                <dd>Reference code</dd>
+                <dd>Reqest ID</dd>
               </div>
               <div>
                 <dt>14 Feb. 2025</dt>

@@ -56,6 +56,7 @@ class ParishionerAuthController extends Controller
 
         if (Auth::guard('parishioner')->attempt($credentials)) {
             $request->session()->regenerate();
+            
             return redirect()->intended(route('user.document_requests.main'));
         }
 

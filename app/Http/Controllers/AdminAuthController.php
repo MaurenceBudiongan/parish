@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Donation;
 class AdminAuthController extends Controller
 {
     // Show registration form
@@ -51,10 +51,20 @@ public function login(Request $request)
 
     if (Auth::guard('admin')->attempt($credentials)) {
         $admin = Auth::guard('admin')->user();
-        return redirect()->route('admin.showdashboard',compact('admin'));
+        $donations = Donation::all();
 
+        return redirect()->route('admin.showdashboard')
+                         ->with([
+                             'admin' => $admin,
+                             'donations' => $donations
+                         ]);
     }
+
+    return redirect()->back()->withErrors([
+        'login' => 'Invalid credentials.',
+    ]);
 }
+
 
 
     // Handle logout
@@ -63,10 +73,12 @@ public function login(Request $request)
         Auth::logout();
         return redirect()->route('gets_started');
     }
-        public function showdashboard()
-    {
-         $admin = Auth::guard('admin')->user();
-        return view('admin.dashboard.dashboard', compact('admin'));
-    }
+ public function showdashboard(Request $request)
+{
+    $admin = Auth::guard('admin')->user(); // fetch logged-in admin
+    $donations = Donation::all(); // get donation data from database
+
+    return view('admin.dashboard.dashboard', compact('admin', 'donations'));
+}
     
 } 
