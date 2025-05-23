@@ -43,8 +43,12 @@ class ReceiptController extends Controller
             'amount' => $amount,
             'title' => $title,
         ]);
+     ini_set('default_charset', 'UTF-8');
 
+    $html = view('pdf.receipt', compact('request', 'amount', 'title'))->render();
+    $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+    $pdf = PDF::loadHTML($html);
         return $pdf->download("receipt_{$type}_{$id}.pdf");
     }
 }
-
