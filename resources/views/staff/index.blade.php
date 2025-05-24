@@ -214,11 +214,25 @@
                                     <span class="detail-label"><i class="fas fa-home"></i> Address:</span>
                                     <span class="detail-value">{{ $person->address }}</span>
                                 </div>
+                                @if($person->date_hired)
+                                <div class="detail-row">
+                                    <span class="detail-label"><i class="fas fa-calendar-alt"></i> Date Hired:</span>
+                                    <span class="detail-value">{{ \Carbon\Carbon::parse($person->date_hired)->format('M d, Y') }}</span>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="card-footer bg-transparent">
                             <div class="d-flex justify-content-between">
-              
+                                @if(session('admin_logged_in') || (session('staff_logged_in') && session('staff_id') == $person->id))
+                                <a href="{{ route('staff.edit', $person) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit me-1"></i> Edit
+                                </a>
+                                @else
+                                <div></div> <!-- Empty div to maintain layout -->
+                                @endif
+                                
+                                @if(session('admin_logged_in'))
                                 <form action="{{ route('staff.destroy', $person) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -227,6 +241,7 @@
                                         <i class="fas fa-trash me-1"></i> Delete
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>

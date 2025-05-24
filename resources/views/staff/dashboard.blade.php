@@ -209,20 +209,34 @@
                                     <span class="detail-label"><i class="fas fa-home"></i> Address:</span>
                                     <span class="detail-value">{{ $staff->address }}</span>
                                 </div>
+                                @if($staff->date_hired)
+                                <div class="detail-row">
+                                    <span class="detail-label"><i class="fas fa-calendar-alt"></i> Date Hired:</span>
+                                    <span class="detail-value">{{ \Carbon\Carbon::parse($staff->date_hired)->format('M d, Y') }}</span>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="card-footer bg-transparent text-end">
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ route('mass.UserIndex') }}" class="btn btn-warning btn-sm me-2"
-                                    onclick="return confirm('Are you sure you want to View Mass/Service Schedule?')">
-                                    <i class="fas fa-calendar-alt me-1"></i> View Mass/Service Schedule
-                                </a>
-                                <a href="{{ route('showEvent.showEvent') }}" class="btn btn-warning btn-sm me-2"
-                                    onclick="return confirm('Are you sure you want to View Event Announcement?')">
-                                    <i class="fas fa-calendar-alt me-1"></i> View Event
-                                </a>
+                            <div class="d-flex justify-content-between flex-wrap gap-2">
+                                <div class="d-flex flex-wrap gap-2">
+                                    @if(session('staff_logged_in') && session('staff_id') == $staff->id)
+                                    <a href="{{ route('staff.edit', $staff) }}" class="btn btn-success btn-sm"
+                                        onclick="return confirm('Are you sure you want to edit your profile?')">
+                                        <i class="fas fa-edit me-1"></i> Edit Profile
+                                    </a>
+                                    @endif
+                                    <a href="{{ route('mass.UserIndex') }}" class="btn btn-warning btn-sm"
+                                        onclick="return confirm('Are you sure you want to View Mass/Service Schedule?')">
+                                        <i class="fas fa-calendar-alt me-1"></i> View Mass/Service Schedule
+                                    </a>
+                                    <a href="{{ route('showEvent.showEvent') }}" class="btn btn-warning btn-sm"
+                                        onclick="return confirm('Are you sure you want to View Event Announcement?')">
+                                        <i class="fas fa-calendar-alt me-1"></i> View Event
+                                    </a>
+                                </div>
 
-                                <form action="{{ route('gets_started') }}" method="GET">
+                                <form action="{{ route('staff.logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure you want to Sign Out?')">

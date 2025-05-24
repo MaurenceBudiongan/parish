@@ -22,5 +22,6 @@ class Staff extends Model
         'address',
         'status',
         'photo', // ✅ Add this
+        'date_hired',
     ];
 }
