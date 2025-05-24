@@ -148,6 +148,7 @@ Route::resource('staff', StaffController::class);
 
 Route::get('/staff-login', [StaffController::class, 'loginForm'])->name('staff.login');
 Route::post('/staff-login', [StaffController::class, 'login'])->name('staff.login.submit');
+Route::post('/staff-logout', [StaffController::class, 'logout'])->name('staff.logout');
 
 
 

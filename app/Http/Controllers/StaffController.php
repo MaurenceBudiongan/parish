@@ -36,7 +36,9 @@ class StaffController extends Controller
             $expectedName = strtolower(trim("{$staff->last_name},{$staff->first_name}"));
 
             if ($inputName === $expectedName) {
-                 return view('staff.dashboard', ['staff' => $staff]);
+                // Store staff information in session
+                session(['staff_logged_in' => true, 'staff_id' => $staff->id, 'staff_data' => $staff]);
+                return view('staff.dashboard', ['staff' => $staff]);
             }
         }
 
@@ -53,8 +55,9 @@ public function store(Request $request)
         'position' => 'required',
         'department' => 'required',
         'address' => 'required|string',
-        'status' => 'required|in:active,inactive',
+        'status' => 'required|in:Active,Inactive',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // ✅
+        'date_hired' => 'nullable|date',
     ]);
 
     $validated = $request->all();
@@ -81,11 +84,21 @@ public function store(Request $request)
 
     public function edit(Staff $staff)
     {
+        // Check authorization - only staff can edit their own profile or admin can edit any
+        if (!$this->canEditStaff($staff)) {
+            return redirect()->route('staff.index')->with('error', 'Unauthorized: You can only edit your own profile.');
+        }
+        
         return view('staff.edit', compact('staff'));
     }
 
     public function update(Request $request, Staff $staff)
 {
+    // Check authorization - only staff can edit their own profile or admin can edit any
+    if (!$this->canEditStaff($staff)) {
+        return redirect()->route('staff.index')->with('error', 'Unauthorized: You can only edit your own profile.');
+    }
+    
     $request->validate([
         'staff_id' => 'required|unique:staff,staff_id,' . $staff->id,
         'first_name' => 'required',
@@ -95,8 +108,9 @@ public function store(Request $request)
         'position' => 'required',
         'department' => 'required',
         'address' => 'required',
-        'status' => 'required|in:active,inactive',
+        'status' => 'required|in:Active,Inactive',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // ✅
+        'date_hired' => 'nullable|date',
     ]);
 
     $data = $request->all();
@@ -117,5 +131,32 @@ public function store(Request $request)
         $staff->delete();
 
         return redirect()->back()->with('success', 'Staff deleted successfully.');
+    }
+    
+    /**
+     * Check if the current user can edit the given staff profile
+     */
+    private function canEditStaff(Staff $staff)
+    {
+        // Check if user is admin (you can modify this logic based on your admin system)
+        if (session('admin_logged_in')) {
+            return true; // Admin can edit any staff
+        }
+        
+        // Check if staff is logged in and trying to edit their own profile
+        if (session('staff_logged_in') && session('staff_id') == $staff->id) {
+            return true; // Staff can edit their own profile
+        }
+        
+        return false; // No access
+    }
+    
+    /**
+     * Logout staff
+     */
+    public function logout()
+    {
+        session()->forget(['staff_logged_in', 'staff_id', 'staff_data']);
+        return redirect()->route('gets_started')->with('success', 'Logged out successfully.');
     }
 }
